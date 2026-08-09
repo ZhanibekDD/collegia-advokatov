@@ -2,7 +2,7 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 
 import type { Locale } from "../lib/portal-data";
-import { Info } from "lucide-react";
+import { Database, ExternalLink, Scale } from "lucide-react";
 
 const nav = {
   ru: [
@@ -24,7 +24,7 @@ export function PortalHeader({ locale, onLocaleChange }: { locale: Locale; onLoc
     <header className="portal-header">
       <div className="shell portal-header-inner">
         <a className="brand" href="/">
-          <span className="brand-mark"><span>Қ</span><i /></span>
+          <span className="brand-mark" aria-hidden="true"><Scale /><small>KZ</small></span>
           <span className="brand-copy">
             <strong>{locale === "ru" ? "Единый портал коллегий адвокатов" : "Адвокаттар алқаларының бірыңғай порталы"}</strong>
             <small>{locale === "ru" ? "Республика Казахстан" : "Қазақстан Республикасы"}</small>
@@ -47,7 +47,7 @@ export function PortalFooter({ locale }: { locale: Locale }) {
     <footer className="portal-footer">
       <div className="shell portal-footer-inner">
         <div className="brand footer-logo">
-          <span className="brand-mark"><span>Қ</span><i /></span>
+          <span className="brand-mark" aria-hidden="true"><Scale /><small>KZ</small></span>
           <span className="brand-copy">
             <strong>{locale === "ru" ? "Коллегии адвокатов Республики Казахстан" : "Қазақстан Республикасының адвокаттар алқалары"}</strong>
             <small>{locale === "ru" ? "Цифровой доступ к правовой помощи" : "Құқықтық көмекке цифрлық қолжетімділік"}</small>
@@ -61,17 +61,25 @@ export function PortalFooter({ locale }: { locale: Locale }) {
       </div>
       <div className="shell portal-footer-bottom">
         <span>© 2026</span>
-        <span>{locale === "ru" ? "Демонстрационные данные отмечены на страницах" : "Демонстрациялық деректер беттерде белгіленген"}</span>
+        <a href="https://data.egov.kz/datasets/view?index=advokattar_tizimi14" target="_blank" rel="noreferrer">
+          {locale === "ru" ? "Источник: открытые данные Минюста РК · 08.07.2025" : "Дереккөз: ҚР Әділет министрлігінің ашық деректері · 08.07.2025"}<ExternalLink />
+        </a>
       </div>
     </footer>
   );
 }
 
-export function DemoNotice({ locale }: { locale: Locale }) {
+export function DataSourceNotice({ locale, total = 6005 }: { locale: Locale; total?: number }) {
   return (
-    <div className="demo-notice" role="note">
-      <span><Info /></span>
-      <p>{locale === "ru" ? "Сейчас используются демонстрационные профили для проверки интерфейса. Перед запуском они будут заменены официальной выгрузкой коллегии." : "Қазір интерфейсті тексеру үшін демонстрациялық профильдер қолданылады. Іске қосар алдында олар алқаның ресми деректерімен ауыстырылады."}</p>
+    <div className="data-source-notice" role="note">
+      <span><Database /></span>
+      <div>
+        <strong>{locale === "ru" ? `${total.toLocaleString("ru-RU")} записей из открытого набора Минюста РК` : `ҚР Әділет министрлігінің ашық деректерінен ${total.toLocaleString("ru-RU")} жазба`}</strong>
+        <p>{locale === "ru" ? "Источник обновлён 08.07.2025 и помечен владельцем как требующий актуализации. Перед заключением соглашения дополнительно проверьте лицензию и членство в территориальной коллегии." : "Дереккөз 08.07.2025 жаңартылған және иесі өзектендіруді қажет етеді деп белгілеген. Келісім жасамас бұрын лицензияны және аумақтық алқаға мүшелікті қосымша тексеріңіз."}</p>
+      </div>
+      <a href="https://data.egov.kz/datasets/view?index=advokattar_tizimi14" target="_blank" rel="noreferrer">
+        {locale === "ru" ? "Открыть источник" : "Дереккөзді ашу"}<ExternalLink />
+      </a>
     </div>
   );
 }

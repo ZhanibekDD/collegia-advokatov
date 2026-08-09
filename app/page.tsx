@@ -10,6 +10,7 @@ import {
   Check,
   CirclePlay,
   Clock3,
+  Database,
   ExternalLink,
   Gavel,
   HeartHandshake,
@@ -22,27 +23,7 @@ import {
   ShieldCheck,
   Siren,
 } from "lucide-react";
-
-type Locale = "ru" | "kk";
-
-const regions = [
-  { value: "all", ru: "Весь Казахстан", kk: "Бүкіл Қазақстан" },
-  { value: "astana", ru: "Астана", kk: "Астана" },
-  { value: "almaty", ru: "Алматы", kk: "Алматы" },
-  { value: "shymkent", ru: "Шымкент", kk: "Шымкент" },
-  { value: "jetisu", ru: "Область Жетісу", kk: "Жетісу облысы" },
-  { value: "karaganda", ru: "Карагандинская область", kk: "Қарағанды облысы" },
-  { value: "turkistan", ru: "Туркестанская область", kk: "Түркістан облысы" },
-];
-
-const practices = [
-  { value: "all", ru: "Любая специализация", kk: "Кез келген мамандану" },
-  { value: "criminal", ru: "Уголовное право", kk: "Қылмыстық құқық" },
-  { value: "family", ru: "Семейное право", kk: "Отбасы құқығы" },
-  { value: "business", ru: "Бизнес и налоги", kk: "Бизнес және салық" },
-  { value: "civil", ru: "Гражданские споры", kk: "Азаматтық даулар" },
-  { value: "property", ru: "Недвижимость", kk: "Жылжымайтын мүлік" },
-];
+import { regionOptions as regions, type Locale } from "./lib/portal-data";
 
 const helpIcons = [Gavel, HeartHandshake, BriefcaseBusiness, House, Scale, Siren];
 
@@ -57,22 +38,23 @@ const copy = {
     titleA: "Право должно быть",
     titleAccent: "понятным.",
     titleB: "Защита — доступной.",
-    lead: "Найдите адвоката по специализации и региону, проверьте его статус и получите понятный маршрут правовой помощи.",
+    lead: "Найдите адвоката по ФИО, номеру лицензии и региону. В каталоге — 6 005 записей из открытого набора Министерства юстиции РК.",
     primary: "Найти адвоката",
     secondary: "Как получить помощь",
-    trust: ["Конфиденциально", "Проверяемый статус", "Все регионы РК"],
+    trust: ["Открытые данные Минюста", "Поиск по лицензии", "Все 20 регионов РК"],
     searchLabel: "Поиск по единому каталогу",
     searchTitle: "Кому доверить защиту?",
     region: "Регион",
-    practice: "Направление права",
-    show: "Показать подходящих адвокатов",
+    practice: "ФИО или номер лицензии",
+    queryPlaceholder: "Например, Ахметов или 2100…",
+    show: "Открыть каталог",
     hint: "Поиск займёт меньше минуты",
-    statOne: "17 регионов",
-    statOneText: "единая точка доступа",
-    statTwo: "2 языка",
-    statTwoText: "қазақша и русский",
-    statThree: "3 шага",
-    statThreeText: "до обращения",
+    statOne: "6 005 записей",
+    statOneText: "официальная открытая выгрузка",
+    statTwo: "20 регионов",
+    statTwoText: "весь Казахстан",
+    statThree: "08.07.2025",
+    statThreeText: "дата обновления источника",
     helpEyebrow: "С чего начать",
     helpTitle: "Выберите ситуацию — мы покажем маршрут",
     helpLead: "Не нужно разбираться в юридических терминах. Начните с того, что произошло.",
@@ -87,18 +69,18 @@ const copy = {
     route: "Открыть маршрут",
     registryEyebrow: "Единый каталог",
     registryTitle: "Найдите специалиста под вашу задачу",
-    registryLead: "Фильтруйте по региону и направлению. В профиле будут указаны статус, опыт, языки и контакты.",
-    verified: "Статус проверяется по реестру",
+    registryLead: "Фильтруйте 6 005 записей по региону, ФИО, лицензии, адресу и контактам. Каталог не добавляет сведения, которых нет в источнике.",
+    verified: "Данные опубликованы Министерством юстиции РК",
     privacy: "Ваш запрос не публикуется и не передаётся третьим лицам",
     resultTitle: "Маршрут поиска подготовлен",
-    resultText: "Показываем специалистов по выбранному региону и направлению. Каталог готов к подключению реальных данных коллегии.",
+    resultText: "Поиск работает по полной официальной выгрузке. Актуальный статус лицензии нужно дополнительно сверить с территориальной коллегией.",
     resultButton: "Перейти к результатам",
     processEyebrow: "Понятный процесс",
     processTitle: "От вопроса до защиты — три простых шага",
     processLead: "Портал помогает быстро сориентироваться, выбрать специалиста и начать работу без лишней бюрократии.",
     processSteps: [
-      ["01", "Опишите ситуацию", "Выберите регион и направление права. Персональные детали на первом шаге не нужны."],
-      ["02", "Сравните специалистов", "Проверьте специализацию, опыт, языки работы и актуальный статус адвоката."],
+      ["01", "Начните с поиска", "Укажите регион, ФИО или номер лицензии. Персональные детали для поиска не нужны."],
+      ["02", "Сверьте запись", "Сравните номер лицензии, дату выдачи, адрес и контакты из официальной выгрузки."],
       ["03", "Свяжитесь напрямую", "Выберите удобный способ связи и договоритесь о консультации или срочной защите."],
     ],
     aboutEyebrow: "Профессиональные гарантии",
@@ -107,7 +89,7 @@ const copy = {
     values: [
       ["01", "Независимость", "Адвокат защищает права и законные интересы доверителя независимо и профессионально."],
       ["02", "Конфиденциальность", "Обращение и содержание консультации защищены принципом адвокатской тайны."],
-      ["03", "Проверяемость", "Профиль позволяет увидеть специализацию и проверить актуальность профессионального статуса."],
+      ["03", "Проверяемость", "Профиль показывает источник, номер лицензии и дату обновления набора без выдуманных оценок."],
       ["04", "Равный доступ", "Понятный интерфейс на казахском и русском языках для жителей всех регионов страны."],
     ],
     materialsEyebrow: "Полезные материалы",
@@ -122,7 +104,7 @@ const copy = {
     faqEyebrow: "Ответы на вопросы",
     faqTitle: "Коротко о главном",
     faqs: [
-      ["Как проверить, что специалист действительно является адвокатом?", "В профиле специалиста отображается профессиональный статус. Перед заключением соглашения его можно дополнительно сверить с данными соответствующей территориальной коллегии."],
+      ["Как проверить, что специалист действительно является адвокатом?", "Каталог показывает запись из открытого набора Минюста РК. Поскольку набор не содержит текущий статус лицензии, перед соглашением сверьте лицензию и членство в территориальной коллегии."],
       ["Можно ли получить бесплатную юридическую помощь?", "В предусмотренных законом случаях помощь может оказываться за счёт государства. Портал поможет определить подходящий маршрут и найти специалиста в вашем регионе."],
       ["Что делать, если помощь нужна срочно?", "Выберите раздел «Срочная помощь», укажите регион и направление. Для ситуаций с задержанием важно обратиться за защитой без промедления."],
       ["Публикуется ли мой запрос на сайте?", "Нет. Поисковый запрос не является публичным. Контактные и фактические данные передаются только при осознанном обращении к выбранному специалисту."],
@@ -140,7 +122,7 @@ const copy = {
       ["О портале", "Новости", "Контакты"],
     ],
     rights: "© 2026 Единый портал коллегий адвокатов Казахстана",
-    demo: "Демонстрационная версия интерфейса",
+    demo: "Каталог: открытые данные Минюста РК · источник обновлён 08.07.2025",
   },
   kk: {
     portal: "Адвокаттар алқаларының бірыңғай порталы",
@@ -152,22 +134,23 @@ const copy = {
     titleA: "Құқық түсінікті",
     titleAccent: "болуы тиіс.",
     titleB: "Қорғау — қолжетімді.",
-    lead: "Мамандану мен аймақ бойынша адвокат табыңыз, мәртебесін тексеріңіз және құқықтық көмектің түсінікті бағытын алыңыз.",
+    lead: "Адвокатты аты-жөні, лицензия нөмірі және өңірі бойынша табыңыз. Каталогта ҚР Әділет министрлігінің ашық жиынынан 6 005 жазба бар.",
     primary: "Адвокат табу",
     secondary: "Көмекті қалай алуға болады",
-    trust: ["Құпия", "Тексерілетін мәртебе", "ҚР барлық өңірлері"],
+    trust: ["Әділет министрлігінің ашық деректері", "Лицензия бойынша іздеу", "ҚР барлық 20 өңірі"],
     searchLabel: "Бірыңғай каталог бойынша іздеу",
     searchTitle: "Қорғауды кімге сеніп тапсыру керек?",
     region: "Өңір",
-    practice: "Құқық саласы",
-    show: "Сәйкес адвокаттарды көрсету",
+    practice: "Аты-жөні немесе лицензия нөмірі",
+    queryPlaceholder: "Мысалы, Ахметов немесе 2100…",
+    show: "Каталогты ашу",
     hint: "Іздеу бір минуттан аз уақыт алады",
-    statOne: "17 өңір",
-    statOneText: "бірыңғай қолжетімділік нүктесі",
-    statTwo: "2 тіл",
-    statTwoText: "қазақша және орысша",
-    statThree: "3 қадам",
-    statThreeText: "өтінішке дейін",
+    statOne: "6 005 жазба",
+    statOneText: "ресми ашық жүктеме",
+    statTwo: "20 өңір",
+    statTwoText: "бүкіл Қазақстан",
+    statThree: "08.07.2025",
+    statThreeText: "дереккөздің жаңартылған күні",
     helpEyebrow: "Неден бастау керек",
     helpTitle: "Жағдайды таңдаңыз — біз бағытты көрсетеміз",
     helpLead: "Заң терминдерін түсінудің қажеті жоқ. Не болғанынан бастаңыз.",
@@ -182,18 +165,18 @@ const copy = {
     route: "Бағытты ашу",
     registryEyebrow: "Бірыңғай каталог",
     registryTitle: "Міндетіңізге сай маманды табыңыз",
-    registryLead: "Өңір мен бағыт бойынша сүзгілеңіз. Профильде мәртебе, тәжірибе, тілдер мен байланыстар көрсетіледі.",
-    verified: "Мәртебе тізілім бойынша тексеріледі",
+    registryLead: "6 005 жазбаны өңір, аты-жөні, лицензия, мекенжай және байланыс бойынша сүзгілеңіз. Каталог дереккөзде жоқ мәліметті қоспайды.",
+    verified: "Деректерді ҚР Әділет министрлігі жариялаған",
     privacy: "Сұрауыңыз жарияланбайды және үшінші тұлғаларға берілмейді",
     resultTitle: "Іздеу бағыты дайындалды",
-    resultText: "Таңдалған өңір мен бағыт бойынша мамандарды көрсетеміз. Каталог алқаның нақты деректерін қосуға дайын.",
+    resultText: "Іздеу толық ресми жүктеме бойынша жұмыс істейді. Лицензияның өзекті мәртебесін аумақтық алқадан қосымша тексеру қажет.",
     resultButton: "Нәтижелерге өту",
     processEyebrow: "Түсінікті үдеріс",
     processTitle: "Сұрақтан қорғауға дейін — үш қарапайым қадам",
     processLead: "Портал жағдайды тез бағалауға, маман таңдауға және артық бюрократиясыз жұмысты бастауға көмектеседі.",
     processSteps: [
-      ["01", "Жағдайды сипаттаңыз", "Өңір мен құқық саласын таңдаңыз. Бірінші қадамда жеке мәліметтер қажет емес."],
-      ["02", "Мамандарды салыстырыңыз", "Мамандануын, тәжірибесін, жұмыс тілдерін және адвокаттың өзекті мәртебесін тексеріңіз."],
+      ["01", "Іздеуден бастаңыз", "Өңірді, аты-жөнін немесе лицензия нөмірін көрсетіңіз. Іздеу үшін жеке мәліметтер қажет емес."],
+      ["02", "Жазбаны салыстырыңыз", "Ресми жүктемедегі лицензия нөмірін, берілген күнін, мекенжайы мен байланысын тексеріңіз."],
       ["03", "Тікелей байланысыңыз", "Қолайлы байланыс тәсілін таңдап, кеңес немесе жедел қорғау туралы келісіңіз."],
     ],
     aboutEyebrow: "Кәсіби кепілдіктер",
@@ -202,7 +185,7 @@ const copy = {
     values: [
       ["01", "Тәуелсіздік", "Адвокат сенім білдірушінің құқықтары мен заңды мүдделерін тәуелсіз әрі кәсіби қорғайды."],
       ["02", "Құпиялылық", "Өтініш пен кеңес мазмұны адвокаттық құпия қағидатымен қорғалады."],
-      ["03", "Тексерілу мүмкіндігі", "Профиль мамандануды көруге және кәсіби мәртебенің өзектілігін тексеруге мүмкіндік береді."],
+      ["03", "Тексерілу мүмкіндігі", "Профиль ойдан шығарылған бағаларсыз дереккөзді, лицензия нөмірін және жиынның жаңартылған күнін көрсетеді."],
       ["04", "Тең қолжетімділік", "Елдің барлық өңіріндегі тұрғындарға қазақ және орыс тілдеріндегі түсінікті интерфейс."],
     ],
     materialsEyebrow: "Пайдалы материалдар",
@@ -217,7 +200,7 @@ const copy = {
     faqEyebrow: "Сұрақтарға жауаптар",
     faqTitle: "Ең маңыздысы қысқаша",
     faqs: [
-      ["Маманның шынымен адвокат екенін қалай тексеруге болады?", "Маман профилінде кәсіби мәртебе көрсетіледі. Келісім жасамас бұрын оны тиісті аумақтық алқаның деректерімен қосымша салыстыруға болады."],
+      ["Маманның шынымен адвокат екенін қалай тексеруге болады?", "Каталог ҚР Әділет министрлігінің ашық жиынындағы жазбаны көрсетеді. Жиында лицензияның ағымдағы мәртебесі жоқ, сондықтан келісімге дейін лицензия мен аумақтық алқаға мүшелікті салыстырыңыз."],
       ["Тегін заң көмегін алуға бола ма?", "Заңда көзделген жағдайларда көмек мемлекет есебінен көрсетілуі мүмкін. Портал қолайлы бағытты анықтап, өңіріңізден маман табуға көмектеседі."],
       ["Көмек шұғыл қажет болса не істеу керек?", "«Жедел көмек» бөлімін таңдап, өңір мен бағытты көрсетіңіз. Ұстау жағдайында қорғауға кідіріссіз жүгіну маңызды."],
       ["Менің сұрауым сайтта жариялана ма?", "Жоқ. Іздеу сұрауы жария емес. Байланыс және нақты деректер тек таңдалған маманға саналы түрде жүгінгенде беріледі."],
@@ -235,7 +218,7 @@ const copy = {
       ["Портал туралы", "Жаңалықтар", "Байланыстар"],
     ],
     rights: "© 2026 Қазақстан адвокаттар алқаларының бірыңғай порталы",
-    demo: "Интерфейстің демонстрациялық нұсқасы",
+    demo: "Каталог: ҚР Әділет министрлігінің ашық деректері · 08.07.2025",
   },
 };
 
@@ -243,7 +226,7 @@ export default function Home() {
   const [locale, setLocale] = useState<Locale>("ru");
   const [menuOpen, setMenuOpen] = useState(false);
   const [region, setRegion] = useState("all");
-  const [practice, setPractice] = useState("all");
+  const [query, setQuery] = useState("");
   const [searched, setSearched] = useState(false);
   const [openFaq, setOpenFaq] = useState(0);
   const t = copy[locale];
@@ -253,32 +236,14 @@ export default function Home() {
     [locale, region],
   );
 
-  const selectedPractice = useMemo(
-    () => practices.find((item) => item.value === practice)?.[locale],
-    [locale, practice],
-  );
+  const selectedQuery = query.trim() || (locale === "ru" ? "Любое ФИО" : "Кез келген аты-жөні");
 
   function submitSearch(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setSearched(true);
     const params = new URLSearchParams();
-    const regionMap: Record<string, string> = {
-      astana: "г. Астана",
-      almaty: "г. Алматы",
-      shymkent: "г. Шымкент",
-      jetisu: "Область Жетісу",
-      karaganda: "Карагандинская область",
-      turkistan: "Туркестанская область",
-    };
-    const practiceMap: Record<string, string> = {
-      criminal: "Уголовное право",
-      family: "Семейное право",
-      business: "Бизнес и налоги",
-      civil: "Гражданские споры",
-      property: "Недвижимость",
-    };
-    if (region !== "all") params.set("region", regionMap[region] ?? region);
-    if (practice !== "all") params.set("practice", practiceMap[practice] ?? practice);
+    if (region !== "all") params.set("region", region);
+    if (query.trim()) params.set("q", query.trim());
     window.location.assign(`/advokaty${params.size ? `?${params.toString()}` : ""}`);
   }
 
@@ -293,8 +258,8 @@ export default function Home() {
         <div className="shell header-inner">
           <a className="brand" href="#top" aria-label={t.portal}>
             <span className="brand-mark" aria-hidden="true">
-              <span>Қ</span>
-              <i />
+              <Scale />
+              <small>KZ</small>
             </span>
             <span className="brand-copy">
               <strong>{t.portal}</strong>
@@ -371,9 +336,7 @@ export default function Home() {
             </label>
             <label>
               <span>{t.practice}</span>
-              <select value={practice} onChange={(event) => setPractice(event.target.value)}>
-                {practices.map((item) => <option key={item.value} value={item.value}>{item[locale]}</option>)}
-              </select>
+              <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder={t.queryPlaceholder} />
             </label>
             <button className="search-submit" type="submit">
               <Search className="search-icon" aria-hidden="true" />{t.show}<ArrowRight aria-hidden="true" />
@@ -382,7 +345,7 @@ export default function Home() {
             {searched && (
               <div className="search-feedback" role="status">
                 <strong>{t.resultTitle}</strong>
-                <span>{selectedRegion} · {selectedPractice}</span>
+                <span>{selectedRegion} · {selectedQuery}</span>
               </div>
             )}
           </form>
@@ -392,7 +355,7 @@ export default function Home() {
           <div><strong>{t.statOne}</strong><span>{t.statOneText}</span></div>
           <div><strong>{t.statTwo}</strong><span>{t.statTwoText}</span></div>
           <div><strong>{t.statThree}</strong><span>{t.statThreeText}</span></div>
-          <div className="hero-seal" aria-hidden="true"><span>ҚА</span><small>KZ</small></div>
+          <div className="hero-seal" aria-hidden="true"><span>6K+</span><small>OPEN DATA</small></div>
         </div>
       </section>
 
@@ -470,9 +433,7 @@ export default function Home() {
               </label>
               <label>
                 <span>{t.practice}</span>
-                <select value={practice} onChange={(event) => setPractice(event.target.value)}>
-                  {practices.map((item) => <option key={item.value} value={item.value}>{item[locale]}</option>)}
-                </select>
+                <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder={t.queryPlaceholder} />
               </label>
             </div>
             <div className="result-preview">
@@ -490,9 +451,10 @@ export default function Home() {
             <div className="eyebrow light"><span />{t.aboutEyebrow}</div>
             <h2>{t.aboutTitle}</h2>
             <p>{t.aboutLead}</p>
-            <div className="values-emblem" aria-hidden="true">
-              <span>ҚА</span>
-              <small>ADVOKATURA · KAZAKHSTAN</small>
+            <div className="values-emblem values-data-card" aria-hidden="true">
+              <Database />
+              <span>6 005</span>
+              <small>OPEN DATA · 08.07.2025</small>
             </div>
           </div>
           <div className="values-grid">
@@ -573,7 +535,7 @@ export default function Home() {
         <div className="shell footer-grid">
           <div className="footer-brand">
             <div className="brand footer-logo">
-              <span className="brand-mark"><span>Қ</span><i /></span>
+              <span className="brand-mark" aria-hidden="true"><Scale /><small>KZ</small></span>
               <span className="brand-copy"><strong>{t.footerTitle}</strong><small>{t.country}</small></span>
             </div>
             <p>{t.footerText}</p>
