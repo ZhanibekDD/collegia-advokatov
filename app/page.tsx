@@ -259,7 +259,6 @@ export default function Home() {
           <a className="brand" href="#top" aria-label={t.portal}>
             <span className="brand-mark" aria-hidden="true">
               <Scale />
-              <small>KZ</small>
             </span>
             <span className="brand-copy">
               <strong>{t.portal}</strong>
@@ -535,7 +534,7 @@ export default function Home() {
         <div className="shell footer-grid">
           <div className="footer-brand">
             <div className="brand footer-logo">
-              <span className="brand-mark" aria-hidden="true"><Scale /><small>KZ</small></span>
+              <span className="brand-mark" aria-hidden="true"><Scale /></span>
               <span className="brand-copy"><strong>{t.footerTitle}</strong><small>{t.country}</small></span>
             </div>
             <p>{t.footerText}</p>
