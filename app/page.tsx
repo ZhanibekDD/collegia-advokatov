@@ -1,6 +1,27 @@
 "use client";
+/* eslint-disable @next/next/no-html-link-for-pages */
 
 import { FormEvent, useMemo, useState } from "react";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  BadgeCheck,
+  BriefcaseBusiness,
+  Check,
+  CirclePlay,
+  Clock3,
+  ExternalLink,
+  Gavel,
+  HeartHandshake,
+  House,
+  LockKeyhole,
+  Minus,
+  Plus,
+  Scale,
+  Search,
+  ShieldCheck,
+  Siren,
+} from "lucide-react";
 
 type Locale = "ru" | "kk";
 
@@ -23,12 +44,14 @@ const practices = [
   { value: "property", ru: "Недвижимость", kk: "Жылжымайтын мүлік" },
 ];
 
+const helpIcons = [Gavel, HeartHandshake, BriefcaseBusiness, House, Scale, Siren];
+
 const copy = {
   ru: {
     portal: "Единый портал коллегий адвокатов",
     country: "Республика Казахстан",
     nav: ["Найти адвоката", "Правовая помощь", "О коллегиях", "Материалы"],
-    navHref: ["#registry", "#help", "#about", "#materials"],
+    navHref: ["/advokaty", "/pomosh", "/regions", "#materials"],
     cabinet: "Личный кабинет",
     eyebrow: "Защита прав по всей стране",
     titleA: "Право должно быть",
@@ -123,7 +146,7 @@ const copy = {
     portal: "Адвокаттар алқаларының бірыңғай порталы",
     country: "Қазақстан Республикасы",
     nav: ["Адвокат табу", "Құқықтық көмек", "Алқалар туралы", "Материалдар"],
-    navHref: ["#registry", "#help", "#about", "#materials"],
+    navHref: ["/advokaty", "/pomosh", "/regions", "#materials"],
     cabinet: "Жеке кабинет",
     eyebrow: "Бүкіл ел бойынша құқықтарды қорғау",
     titleA: "Құқық түсінікті",
@@ -238,6 +261,25 @@ export default function Home() {
   function submitSearch(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setSearched(true);
+    const params = new URLSearchParams();
+    const regionMap: Record<string, string> = {
+      astana: "г. Астана",
+      almaty: "г. Алматы",
+      shymkent: "г. Шымкент",
+      jetisu: "Область Жетісу",
+      karaganda: "Карагандинская область",
+      turkistan: "Туркестанская область",
+    };
+    const practiceMap: Record<string, string> = {
+      criminal: "Уголовное право",
+      family: "Семейное право",
+      business: "Бизнес и налоги",
+      civil: "Гражданские споры",
+      property: "Недвижимость",
+    };
+    if (region !== "all") params.set("region", regionMap[region] ?? region);
+    if (practice !== "all") params.set("practice", practiceMap[practice] ?? practice);
+    window.location.assign(`/advokaty${params.size ? `?${params.toString()}` : ""}`);
   }
 
   function changeLocale(next: Locale) {
@@ -277,7 +319,7 @@ export default function Home() {
                 РУС
               </button>
             </div>
-            <button className="cabinet-button">{t.cabinet}</button>
+            <a className="cabinet-button" href="/advokaty">{t.cabinet}</a>
             <button
               className={menuOpen ? "menu-button is-open" : "menu-button"}
               aria-label="Открыть меню"
@@ -303,15 +345,15 @@ export default function Home() {
             </h1>
             <p>{t.lead}</p>
             <div className="hero-actions">
-              <a className="button button-primary" href="#registry">
-                {t.primary}<span aria-hidden="true">↗</span>
+              <a className="button button-primary" href="/advokaty">
+                {t.primary}<ArrowUpRight aria-hidden="true" />
               </a>
               <a className="text-link" href="#help">
-                <span className="play-icon" aria-hidden="true">→</span>{t.secondary}
+                <span className="play-icon" aria-hidden="true"><CirclePlay /></span>{t.secondary}
               </a>
             </div>
             <ul className="trust-list">
-              {t.trust.map((item) => <li key={item}><span>✓</span>{item}</li>)}
+              {t.trust.map((item) => <li key={item}><span><ShieldCheck /></span>{item}</li>)}
             </ul>
           </div>
 
@@ -334,9 +376,9 @@ export default function Home() {
               </select>
             </label>
             <button className="search-submit" type="submit">
-              <span className="search-icon" aria-hidden="true">⌕</span>{t.show}<span aria-hidden="true">→</span>
+              <Search className="search-icon" aria-hidden="true" />{t.show}<ArrowRight aria-hidden="true" />
             </button>
-            <p className="form-hint"><span>◷</span>{t.hint}</p>
+            <p className="form-hint"><Clock3 />{t.hint}</p>
             {searched && (
               <div className="search-feedback" role="status">
                 <strong>{t.resultTitle}</strong>
@@ -364,16 +406,18 @@ export default function Home() {
             <p>{t.helpLead}</p>
           </div>
           <div className="help-grid">
-            {t.helpCards.map(([icon, title, description], index) => (
-              <a className={index === 5 ? "help-card urgent" : "help-card"} href="#registry" key={title}>
-                <div className="help-icon">{icon}</div>
+            {t.helpCards.map(([, title, description], index) => {
+              const HelpIcon = helpIcons[index];
+              return (
+              <a className={index === 5 ? "help-card urgent" : "help-card"} href="/pomosh" key={title}>
+                <div className="help-icon"><HelpIcon /></div>
                 <div>
                   <h3>{title}</h3>
                   <p>{description}</p>
-                  <span className="card-link">{t.route}<b>→</b></span>
+                  <span className="card-link">{t.route}<ArrowRight /></span>
                 </div>
               </a>
-            ))}
+            )})}
           </div>
         </div>
       </section>
@@ -408,13 +452,13 @@ export default function Home() {
             <h2>{t.registryTitle}</h2>
             <p>{t.registryLead}</p>
             <div className="registry-points">
-              <div><span>✓</span>{t.verified}</div>
-              <div><span>◉</span>{t.privacy}</div>
+              <div><span><BadgeCheck /></span>{t.verified}</div>
+              <div><span><LockKeyhole /></span>{t.privacy}</div>
             </div>
           </div>
           <div className="registry-panel">
             <div className="registry-panel-head">
-              <span className="directory-icon">⌕</span>
+              <span className="directory-icon"><Search /></span>
               <div><small>{t.searchLabel}</small><strong>{selectedRegion}</strong></div>
             </div>
             <div className="filter-row">
@@ -432,10 +476,10 @@ export default function Home() {
               </label>
             </div>
             <div className="result-preview">
-              <div className="result-badge">✓</div>
+              <div className="result-badge"><Check /></div>
               <div><strong>{t.resultTitle}</strong><p>{t.resultText}</p></div>
             </div>
-            <button className="button button-dark" onClick={() => setSearched(true)}>{t.resultButton}<span>→</span></button>
+            <a className="button button-dark" href="/advokaty">{t.resultButton}<ArrowRight /></a>
           </div>
         </div>
       </section>
@@ -483,7 +527,7 @@ export default function Home() {
                   <span className="material-tag">{tag}</span>
                   <h3>{title}</h3>
                   <p>{description}</p>
-                  <a href="#registry">{t.read}<b>↗</b></a>
+                  <a href="/pomosh">{t.read}<ExternalLink /></a>
                 </div>
               </article>
             ))}
@@ -504,7 +548,7 @@ export default function Home() {
                 <button onClick={() => setOpenFaq(openFaq === index ? -1 : index)} aria-expanded={openFaq === index}>
                   <span>{String(index + 1).padStart(2, "0")}</span>
                   <strong>{question}</strong>
-                  <i>{openFaq === index ? "−" : "+"}</i>
+                  <i>{openFaq === index ? <Minus /> : <Plus />}</i>
                 </button>
                 <div className="faq-answer"><p>{answer}</p></div>
               </article>
@@ -521,7 +565,7 @@ export default function Home() {
             <h2>{t.ctaTitle}</h2>
             <p>{t.ctaText}</p>
           </div>
-          <a className="button button-primary" href="#registry">{t.ctaButton}<span>↗</span></a>
+          <a className="button button-primary" href="/advokaty">{t.ctaButton}<ArrowUpRight /></a>
         </div>
       </section>
 
