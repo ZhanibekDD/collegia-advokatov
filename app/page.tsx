@@ -2,30 +2,33 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 
 import { FormEvent, useMemo, useState } from "react";
+import Image from "next/image";
 import {
   ArrowRight,
   ArrowUpRight,
   BadgeCheck,
-  BriefcaseBusiness,
   Check,
   CirclePlay,
   Clock3,
   Database,
   ExternalLink,
-  Gavel,
-  HeartHandshake,
-  House,
   LockKeyhole,
   Minus,
   Plus,
   Scale,
   Search,
   ShieldCheck,
-  Siren,
 } from "lucide-react";
 import { regionOptions as regions, type Locale } from "./lib/portal-data";
 
-const helpIcons = [Gavel, HeartHandshake, BriefcaseBusiness, House, Scale, Siren];
+const helpIconAssets = [
+  "/icons/icon-criminal.webp",
+  "/icons/icon-family.webp",
+  "/icons/icon-business.webp",
+  "/icons/icon-property.webp",
+  "/icons/icon-civil.webp",
+  "/icons/icon-urgent.webp",
+];
 
 const copy = {
   ru: {
@@ -299,8 +302,14 @@ export default function Home() {
 
       <section className="hero" id="top">
         <div className="hero-grid" aria-hidden="true" />
+        <div className="hero-shanyrak" aria-hidden="true"><span /><i /><b /></div>
         <div className="shell hero-layout">
           <div className="hero-copy">
+            <div className="identity-line">
+              <span className="identity-mark" aria-hidden="true"><i /><i /><i /></span>
+              <strong>QAZAQSTAN</strong>
+              <small>{locale === "ru" ? "20 регионов · единое правовое пространство" : "20 өңір · бірыңғай құқықтық кеңістік"}</small>
+            </div>
             <div className="eyebrow light"><span />{t.eyebrow}</div>
             <h1>
               {t.titleA} <em>{t.titleAccent}</em>
@@ -369,11 +378,13 @@ export default function Home() {
           </div>
           <div className="help-grid">
             {t.helpCards.map(([, title, description], index) => {
-              const HelpIcon = helpIcons[index];
               return (
               <a className={index === 5 ? "help-card urgent" : "help-card"} href="/pomosh" key={title}>
-                <div className="help-icon"><HelpIcon /></div>
-                <div>
+                <div className="help-icon">
+                  <Image src={helpIconAssets[index]} alt="" width={320} height={320} sizes="(max-width: 850px) 128px, 180px" />
+                </div>
+                <div className="help-card-copy">
+                  <span className="help-index">{String(index + 1).padStart(2, "0")}</span>
                   <h3>{title}</h3>
                   <p>{description}</p>
                   <span className="card-link">{t.route}<ArrowRight /></span>
