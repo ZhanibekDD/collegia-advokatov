@@ -3,7 +3,8 @@
 
 import { useState } from "react";
 import type { Locale } from "../lib/portal-data";
-import { Database, ExternalLink, Menu, Scale, X } from "lucide-react";
+import { Database, ExternalLink, Menu, X } from "lucide-react";
+import { ShanyrakMark } from "./shanyrak-mark";
 
 const nav = {
   ru: [
@@ -27,7 +28,7 @@ export function PortalHeader({ locale, onLocaleChange }: { locale: Locale; onLoc
     <header className="portal-header">
       <div className="shell portal-header-inner">
         <a className="brand" href="/">
-          <span className="brand-mark" aria-hidden="true"><Scale /></span>
+          <span className="brand-mark" aria-hidden="true"><ShanyrakMark /></span>
           <span className="brand-copy">
             <strong>{locale === "ru" ? "Единый портал коллегий адвокатов" : "Адвокаттар алқаларының бірыңғай порталы"}</strong>
             <small>{locale === "ru" ? "Республика Казахстан" : "Қазақстан Республикасы"}</small>
@@ -61,7 +62,7 @@ export function PortalFooter({ locale }: { locale: Locale }) {
     <footer className="portal-footer">
       <div className="shell portal-footer-inner">
         <div className="brand footer-logo">
-          <span className="brand-mark" aria-hidden="true"><Scale /></span>
+          <span className="brand-mark" aria-hidden="true"><ShanyrakMark /></span>
           <span className="brand-copy">
             <strong>{locale === "ru" ? "Коллегии адвокатов Республики Казахстан" : "Қазақстан Республикасының адвокаттар алқалары"}</strong>
             <small>{locale === "ru" ? "Цифровой доступ к правовой помощи" : "Құқықтық көмекке цифрлық қолжетімділік"}</small>
