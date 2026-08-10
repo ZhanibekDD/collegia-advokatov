@@ -2,7 +2,20 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 
 import { FormEvent, useMemo, useState } from "react";
-import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBriefcase,
+  faDatabase as faDatabaseSolid,
+  faFileCircleCheck,
+  faHandcuffs,
+  faHandshake,
+  faHouse,
+  faLanguage,
+  faLock,
+  faPeopleRoof,
+  faShieldHalved,
+  faUserCheck,
+} from "@fortawesome/free-solid-svg-icons";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -15,20 +28,15 @@ import {
   LockKeyhole,
   Minus,
   Plus,
-  Scale,
   Search,
   ShieldCheck,
 } from "lucide-react";
 import { regionOptions as regions, type Locale } from "./lib/portal-data";
+import { ShanyrakMark } from "./components/shanyrak-mark";
 
-const helpIconAssets = [
-  "/icons/icon-criminal.webp",
-  "/icons/icon-family.webp",
-  "/icons/icon-business.webp",
-  "/icons/icon-property.webp",
-  "/icons/icon-civil.webp",
-  "/icons/icon-urgent.webp",
-];
+const helpIcons = [faHandcuffs, faPeopleRoof, faBriefcase, faHouse, faHandshake, faShieldHalved];
+const valueIcons = [faShieldHalved, faLock, faDatabaseSolid, faLanguage];
+const materialIcons = [faHandcuffs, faUserCheck, faFileCircleCheck];
 
 const copy = {
   ru: {
@@ -261,7 +269,7 @@ export default function Home() {
         <div className="shell header-inner">
           <a className="brand" href="#top" aria-label={t.portal}>
             <span className="brand-mark" aria-hidden="true">
-              <Scale />
+              <ShanyrakMark />
             </span>
             <span className="brand-copy">
               <strong>{t.portal}</strong>
@@ -302,11 +310,10 @@ export default function Home() {
 
       <section className="hero" id="top">
         <div className="hero-grid" aria-hidden="true" />
-        <div className="hero-shanyrak" aria-hidden="true"><span /><i /><b /></div>
         <div className="shell hero-layout">
           <div className="hero-copy">
             <div className="identity-line">
-              <span className="identity-mark" aria-hidden="true"><i /><i /><i /></span>
+              <span className="identity-mark" aria-hidden="true"><ShanyrakMark /></span>
               <strong>QAZAQSTAN</strong>
               <small>{locale === "ru" ? "20 регионов · единое правовое пространство" : "20 өңір · бірыңғай құқықтық кеңістік"}</small>
             </div>
@@ -380,8 +387,9 @@ export default function Home() {
             {t.helpCards.map(([, title, description], index) => {
               return (
               <a className={index === 5 ? "help-card urgent" : "help-card"} href="/pomosh" key={title}>
-                <div className="help-icon">
-                  <Image src={helpIconAssets[index]} alt="" width={320} height={320} sizes="(max-width: 850px) 128px, 180px" />
+                <div className={`help-icon help-icon-${index + 1}`} aria-hidden="true">
+                  <span className="icon-kz-pattern" />
+                  <FontAwesomeIcon icon={helpIcons[index]} />
                 </div>
                 <div className="help-card-copy">
                   <span className="help-index">{String(index + 1).padStart(2, "0")}</span>
@@ -468,9 +476,12 @@ export default function Home() {
             </div>
           </div>
           <div className="values-grid">
-            {t.values.map(([number, title, description]) => (
+            {t.values.map(([number, title, description], index) => (
               <article className="value-card" key={number}>
-                <span>{number}</span>
+                <div className="value-card-top">
+                  <span>{number}</span>
+                  <i aria-hidden="true"><FontAwesomeIcon icon={valueIcons[index]} /></i>
+                </div>
                 <h3>{title}</h3>
                 <p>{description}</p>
               </article>
@@ -493,7 +504,7 @@ export default function Home() {
               <article className="material-card" key={title}>
                 <div className={`material-art art-${index + 1}`} aria-hidden="true">
                   <span>{String(index + 1).padStart(2, "0")}</span>
-                  <i>§</i>
+                  <i><FontAwesomeIcon icon={materialIcons[index]} /></i>
                 </div>
                 <div className="material-content">
                   <span className="material-tag">{tag}</span>
@@ -545,7 +556,7 @@ export default function Home() {
         <div className="shell footer-grid">
           <div className="footer-brand">
             <div className="brand footer-logo">
-              <span className="brand-mark" aria-hidden="true"><Scale /></span>
+              <span className="brand-mark" aria-hidden="true"><ShanyrakMark /></span>
               <span className="brand-copy"><strong>{t.footerTitle}</strong><small>{t.country}</small></span>
             </div>
             <p>{t.footerText}</p>
