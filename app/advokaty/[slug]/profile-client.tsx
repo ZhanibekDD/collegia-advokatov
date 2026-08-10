@@ -8,11 +8,15 @@ import {
   ArrowUpRight,
   BadgeCheck,
   CalendarDays,
+  Check,
+  Copy,
   Database,
   ExternalLink,
   IdCard,
   MapPin,
+  MessageCircle,
   Phone,
+  PhoneCall,
 } from "lucide-react";
 import { DataSourceNotice, PortalFooter, PortalHeader } from "../../components/portal-shell";
 import type { Locale, OfficialAdvocate } from "../../lib/portal-data";
@@ -26,10 +30,37 @@ function readableDate(value: string, fallback: string) {
   return value;
 }
 
+function extractPhone(value: string) {
+  const match = value.match(/(?:\+?7|8)[\s()\-]*\d{3}[\s()\-]*\d{3}[\s()\-]*\d{2}[\s()\-]*\d{2}/);
+  if (!match) return null;
+  let digits = match[0].replace(/\D/g, "");
+  if (digits.startsWith("8")) digits = `7${digits.slice(1)}`;
+  return digits.length === 11 && digits.startsWith("7") ? digits : null;
+}
+
 export default function ProfileClient({ advocate, total }: { advocate: OfficialAdvocate; total: number }) {
   const [locale, setLocale] = useState<Locale>("ru");
+  const [copied, setCopied] = useState(false);
   const kk = locale === "kk";
   const noValue = kk ? "Дереккөзде көрсетілмеген" : "Не указано в источнике";
+  const phone = extractPhone(advocate.contacts);
+
+  async function copyProfileLink() {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+    } catch {
+      const temporary = document.createElement("textarea");
+      temporary.value = window.location.href;
+      temporary.style.position = "fixed";
+      temporary.style.opacity = "0";
+      document.body.appendChild(temporary);
+      temporary.select();
+      document.execCommand("copy");
+      temporary.remove();
+    }
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1800);
+  }
 
   return (
     <main className="portal-page profile-page">
@@ -60,6 +91,11 @@ export default function ProfileClient({ advocate, total }: { advocate: OfficialA
             <a className="button button-primary" href="https://data.egov.kz/datasets/view?index=advokattar_tizimi14" target="_blank" rel="noreferrer">
               {kk ? "Дереккөзді ашу" : "Открыть источник"}<ExternalLink />
             </a>
+            <div className="profile-contact-actions">
+              {phone && <a href={`tel:+${phone}`}><PhoneCall />{kk ? "Қоңырау шалу" : "Позвонить"}</a>}
+              {phone && <a href={`https://wa.me/${phone}`} target="_blank" rel="noreferrer"><MessageCircle />WhatsApp</a>}
+              <button type="button" onClick={copyProfileLink}>{copied ? <Check /> : <Copy />}{copied ? (kk ? "Көшірілді" : "Скопировано") : (kk ? "Сілтемені көшіру" : "Копировать ссылку")}</button>
+            </div>
           </aside>
         </div>
       </section>

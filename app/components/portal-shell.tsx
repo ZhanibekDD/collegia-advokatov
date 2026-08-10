@@ -1,8 +1,9 @@
 "use client";
 /* eslint-disable @next/next/no-html-link-for-pages */
 
+import { useState } from "react";
 import type { Locale } from "../lib/portal-data";
-import { Database, ExternalLink, Scale } from "lucide-react";
+import { Database, ExternalLink, Menu, Scale, X } from "lucide-react";
 
 const nav = {
   ru: [
@@ -20,6 +21,8 @@ const nav = {
 };
 
 export function PortalHeader({ locale, onLocaleChange }: { locale: Locale; onLocaleChange: (locale: Locale) => void }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <header className="portal-header">
       <div className="shell portal-header-inner">
@@ -30,12 +33,23 @@ export function PortalHeader({ locale, onLocaleChange }: { locale: Locale; onLoc
             <small>{locale === "ru" ? "Республика Казахстан" : "Қазақстан Республикасы"}</small>
           </span>
         </a>
-        <nav className="portal-nav" aria-label={locale === "ru" ? "Навигация" : "Навигация"}>
-          {nav[locale].map(([label, href]) => <a href={href} key={href}>{label}</a>)}
+        <nav className={menuOpen ? "portal-nav is-open" : "portal-nav"} aria-label={locale === "ru" ? "Навигация" : "Навигация"}>
+          {nav[locale].map(([label, href]) => <a href={href} key={href} onClick={() => setMenuOpen(false)}>{label}</a>)}
         </nav>
-        <div className="language-switch">
-          <button className={locale === "kk" ? "active" : ""} onClick={() => onLocaleChange("kk")}>ҚАЗ</button>
-          <button className={locale === "ru" ? "active" : ""} onClick={() => onLocaleChange("ru")}>РУС</button>
+        <div className="portal-header-actions">
+          <div className="language-switch">
+            <button className={locale === "kk" ? "active" : ""} onClick={() => onLocaleChange("kk")}>ҚАЗ</button>
+            <button className={locale === "ru" ? "active" : ""} onClick={() => onLocaleChange("ru")}>РУС</button>
+          </div>
+          <button
+            className="portal-menu-button"
+            type="button"
+            aria-label={locale === "ru" ? "Открыть меню" : "Мәзірді ашу"}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((value) => !value)}
+          >
+            {menuOpen ? <X /> : <Menu />}
+          </button>
         </div>
       </div>
     </header>
