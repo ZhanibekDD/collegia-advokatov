@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, BadgeCheck, Database, Languages, MapPin, Search, ShieldCheck } from "lucide-react";
+import { ArrowRight, BadgeCheck, Database, Languages, Mail, MapPin, Phone, Search, ShieldCheck, UserRound } from "lucide-react";
 import { DataSourceNotice, PortalFooter, PortalHeader } from "../components/portal-shell";
 import { ZHETISU_REGION, type AdvocateDirectory, type Locale } from "../lib/portal-data";
 
@@ -54,7 +54,7 @@ export default function RegionsPage() {
         <div className="shell regions-hero-grid">
           <div>
             <div className="eyebrow light"><span />{kk ? "Алқа туралы" : "О коллегии"}</div>
-            <h1>{kk ? "Жетісу облыстық адвокаттар алқасының цифрлық порталы" : "Цифровой портал Жетісуской областной коллегии адвокатов"}</h1>
+            <h1>{kk ? "Жетісу облыстық адвокаттар алқасының цифрлық порталы" : "Цифровой портал Коллегии адвокатов области Жетісу"}</h1>
           </div>
           <p>{kk ? "Портал Жетісу облысының тұрғындарына адвокат табуға, лицензия туралы ашық мәліметтерді көруге және құқықтық көмекке жүгіну бағытын түсінуге көмектеседі." : "Портал помогает жителям области Жетісу найти адвоката, посмотреть опубликованные сведения о лицензии и понять, как начать обращение за правовой помощью."}</p>
         </div>
@@ -78,6 +78,22 @@ export default function RegionsPage() {
                 </article>
               );
             })}
+          </div>
+
+          <div className="flow-result">
+            <div className="eyebrow"><span />{kk ? "Ресми байланыстар" : "Официальные контакты"}</div>
+            <h2>{kk ? "Жетісу облыстық адвокаттар алқасы" : "Коллегия адвокатов области Жетісу"}</h2>
+            <p>{kk ? "Төмендегі мәліметтер Республикалық адвокаттар алқасының аумақтық алқалар тізіміндегі ашық ақпаратқа негізделген." : "Контактные сведения взяты из открытой карточки территориальной коллегии на сайте Республиканской коллегии адвокатов."}</p>
+            <div className="result-summary">
+              <div><small>{kk ? "Төраға" : "Председатель"}</small><strong><UserRound /> Адильбекова Данипа Медетовна</strong></div>
+              <div><small>{kk ? "Мекенжай" : "Адрес"}</small><strong><MapPin /> г. Талдыкорган, ул. Каблиса жырау, д. 69</strong></div>
+              <div><small>{kk ? "Телефон" : "Телефон"}</small><strong><Phone /> 8 (7282) 24-40-33</strong></div>
+              <div><small>Email</small><strong><Mail /> advokatura-tk@bk.ru</strong></div>
+            </div>
+            <div className="flow-result-actions">
+              <a className="button button-primary" href="tel:+77282244033">{kk ? "Қоңырау шалу" : "Позвонить"}<Phone /></a>
+              <a href="mailto:advokatura-tk@bk.ru">{kk ? "Хат жазу" : "Написать на email"}<Mail /></a>
+            </div>
           </div>
 
           <div className="directory-toolbar">
