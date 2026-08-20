@@ -10,13 +10,13 @@ const nav = {
   ru: [
     ["Адвокаты", "/advokaty"],
     ["Получить помощь", "/pomosh"],
-    ["Регионы", "/regions"],
+    ["О коллегии", "/regions"],
     ["Главная", "/"],
   ],
   kk: [
     ["Адвокаттар", "/advokaty"],
     ["Көмек алу", "/pomosh"],
-    ["Өңірлер", "/regions"],
+    ["Алқа туралы", "/regions"],
     ["Басты бет", "/"],
   ],
 };
@@ -30,11 +30,11 @@ export function PortalHeader({ locale, onLocaleChange }: { locale: Locale; onLoc
         <a className="brand" href="/">
           <span className="brand-mark" aria-hidden="true"><ShanyrakMark /></span>
           <span className="brand-copy">
-            <strong>{locale === "ru" ? "Единый портал коллегий адвокатов" : "Адвокаттар алқаларының бірыңғай порталы"}</strong>
-            <small>{locale === "ru" ? "Республика Казахстан" : "Қазақстан Республикасы"}</small>
+            <strong>{locale === "ru" ? "Жетісуская областная коллегия адвокатов" : "Жетісу облыстық адвокаттар алқасы"}</strong>
+            <small>{locale === "ru" ? "Область Жетісу · Республика Казахстан" : "Жетісу облысы · Қазақстан Республикасы"}</small>
           </span>
         </a>
-        <nav className={menuOpen ? "portal-nav is-open" : "portal-nav"} aria-label={locale === "ru" ? "Навигация" : "Навигация"}>
+        <nav className={menuOpen ? "portal-nav is-open" : "portal-nav"} aria-label="Навигация">
           {nav[locale].map(([label, href]) => <a href={href} key={href} onClick={() => setMenuOpen(false)}>{label}</a>)}
         </nav>
         <div className="portal-header-actions">
@@ -64,33 +64,39 @@ export function PortalFooter({ locale }: { locale: Locale }) {
         <div className="brand footer-logo">
           <span className="brand-mark" aria-hidden="true"><ShanyrakMark /></span>
           <span className="brand-copy">
-            <strong>{locale === "ru" ? "Коллегии адвокатов Республики Казахстан" : "Қазақстан Республикасының адвокаттар алқалары"}</strong>
-            <small>{locale === "ru" ? "Цифровой доступ к правовой помощи" : "Құқықтық көмекке цифрлық қолжетімділік"}</small>
+            <strong>{locale === "ru" ? "Жетісуская областная коллегия адвокатов" : "Жетісу облыстық адвокаттар алқасы"}</strong>
+            <small>{locale === "ru" ? "Цифровой доступ к правовой помощи в области Жетісу" : "Жетісу облысындағы құқықтық көмекке цифрлық қолжетімділік"}</small>
           </span>
         </div>
         <div className="portal-footer-links">
           <a href="/advokaty">{locale === "ru" ? "Найти адвоката" : "Адвокат табу"}</a>
           <a href="/pomosh">{locale === "ru" ? "Получить помощь" : "Көмек алу"}</a>
-          <a href="/regions">{locale === "ru" ? "Региональные коллегии" : "Өңірлік алқалар"}</a>
+          <a href="/regions">{locale === "ru" ? "О коллегии" : "Алқа туралы"}</a>
         </div>
       </div>
       <div className="shell portal-footer-bottom">
-        <span>© 2026</span>
+        <span>© 2026 · Жетісу</span>
         <a href="https://data.egov.kz/datasets/view?index=advokattar_tizimi14" target="_blank" rel="noreferrer">
-          {locale === "ru" ? "Источник: открытые данные Минюста РК · 08.07.2025" : "Дереккөз: ҚР Әділет министрлігінің ашық деректері · 08.07.2025"}<ExternalLink />
+          {locale === "ru" ? "Источник каталога: открытые данные Минюста РК · 08.07.2025" : "Каталог дереккөзі: ҚР Әділет министрлігінің ашық деректері · 08.07.2025"}<ExternalLink />
         </a>
       </div>
     </footer>
   );
 }
 
-export function DataSourceNotice({ locale, total = 6005 }: { locale: Locale; total?: number }) {
+export function DataSourceNotice({ locale, total }: { locale: Locale; total?: number }) {
+  const count = typeof total === "number" ? total.toLocaleString("ru-RU") : null;
+
   return (
     <div className="data-source-notice" role="note">
       <span><Database /></span>
       <div>
-        <strong>{locale === "ru" ? `${total.toLocaleString("ru-RU")} записей из открытого набора Минюста РК` : `ҚР Әділет министрлігінің ашық деректерінен ${total.toLocaleString("ru-RU")} жазба`}</strong>
-        <p>{locale === "ru" ? "Источник обновлён 08.07.2025 и помечен владельцем как требующий актуализации. Перед заключением соглашения дополнительно проверьте лицензию и членство в территориальной коллегии." : "Дереккөз 08.07.2025 жаңартылған және иесі өзектендіруді қажет етеді деп белгілеген. Келісім жасамас бұрын лицензияны және аумақтық алқаға мүшелікті қосымша тексеріңіз."}</p>
+        <strong>
+          {locale === "ru"
+            ? `${count ? `${count} · ` : ""}адвокаты области Жетісу в открытом наборе Минюста РК`
+            : `${count ? `${count} · ` : ""}Жетісу облысының адвокаттары ҚР Әділет министрлігінің ашық деректерінде`}
+        </strong>
+        <p>{locale === "ru" ? "На сайте показываются только записи, относящиеся к области Жетісу. Источник обновлён 08.07.2025 и помечен владельцем как требующий актуализации, поэтому перед заключением соглашения дополнительно проверьте статус лицензии и членство в коллегии." : "Сайтта тек Жетісу облысына қатысты жазбалар көрсетіледі. Дереккөз 08.07.2025 жаңартылған және өзектендіруді қажет етеді деп белгіленген, сондықтан келісім жасамас бұрын лицензия мәртебесі мен алқаға мүшелікті қосымша тексеріңіз."}</p>
       </div>
       <a href="https://data.egov.kz/datasets/view?index=advokattar_tizimi14" target="_blank" rel="noreferrer">
         {locale === "ru" ? "Открыть источник" : "Дереккөзді ашу"}<ExternalLink />
