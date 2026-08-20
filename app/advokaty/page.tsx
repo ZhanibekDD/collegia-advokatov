@@ -17,76 +17,68 @@ import {
   X,
 } from "lucide-react";
 import { DataSourceNotice, PortalFooter, PortalHeader } from "../components/portal-shell";
-import type { AdvocateDirectory, Locale, OfficialAdvocate } from "../lib/portal-data";
+import { ZHETISU_REGION, type AdvocateDirectory, type Locale, type OfficialAdvocate } from "../lib/portal-data";
 
 const PAGE_SIZE = 24;
 
 const copy = {
   ru: {
-    eyebrow: "Открытые данные Министерства юстиции РК",
-    title: "Все адвокаты Казахстана — в одном каталоге",
-    lead: "Ищите по ФИО, номеру лицензии, региону или адресу. Мы показываем только поля официальной открытой выгрузки — без выдуманных рейтингов и специализаций.",
+    eyebrow: "Каталог адвокатов области Жетісу",
+    title: "Найдите адвоката Жетісу по официальным данным",
+    lead: "Поиск работает только по адвокатам области Жетісу. Ищите по ФИО, номеру лицензии, адресу или телефону — без выдуманных рейтингов и специализаций.",
     search: "ФИО, лицензия, адрес или телефон",
-    region: "Регион",
-    allRegions: "Весь Казахстан",
     sort: "Сортировка",
     sortName: "По фамилии А—Я",
     sortNameDesc: "По фамилии Я—А",
-    sortRegion: "По региону",
-    found: "Найдено записей",
-    shown: "Показано",
-    reset: "Сбросить фильтры",
+    found: "Найдено адвокатов",
+    reset: "Сбросить поиск",
     source: "Запись из открытых данных",
     license: "Лицензия",
     issued: "Дата выдачи",
-    joined: "Вступление в коллегию",
     profile: "Открыть карточку",
     noValue: "Не указано в источнике",
     empty: "По запросу ничего не найдено",
-    emptyText: "Проверьте написание ФИО или сбросьте один из фильтров.",
-    loading: "Загружаем официальный каталог",
+    emptyText: "Проверьте написание ФИО, номер лицензии или очистите строку поиска.",
+    loading: "Загружаем каталог адвокатов Жетісу",
     loadError: "Не удалось загрузить каталог",
     retry: "Попробовать ещё раз",
     previous: "Назад",
     next: "Дальше",
     page: "Страница",
-    limitation: "Специализация и текущий статус лицензии в этом наборе не публикуются.",
-    popular: "Популярные регионы",
+    limitation: "Каталог ограничен областью Жетісу. Текущий статус лицензии необходимо дополнительно проверять перед заключением соглашения.",
     call: "Позвонить",
     whatsapp: "Написать в WhatsApp",
+    regionFact: "область Жетісу",
+    sourceFact: "открытые данные Минюста РК",
   },
   kk: {
-    eyebrow: "ҚР Әділет министрлігінің ашық деректері",
-    title: "Қазақстанның барлық адвокаттары бір каталогта",
-    lead: "Аты-жөні, лицензия нөмірі, өңірі немесе мекенжайы бойынша іздеңіз. Біз рейтингтер мен мамандануды ойдан қоспай, ресми ашық жүктемедегі өрістерді ғана көрсетеміз.",
+    eyebrow: "Жетісу облысы адвокаттарының каталогы",
+    title: "Ресми деректер бойынша Жетісу адвокатын табыңыз",
+    lead: "Іздеу тек Жетісу облысының адвокаттары бойынша жұмыс істейді. Аты-жөні, лицензия нөмірі, мекенжайы немесе телефоны бойынша іздеңіз — ойдан шығарылған рейтингтер мен маманданусыз.",
     search: "Аты-жөні, лицензия, мекенжай немесе телефон",
-    region: "Өңір",
-    allRegions: "Бүкіл Қазақстан",
     sort: "Сұрыптау",
     sortName: "Тегі бойынша А—Я",
     sortNameDesc: "Тегі бойынша Я—А",
-    sortRegion: "Өңір бойынша",
-    found: "Табылған жазбалар",
-    shown: "Көрсетілді",
-    reset: "Сүзгілерді тазарту",
+    found: "Табылған адвокаттар",
+    reset: "Іздеуді тазарту",
     source: "Ашық деректердегі жазба",
     license: "Лицензия",
     issued: "Берілген күні",
-    joined: "Алқаға кіру",
     profile: "Карточканы ашу",
     noValue: "Дереккөзде көрсетілмеген",
     empty: "Сұрау бойынша ештеңе табылмады",
-    emptyText: "Аты-жөнінің жазылуын тексеріңіз немесе сүзгілердің бірін тазалаңыз.",
-    loading: "Ресми каталог жүктелуде",
+    emptyText: "Аты-жөнінің жазылуын, лицензия нөмірін тексеріңіз немесе іздеу жолын тазалаңыз.",
+    loading: "Жетісу адвокаттарының каталогы жүктелуде",
     loadError: "Каталогты жүктеу мүмкін болмады",
     retry: "Қайталап көру",
     previous: "Артқа",
     next: "Келесі",
     page: "Бет",
-    limitation: "Бұл жиында мамандану мен лицензияның ағымдағы мәртебесі жарияланбайды.",
-    popular: "Танымал өңірлер",
+    limitation: "Каталог Жетісу облысымен шектелген. Келісім жасамас бұрын лицензияның ағымдағы мәртебесін қосымша тексеру қажет.",
     call: "Қоңырау шалу",
     whatsapp: "WhatsApp-қа жазу",
+    regionFact: "Жетісу облысы",
+    sourceFact: "ҚР Әділет министрлігінің ашық деректері",
   },
 };
 
@@ -107,13 +99,21 @@ function extractPhone(value: string) {
   return digits.length === 11 && digits.startsWith("7") ? digits : null;
 }
 
+function scopeDirectory(result: AdvocateDirectory): AdvocateDirectory {
+  const advocates = result.advocates.filter((advocate) => advocate.region === ZHETISU_REGION);
+  return {
+    ...result,
+    meta: { ...result.meta, total: advocates.length },
+    advocates,
+  };
+}
+
 export default function AdvocatesPage() {
   const [locale, setLocale] = useState<Locale>("ru");
   const [directory, setDirectory] = useState<AdvocateDirectory | null>(null);
   const [loadFailed, setLoadFailed] = useState(false);
   const [reloadKey, setReloadKey] = useState(0);
   const [query, setQuery] = useState("");
-  const [region, setRegion] = useState("all");
   const [sort, setSort] = useState("name-asc");
   const [page, setPage] = useState(1);
   const [filtersReady, setFiltersReady] = useState(false);
@@ -124,7 +124,7 @@ export default function AdvocatesPage() {
     const timer = window.setTimeout(() => {
       const params = new URLSearchParams(window.location.search);
       setQuery(params.get("q") ?? "");
-      setRegion(params.get("region") ?? "all");
+      setSort(params.get("sort") ?? "name-asc");
       setFiltersReady(true);
     }, 0);
     return () => window.clearTimeout(timer);
@@ -134,21 +134,21 @@ export default function AdvocatesPage() {
     if (!filtersReady) return;
     const params = new URLSearchParams();
     if (query.trim()) params.set("q", query.trim());
-    if (region !== "all") params.set("region", region);
     if (sort !== "name-asc") params.set("sort", sort);
     const next = `${window.location.pathname}${params.size ? `?${params.toString()}` : ""}`;
     window.history.replaceState(null, "", next);
-  }, [filtersReady, query, region, sort]);
+  }, [filtersReady, query, sort]);
 
   useEffect(() => {
     let active = true;
+    setLoadFailed(false);
     fetch("/data/advocates.json")
       .then((response) => {
         if (!response.ok) throw new Error("Directory request failed");
         return response.json() as Promise<AdvocateDirectory>;
       })
       .then((result) => {
-        if (active) setDirectory(result);
+        if (active) setDirectory(scopeDirectory(result));
       })
       .catch(() => {
         if (active) setLoadFailed(true);
@@ -158,42 +158,20 @@ export default function AdvocatesPage() {
     };
   }, [reloadKey]);
 
-  const regions = useMemo(() => {
-    if (!directory) return [];
-    return [...new Set(directory.advocates.map((advocate) => advocate.region))]
-      .filter((item) => item !== "Регион не указан")
-      .sort((a, b) => a.localeCompare(b, "ru"));
-  }, [directory]);
-
-  const popularRegions = useMemo(() => {
-    if (!directory) return [];
-    const counts = new Map<string, number>();
-    for (const advocate of directory.advocates) {
-      if (advocate.region !== "Регион не указан") counts.set(advocate.region, (counts.get(advocate.region) ?? 0) + 1);
-    }
-    return [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 6);
-  }, [directory]);
-
   const filtered = useMemo(() => {
     if (!directory) return [];
     const normalized = deferredQuery.trim().toLocaleLowerCase(locale === "kk" ? "kk-KZ" : "ru-RU");
     const result = directory.advocates.filter((advocate) => {
-      const regionMatch = region === "all" || advocate.region === region;
-      if (!regionMatch) return false;
       if (!normalized) return true;
-      return [advocate.name, advocate.licenseNumber, advocate.region, advocate.address, advocate.contacts]
+      return [advocate.name, advocate.licenseNumber, advocate.address, advocate.contacts]
         .join(" ")
         .toLocaleLowerCase()
         .includes(normalized);
     });
 
     const collator = new Intl.Collator(locale === "kk" ? "kk" : "ru", { sensitivity: "base" });
-    return result.sort((a, b) => {
-      if (sort === "name-desc") return collator.compare(b.name, a.name);
-      if (sort === "region") return collator.compare(a.region, b.region) || collator.compare(a.name, b.name);
-      return collator.compare(a.name, b.name);
-    });
-  }, [deferredQuery, directory, locale, region, sort]);
+    return result.sort((a, b) => sort === "name-desc" ? collator.compare(b.name, a.name) : collator.compare(a.name, b.name));
+  }, [deferredQuery, directory, locale, sort]);
 
   const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const currentPage = Math.min(page, pageCount);
@@ -204,14 +182,8 @@ export default function AdvocatesPage() {
     setPage(1);
   }
 
-  function updateRegion(value: string) {
-    setRegion(value);
-    setPage(1);
-  }
-
   function resetFilters() {
     setQuery("");
-    setRegion("all");
     setSort("name-asc");
     setPage(1);
   }
@@ -224,6 +196,7 @@ export default function AdvocatesPage() {
   return (
     <main className="portal-page">
       <PortalHeader locale={locale} onLocaleChange={setLocale} />
+
       <section className="directory-hero">
         <div className="directory-orbit" aria-hidden="true" />
         <div className="shell directory-hero-inner">
@@ -231,8 +204,8 @@ export default function AdvocatesPage() {
           <h1>{t.title}</h1>
           <p>{t.lead}</p>
           <div className="directory-hero-facts">
-            <span><Database />6 005 {locale === "ru" ? "записей" : "жазба"}</span>
-            <span><MapPin />20 {locale === "ru" ? "регионов" : "өңір"}</span>
+            <span><Database />{directory ? directory.meta.total.toLocaleString("ru-RU") : "—"} {locale === "ru" ? "адвокатов" : "адвокат"}</span>
+            <span><MapPin />{t.regionFact}</span>
             <span><CalendarDays />08.07.2025</span>
           </div>
         </div>
@@ -249,33 +222,13 @@ export default function AdvocatesPage() {
               {query && <button onClick={() => updateQuery("")} aria-label={t.reset}><X /></button>}
             </label>
             <label className="directory-select">
-              <small>{t.region}</small>
-              <select value={region} onChange={(event) => updateRegion(event.target.value)}>
-                <option value="all">{t.allRegions}</option>
-                {regions.map((item) => <option key={item} value={item}>{item}</option>)}
-              </select>
-            </label>
-            <label className="directory-select">
               <small>{t.sort}</small>
               <select value={sort} onChange={(event) => { setSort(event.target.value); setPage(1); }}>
                 <option value="name-asc">{t.sortName}</option>
                 <option value="name-desc">{t.sortNameDesc}</option>
-                <option value="region">{t.sortRegion}</option>
               </select>
             </label>
           </div>
-
-          {popularRegions.length > 0 && (
-            <div className="popular-regions" aria-label={t.popular}>
-              <span>{t.popular}</span>
-              <button className={region === "all" ? "active" : ""} onClick={() => updateRegion("all")}>{t.allRegions}</button>
-              {popularRegions.map(([item, count]) => (
-                <button className={region === item ? "active" : ""} onClick={() => updateRegion(item)} key={item}>
-                  {item}<small>{count.toLocaleString("ru-RU")}</small>
-                </button>
-              ))}
-            </div>
-          )}
 
           <div className="directory-toolbar">
             <div>
@@ -303,33 +256,34 @@ export default function AdvocatesPage() {
                 {visible.map((advocate: OfficialAdvocate, index) => {
                   const phone = extractPhone(advocate.contacts);
                   return (
-                  <article className="advocate-card official-card" key={advocate.id}>
-                    <div className={`advocate-avatar avatar-${(index % 3) + 1}`}>
-                      <span>{advocate.initials || "KZ"}</span>
-                      <small>#{advocate.id}</small>
-                    </div>
-                    <div className="advocate-card-body">
-                      <div className="verified-line"><span><BadgeCheck /></span>{t.source}</div>
-                      <h2>{advocate.name}</h2>
-                      <p className="official-region"><MapPin />{advocate.region}</p>
-                      <div className="official-facts">
-                        <div><span><IdCard />{t.license}</span><strong>{advocate.licenseNumber || t.noValue}</strong></div>
-                        <div><span><CalendarDays />{t.issued}</span><strong>{readableDate(advocate.licenseIssuedAt, t.noValue)}</strong></div>
+                    <article className="advocate-card official-card" key={advocate.id}>
+                      <div className={`advocate-avatar avatar-${(index % 3) + 1}`}>
+                        <span>{advocate.initials || "JE"}</span>
+                        <small>#{advocate.id}</small>
                       </div>
-                      {advocate.address && <p className="official-address"><MapPin />{advocate.address}</p>}
-                      {advocate.contacts && <p className="official-contact"><Phone />{advocate.contacts}</p>}
-                      <div className="advocate-card-actions">
-                        <a className="card-profile-link" href={`/advokaty/${advocate.id}`}>{t.profile}<ArrowRight /></a>
-                        {phone && (
-                          <div className="card-contact-buttons">
-                            <a href={`tel:+${phone}`} aria-label={t.call} title={t.call}><PhoneCall /></a>
-                            <a href={`https://wa.me/${phone}`} target="_blank" rel="noreferrer" aria-label={t.whatsapp} title={t.whatsapp}><MessageCircle /></a>
-                          </div>
-                        )}
+                      <div className="advocate-card-body">
+                        <div className="verified-line"><span><BadgeCheck /></span>{t.source}</div>
+                        <h2>{advocate.name}</h2>
+                        <p className="official-region"><MapPin />{locale === "ru" ? "Область Жетісу" : "Жетісу облысы"}</p>
+                        <div className="official-facts">
+                          <div><span><IdCard />{t.license}</span><strong>{advocate.licenseNumber || t.noValue}</strong></div>
+                          <div><span><CalendarDays />{t.issued}</span><strong>{readableDate(advocate.licenseIssuedAt, t.noValue)}</strong></div>
+                        </div>
+                        {advocate.address && <p className="official-address"><MapPin />{advocate.address}</p>}
+                        {advocate.contacts && <p className="official-contact"><Phone />{advocate.contacts}</p>}
+                        <div className="advocate-card-actions">
+                          <a className="card-profile-link" href={`/advokaty/${advocate.id}`}>{t.profile}<ArrowRight /></a>
+                          {phone && (
+                            <div className="card-contact-buttons">
+                              <a href={`tel:+${phone}`} aria-label={t.call} title={t.call}><PhoneCall /></a>
+                              <a href={`https://wa.me/${phone}`} target="_blank" rel="noreferrer" aria-label={t.whatsapp} title={t.whatsapp}><MessageCircle /></a>
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  </article>
-                )})}
+                    </article>
+                  );
+                })}
               </div>
 
               <nav className="directory-pagination" aria-label={t.page}>
@@ -350,6 +304,7 @@ export default function AdvocatesPage() {
           )}
         </div>
       </section>
+
       <PortalFooter locale={locale} />
     </main>
   );
