@@ -1,19 +1,25 @@
+const JETISU_EMBLEM_URL =
+  "https://upload.wikimedia.org/wikipedia/commons/f/f1/%D0%93%D0%B5%D1%80%D0%B1_%D0%96%D0%B5%D1%82%D1%8B%D1%81%D1%83%D1%81%D0%BA%D0%BE%D0%B9_%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D0%B8.svg";
+
 export function ShanyrakMark({ className = "" }: { className?: string }) {
   return (
-    <svg
-      className={className}
-      viewBox="0 0 64 64"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <circle cx="32" cy="32" r="27" stroke="currentColor" strokeWidth="4" />
-      <circle cx="32" cy="32" r="12" stroke="currentColor" strokeWidth="2.5" opacity=".95" />
-      <path d="M32 5v15M32 44v15M5 32h15M44 32h15" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <path d="m12.9 12.9 10.6 10.6M40.5 40.5l10.6 10.6M51.1 12.9 40.5 23.5M23.5 40.5 12.9 51.1" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-      <path d="M24 21c2.8 5.6 13.2 5.6 16 0M24 43c2.8-5.6 13.2-5.6 16 0M21 24c5.6 2.8 5.6 13.2 0 16M43 24c-5.6 2.8-5.6 13.2 0 16" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
-      <path d="m26 26 12 12M38 26 26 38" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" />
-      <circle cx="32" cy="32" r="2.6" fill="currentColor" />
-    </svg>
+    <span
+      className={`jetisu-region-emblem ${className}`.trim()}
+      role="img"
+      aria-label="Эмблема области Жетісу"
+      title="Эмблема области Жетісу"
+      style={{
+        display: "block",
+        width: "100%",
+        height: "100%",
+        borderRadius: "50%",
+        backgroundColor: "#ffffff",
+        backgroundImage: `url(${JETISU_EMBLEM_URL})`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        backgroundSize: "94% 94%",
+        boxShadow: "0 0 0 1px rgba(197,155,85,.35)",
+      }}
+    />
   );
 }
