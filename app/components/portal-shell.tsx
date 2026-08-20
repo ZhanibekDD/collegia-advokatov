@@ -30,7 +30,7 @@ export function PortalHeader({ locale, onLocaleChange }: { locale: Locale; onLoc
         <a className="brand" href="/">
           <span className="brand-mark" aria-hidden="true"><ShanyrakMark /></span>
           <span className="brand-copy">
-            <strong>{locale === "ru" ? "Жетісуская областная коллегия адвокатов" : "Жетісу облыстық адвокаттар алқасы"}</strong>
+            <strong>{locale === "ru" ? "Коллегия адвокатов области Жетісу" : "Жетісу облыстық адвокаттар алқасы"}</strong>
             <small>{locale === "ru" ? "Область Жетісу · Республика Казахстан" : "Жетісу облысы · Қазақстан Республикасы"}</small>
           </span>
         </a>
@@ -64,7 +64,7 @@ export function PortalFooter({ locale }: { locale: Locale }) {
         <div className="brand footer-logo">
           <span className="brand-mark" aria-hidden="true"><ShanyrakMark /></span>
           <span className="brand-copy">
-            <strong>{locale === "ru" ? "Жетісуская областная коллегия адвокатов" : "Жетісу облыстық адвокаттар алқасы"}</strong>
+            <strong>{locale === "ru" ? "Коллегия адвокатов области Жетісу" : "Жетісу облыстық адвокаттар алқасы"}</strong>
             <small>{locale === "ru" ? "Цифровой доступ к правовой помощи в области Жетісу" : "Жетісу облысындағы құқықтық көмекке цифрлық қолжетімділік"}</small>
           </span>
         </div>
