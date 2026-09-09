@@ -1,327 +1,205 @@
 "use client";
 
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import Link from "next/link";
+import { type FormEvent, useMemo, useState } from "react";
 import {
   ArrowRight,
   BadgeCheck,
-  BriefcaseBusiness,
   Building2,
-  ChevronDown,
-  Clock3,
-  FileCheck2,
+  CalendarCheck2,
+  FileSearch,
   Gavel,
-  Globe2,
-  Handshake,
-  Home,
+  Landmark,
   Mail,
   MapPin,
-  Menu,
   Phone,
-  Search,
   Scale,
+  Search,
   ShieldCheck,
-  UserRound,
+  UserRoundSearch,
   UsersRound,
-  X,
 } from "lucide-react";
-import { ShanyrakMark } from "./components/shanyrak-mark";
-import {
-  ZHETISU_REGION,
-  type AdvocateDirectory,
-  type Locale,
-  type OfficialAdvocate,
-} from "./lib/portal-data";
+import { DataSourceNotice, PortalFooter, PortalHeader } from "./components/portal-shell";
+import { ASSOCIATION, advocateWord, consultationName, formatDirectoryDate } from "./lib/portal-data";
+import { useDirectory } from "./lib/use-directory";
+import { usePersistentLocale } from "./lib/use-persistent-locale";
 
-const serviceIcons = [Gavel, UsersRound, BriefcaseBusiness, Handshake, Home];
-
-const copy = {
+const text = {
   ru: {
-    name: "Коллегия адвокатов области Жетісу",
-    nameKk: "ЖЕТІСУ ОБЛЫСТЫҚ АДВОКАТТАР АЛҚАСЫ",
-    nav: [
-      ["Главная", "#top"],
-      ["О коллегии", "#about"],
-      ["Адвокаты", "#advocates"],
-      ["Правовая помощь", "#help"],
-      ["Новости", "#resources"],
-      ["Документы", "#resources"],
-      ["Контакты", "#contacts"],
+    eyebrow: "Коллегия адвокатов области Жетісу",
+    title: "Правовая помощь начинается с проверенной информации",
+    lead: "Найдите действующего члена коллегии или юридическую консультацию региона в актуальном списке на 1 сентября 2026 года.",
+    find: "Найти адвоката",
+    consultations: "Юридические консультации",
+    registry: "Актуальный реестр",
+    searchTitle: "Поиск по списку коллегии",
+    searchLead: "Введите фамилию, имя или название юридической консультации.",
+    placeholder: "Например, Абдуллаев или Панфиловский район",
+    search: "Искать",
+    all: "Открыть полный список",
+    members: "адвокатов",
+    groups: "подразделений и форм практики",
+    updated: "состояние списка",
+    languages: "русский / қазақша",
+    tasksEyebrow: "Главное — без лишних шагов",
+    tasksTitle: "Что можно сделать на сайте",
+    tasks: [
+      ["Найти адвоката", "Поиск по ФИО в составе коллегии на сентябрь 2026 года."],
+      ["Выбрать подразделение", "Городские, районные и ювенальная юридические консультации."],
+      ["Понять маршрут", "Короткая памятка по выбору направления правовой помощи."],
+      ["Проверить сведения", "Дата списка и источник всегда показаны рядом с данными."],
     ],
-    heroTitleA: "Профессиональная",
-    heroTitleB: "правовая помощь",
-    heroTitleC: "в области Жетісу",
-    heroLead:
-      "Найдите своего адвоката среди профессионалов региона и получите квалифицированную юридическую помощь в любых правовых вопросах.",
-    findLawyer: "Найти адвоката",
-    getHelp: "Получить помощь",
-    searchTitle: "Поиск адвоката",
-    searchLead: "Найдите адвоката по имени, фамилии или номеру лицензии",
-    advanced: "Расширенный поиск",
-    namePlaceholder: "Фамилия, имя или отчество",
-    licensePlaceholder: "Номер лицензии",
-    cityPlaceholder: "Город",
-    find: "Найти",
-    stats: [
-      ["адвокатов", "в области Жетісу"],
-      ["Официальные данные", "из открытого набора Минюста РК"],
-      ["Двуязычная поддержка", "қазақша / русский"],
-      ["Вся область Жетісу", "города и районы"],
-    ],
-    advocatesTitle: "Адвокаты области Жетісу",
-    allLawyers: "Смотреть всех адвокатов",
-    license: "Лицензия",
-    source: "Открытые данные",
-    profile: "Профиль",
-    call: "Позвонить",
-    write: "Написать",
-    helpTitle: "Правовая помощь",
-    services: [
-      ["Уголовное право", "Защита на всех стадиях уголовного процесса"],
-      ["Семейное право", "Развод, алименты, раздел имущества, опека"],
-      ["Бизнес и налоги", "Сопровождение бизнеса и экономических споров"],
-      ["Гражданские споры", "Защита прав и законных интересов в суде"],
-      ["Недвижимость", "Сделки, споры и регистрация прав"],
-    ],
-    aboutTitle: "О коллегии",
-    aboutText:
-      "Коллегия адвокатов области Жетісу — профессиональное объединение адвокатов региона, созданное для защиты прав и законных интересов граждан и организаций.",
-    aboutText2:
-      "Портал помогает быстро найти адвоката, проверить опубликованные сведения и перейти к удобному способу связи.",
-    more: "Подробнее о коллегии",
-    contactsTitle: "Контакты",
-    address: "г. Талдыкорган, ул. Каблиса жырау, 69",
-    hours: "Пн – Пт: 09:00 – 18:00",
-    resourcesTitle: "Полезно знать",
-    resources: [
-      "Как выбрать адвоката",
-      "Что делать при задержании",
-      "Как подготовиться к консультации",
-    ],
-    footerCols: [
-      ["Коллегия", "О коллегии", "Руководство", "Структура", "Контакты"],
-      ["Адвокатам", "Каталог адвокатов", "Документы", "Этические принципы", "Открытые данные"],
-      ["Полезное", "Правовая помощь", "Вопросы и ответы", "Новости", "Материалы"],
-    ],
-    needHelp: "Нужна юридическая помощь?",
-    consultation: "Получить консультацию",
-    rights: "© 2026 Коллегия адвокатов области Жетісу",
+    membersEyebrow: "Состав коллегии",
+    membersTitle: "Адвокаты без лишних анкет",
+    membersLead: "Только сведения из переданного списка: ФИО, регион и подразделение. Фотографии, рейтинги и специализации не выдумываются.",
+    openProfile: "Открыть запись",
+    viewAll: "Все 138 адвокатов",
+    groupsEyebrow: "Структура коллегии",
+    groupsTitle: "Юридические консультации",
+    groupsLead: "Отдельный каталог для городских, районных подразделений и индивидуально практикующих адвокатов.",
+    viewGroups: "Все подразделения",
+    person: "адвокат",
+    aboutEyebrow: "О коллегии",
+    aboutTitle: "Профессиональное объединение адвокатов региона",
+    aboutText: "Коллегия объединяет адвокатов области Жетісу и организует работу юридических консультаций. Портал создан для понятного доступа к составу коллегии и официальным контактам.",
+    chair: "Председатель президиума",
+    address: "Юридический адрес",
+    details: "Реквизиты и сведения",
+    contactEyebrow: "Связь с коллегией",
+    contactTitle: "Официальные контакты",
+    contactText: "Телефон приёмной и электронная почта указаны по подписанному договору. Отдельный номер для обращений появится после согласования.",
+    office: "Приёмная",
+    email: "Электронная почта",
+    sourceTitle: "Список обновлён коллегией",
   },
   kk: {
-    name: "Жетісу облыстық адвокаттар алқасы",
-    nameKk: "ЖЕТІСУ ОБЛЫСТЫҚ АДВОКАТТАР АЛҚАСЫ",
-    nav: [
-      ["Басты бет", "#top"],
-      ["Алқа туралы", "#about"],
-      ["Адвокаттар", "#advocates"],
-      ["Құқықтық көмек", "#help"],
-      ["Жаңалықтар", "#resources"],
-      ["Құжаттар", "#resources"],
-      ["Байланыс", "#contacts"],
+    eyebrow: "Жетісу облыстық адвокаттар алқасы",
+    title: "Құқықтық көмек тексерілген ақпараттан басталады",
+    lead: "2026 жылғы 1 қыркүйектегі өзекті тізімнен алқа мүшесін немесе өңірдің заң консультациясын табыңыз.",
+    find: "Адвокат табу",
+    consultations: "Заң консультациялары",
+    registry: "Өзекті тізілім",
+    searchTitle: "Алқа тізімі бойынша іздеу",
+    searchLead: "Тегін, атын немесе заң консультациясының атауын енгізіңіз.",
+    placeholder: "Мысалы, Абдуллаев немесе Панфилов ауданы",
+    search: "Іздеу",
+    all: "Толық тізімді ашу",
+    members: "адвокат",
+    groups: "бөлімше және практика нысаны",
+    updated: "тізімнің жағдайы",
+    languages: "қазақша / русский",
+    tasksEyebrow: "Қажеттісі — артық қадамсыз",
+    tasksTitle: "Сайтта не істеуге болады",
+    tasks: [
+      ["Адвокат табу", "2026 жылғы қыркүйектегі алқа құрамынан аты-жөні бойынша іздеу."],
+      ["Бөлімшені таңдау", "Қалалық, аудандық және ювеналдық заң консультациялары."],
+      ["Бағытты түсіну", "Құқықтық көмек бағытын таңдауға арналған қысқа нұсқаулық."],
+      ["Мәліметті тексеру", "Тізімнің күні мен дереккөзі әрқашан деректердің жанында көрсетіледі."],
     ],
-    heroTitleA: "Кәсіби",
-    heroTitleB: "құқықтық көмек",
-    heroTitleC: "Жетісу облысында",
-    heroLead:
-      "Өңірдің кәсіби адвокаттарының арасынан қажетті маманды тауып, кез келген құқықтық мәселе бойынша білікті көмек алыңыз.",
-    findLawyer: "Адвокат табу",
-    getHelp: "Көмек алу",
-    searchTitle: "Адвокат іздеу",
-    searchLead: "Адвокатты аты-жөні немесе лицензия нөмірі бойынша табыңыз",
-    advanced: "Кеңейтілген іздеу",
-    namePlaceholder: "Тегі, аты, әкесінің аты",
-    licensePlaceholder: "Лицензия нөмірі",
-    cityPlaceholder: "Қала",
-    find: "Табу",
-    stats: [
-      ["адвокат", "Жетісу облысында"],
-      ["Ресми деректер", "ҚР Әділет министрлігінің ашық деректері"],
-      ["Екі тілде қолдау", "қазақша / русский"],
-      ["Бүкіл Жетісу облысы", "қалалар мен аудандар"],
-    ],
-    advocatesTitle: "Жетісу облысының адвокаттары",
-    allLawyers: "Барлық адвокаттарды көру",
-    license: "Лицензия",
-    source: "Ашық деректер",
-    profile: "Профиль",
-    call: "Қоңырау",
-    write: "Жазу",
-    helpTitle: "Құқықтық көмек",
-    services: [
-      ["Қылмыстық құқық", "Қылмыстық процестің барлық сатысында қорғау"],
-      ["Отбасы құқығы", "Ажырасу, алимент, мүлік бөлу, қамқоршылық"],
-      ["Бизнес және салық", "Бизнесті және экономикалық дауларды сүйемелдеу"],
-      ["Азаматтық даулар", "Сотта құқықтар мен заңды мүдделерді қорғау"],
-      ["Жылжымайтын мүлік", "Мәмілелер, даулар және құқықтарды тіркеу"],
-    ],
-    aboutTitle: "Алқа туралы",
-    aboutText:
-      "Жетісу облыстық адвокаттар алқасы — азаматтар мен ұйымдардың құқықтары мен заңды мүдделерін қорғау үшін құрылған өңір адвокаттарының кәсіби бірлестігі.",
-    aboutText2:
-      "Портал адвокатты жылдам табуға, жарияланған мәліметтерді тексеруге және қолайлы байланыс тәсіліне өтуге көмектеседі.",
-    more: "Алқа туралы толығырақ",
-    contactsTitle: "Байланыс",
-    address: "Талдықорған қ., Қаблиса жырау көш., 69",
-    hours: "Дс – Жм: 09:00 – 18:00",
-    resourcesTitle: "Пайдалы ақпарат",
-    resources: [
-      "Адвокатты қалай таңдау керек",
-      "Ұстау кезінде не істеу керек",
-      "Кеңеске қалай дайындалу керек",
-    ],
-    footerCols: [
-      ["Алқа", "Алқа туралы", "Басшылық", "Құрылым", "Байланыс"],
-      ["Адвокаттарға", "Адвокаттар каталогы", "Құжаттар", "Әдеп қағидаттары", "Ашық деректер"],
-      ["Пайдалы", "Құқықтық көмек", "Сұрақтар мен жауаптар", "Жаңалықтар", "Материалдар"],
-    ],
-    needHelp: "Құқықтық көмек қажет пе?",
-    consultation: "Кеңес алу",
-    rights: "© 2026 Жетісу облыстық адвокаттар алқасы",
+    membersEyebrow: "Алқа құрамы",
+    membersTitle: "Артық анкетасыз адвокаттар",
+    membersLead: "Тек берілген тізімдегі мәліметтер: аты-жөні, өңірі және бөлімшесі. Фотосуреттер, рейтингтер мен мамандану ойдан шығарылмайды.",
+    openProfile: "Жазбаны ашу",
+    viewAll: "Барлық 138 адвокат",
+    groupsEyebrow: "Алқа құрылымы",
+    groupsTitle: "Заң консультациялары",
+    groupsLead: "Қалалық, аудандық бөлімшелер мен жеке практикадағы адвокаттарға арналған жеке каталог.",
+    viewGroups: "Барлық бөлімшелер",
+    person: "адвокат",
+    aboutEyebrow: "Алқа туралы",
+    aboutTitle: "Өңір адвокаттарының кәсіби бірлестігі",
+    aboutText: "Алқа Жетісу облысының адвокаттарын біріктіреді және заң консультацияларының жұмысын ұйымдастырады. Портал алқа құрамы мен ресми байланыстарға түсінікті қол жеткізу үшін жасалған.",
+    chair: "Төралқа төрағасы",
+    address: "Заңды мекенжай",
+    details: "Деректемелер мен мәліметтер",
+    contactEyebrow: "Алқамен байланыс",
+    contactTitle: "Ресми байланыстар",
+    contactText: "Қабылдау телефоны мен электрондық пошта қол қойылған шарт бойынша көрсетілді. Өтініштерге арналған жеке нөмір келісілгеннен кейін пайда болады.",
+    office: "Қабылдау",
+    email: "Электрондық пошта",
+    sourceTitle: "Тізімді алқа жаңартты",
   },
 };
 
-function extractPhone(value: string) {
-  const match = value.match(/(?:\+?7|8)[\s()\-]*\d{3}[\s()\-]*\d{3}[\s()\-]*\d{2}[\s()\-]*\d{2}/);
-  if (!match) return null;
-  let digits = match[0].replace(/\D/g, "");
-  if (digits.startsWith("8")) digits = `7${digits.slice(1)}`;
-  return digits.length === 11 && digits.startsWith("7") ? digits : null;
-}
+const taskIcons = [UserRoundSearch, Building2, Gavel, FileSearch];
 
 export default function HomePage() {
-  const [locale, setLocale] = useState<Locale>("ru");
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [advocates, setAdvocates] = useState<OfficialAdvocate[]>([]);
-  const [nameQuery, setNameQuery] = useState("");
-  const [licenseQuery, setLicenseQuery] = useState("");
-  const [cityQuery, setCityQuery] = useState("");
-  const t = copy[locale];
+  const [locale, setLocale] = usePersistentLocale();
+  const [query, setQuery] = useState("");
+  const { directory } = useDirectory();
+  const t = text[locale];
 
-  useEffect(() => {
-    let active = true;
-    fetch("/data/advocates.json")
-      .then((response) => response.json() as Promise<AdvocateDirectory>)
-      .then((result) => {
-        if (!active) return;
-        const scoped = result.advocates
-          .filter((item) => item.region === ZHETISU_REGION)
-          .sort((a, b) => a.name.localeCompare(b.name, "ru"));
-        setAdvocates(scoped);
-      })
-      .catch(() => setAdvocates([]));
-    return () => {
-      active = false;
-    };
-  }, []);
-
-  const featured = useMemo(() => advocates.slice(0, 3), [advocates]);
-  const cityOptions = useMemo(() => {
-    const cities = new Set<string>();
-    for (const advocate of advocates) {
-      const match = advocate.address.match(/(?:г\.|город\s+)([А-ЯA-ZӘІҢҒҮҰҚӨҺЁа-яa-zәіңғүұқөһё-]+)/i);
-      if (match?.[1]) cities.add(match[1]);
-    }
-    return [...cities].sort((a, b) => a.localeCompare(b, "ru")).slice(0, 20);
-  }, [advocates]);
+  const featured = useMemo(
+    () => directory?.advocates.slice(0, 6) ?? [],
+    [directory],
+  );
+  const featuredConsultations = useMemo(
+    () => directory?.consultations.filter((item) => item.name !== "Индивидуалы").slice(0, 6) ?? [],
+    [directory],
+  );
 
   function submitSearch(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const params = new URLSearchParams();
-    const q = nameQuery.trim() || licenseQuery.trim() || cityQuery.trim();
-    if (q) params.set("q", q);
-    window.location.assign(`/advokaty${params.size ? `?${params.toString()}` : ""}`);
+    const value = query.trim();
+    window.location.assign(`/advokaty${value ? `?q=${encodeURIComponent(value)}` : ""}`);
   }
 
   return (
-    <main className="jetisu-premium" id="top">
-      <header className="jp-header">
-        <div className="jp-shell jp-header-inner">
-          <a className="jp-brand" href="#top" aria-label={t.name}>
-            <span className="jp-emblem"><ShanyrakMark /></span>
-            <span className="jp-brand-text">
-              <strong>{t.nameKk}</strong>
-              <small>{t.name}</small>
-            </span>
-          </a>
+    <main id="top">
+      <PortalHeader locale={locale} onLocaleChange={setLocale} />
 
-          <nav className={menuOpen ? "jp-nav is-open" : "jp-nav"} aria-label="Навигация">
-            {t.nav.map(([label, href], index) => (
-              <a className={index === 0 ? "active" : ""} href={href} key={label} onClick={() => setMenuOpen(false)}>
-                {label}
-              </a>
-            ))}
-          </nav>
-
-          <div className="jp-header-actions">
-            <div className="jp-language">
-              <button onClick={() => setLocale("kk")} className={locale === "kk" ? "active" : ""}>ҚАЗ</button>
-              <span>/</span>
-              <button onClick={() => setLocale("ru")} className={locale === "ru" ? "active" : ""}>РУС</button>
+      <section className="home-hero">
+        <div className="hero-orbit" aria-hidden="true"><Scale /><span /><span /></div>
+        <div className="shell home-hero-grid">
+          <div className="hero-copy reveal">
+            <div className="eyebrow light"><span />{t.eyebrow}</div>
+            <h1>{t.title}</h1>
+            <p>{t.lead}</p>
+            <div className="hero-actions">
+              <Link className="button button-primary" href="/advokaty">{t.find}<ArrowRight /></Link>
+              <Link className="button button-ghost" href="/konsultacii">{t.consultations}</Link>
             </div>
-            <button className="jp-menu" type="button" onClick={() => setMenuOpen((value) => !value)} aria-label="Открыть меню" aria-expanded={menuOpen}>
-              {menuOpen ? <X /> : <Menu />}
-            </button>
+            <div className="hero-trust"><BadgeCheck />{t.sourceTitle} · {formatDirectoryDate(locale)}</div>
           </div>
-        </div>
-      </header>
 
-      <section className="jp-hero">
-        <div className="jp-hero-pattern" aria-hidden="true" />
-        <div className="jp-hero-art" aria-hidden="true" />
-        <div className="jp-shell jp-hero-inner">
-          <div className="jp-hero-copy">
-            <span className="jp-kicker">{locale === "ru" ? "Профессиональная адвокатура региона" : "Өңірдің кәсіби адвокатурасы"}</span>
-            <h1>{t.heroTitleA}<br />{t.heroTitleB}<br /><em>{t.heroTitleC}</em></h1>
-            <p>{t.heroLead}</p>
-            <div className="jp-hero-actions">
-              <a className="jp-button jp-button-gold" href="#search"><UserRound />{t.findLawyer}</a>
-              <a className="jp-button jp-button-outline" href="/pomosh"><ShieldCheck />{t.getHelp}</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="jp-search-wrap" id="search">
-        <div className="jp-shell">
-          <form className="jp-search-card" onSubmit={submitSearch}>
-            <div className="jp-search-head">
-              <div><h2>{t.searchTitle}</h2><p>{t.searchLead}</p></div>
-              <a href="/advokaty"><Search />{t.advanced}</a>
-            </div>
-            <div className="jp-search-grid">
-              <label><UserRound /><input value={nameQuery} onChange={(e) => setNameQuery(e.target.value)} placeholder={t.namePlaceholder} /></label>
-              <label><ShieldCheck /><input value={licenseQuery} onChange={(e) => setLicenseQuery(e.target.value)} placeholder={t.licensePlaceholder} /></label>
-              <label><MapPin /><select value={cityQuery} onChange={(e) => setCityQuery(e.target.value)}><option value="">{t.cityPlaceholder}</option>{cityOptions.map((city) => <option key={city} value={city}>{city}</option>)}</select><ChevronDown className="jp-select-arrow" /></label>
-              <button type="submit" className="jp-search-button"><Search />{t.find}</button>
-            </div>
+          <form className="registry-search-card reveal delay-1" onSubmit={submitSearch}>
+            <div className="registry-card-top"><span><ShieldCheck />{t.registry}</span><strong>{ASSOCIATION.domain}</strong></div>
+            <h2>{t.searchTitle}</h2>
+            <p>{t.searchLead}</p>
+            <label>
+              <Search />
+              <span className="sr-only">{t.placeholder}</span>
+              <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder={t.placeholder} />
+            </label>
+            <button className="button button-accent" type="submit">{t.search}<ArrowRight /></button>
+            <Link className="card-text-link" href="/advokaty">{t.all}<ArrowRight /></Link>
           </form>
         </div>
       </section>
 
-      <section className="jp-stats">
-        <div className="jp-shell jp-stats-grid">
-          <div className="jp-stat"><UsersRound /><div><strong>{advocates.length || "—"}</strong><span>{t.stats[0][0]}</span><small>{t.stats[0][1]}</small></div></div>
-          <div className="jp-stat"><Building2 /><div><strong>{t.stats[1][0]}</strong><small>{t.stats[1][1]}</small></div></div>
-          <div className="jp-stat"><Globe2 /><div><strong>{t.stats[2][0]}</strong><small>{t.stats[2][1]}</small></div></div>
-          <div className="jp-stat"><MapPin /><div><strong>{t.stats[3][0]}</strong><small>{t.stats[3][1]}</small></div></div>
+      <section className="registry-stats" aria-label={locale === "ru" ? "Статистика списка" : "Тізім статистикасы"}>
+        <div className="shell stats-grid">
+          <div><UsersRound /><strong>{directory?.meta.total ?? "—"}</strong><span>{t.members}</span></div>
+          <div><Landmark /><strong>{directory?.meta.consultationCount ?? "—"}</strong><span>{t.groups}</span></div>
+          <div><CalendarCheck2 /><strong>01.09.2026</strong><span>{t.updated}</span></div>
+          <div><ShieldCheck /><strong>2</strong><span>{t.languages}</span></div>
         </div>
       </section>
 
-      <section className="jp-section jp-advocates" id="advocates">
-        <div className="jp-shell">
-          <div className="jp-section-head"><div><span className="jp-section-rule" /><h2>{t.advocatesTitle}</h2></div><a href="/advokaty">{t.allLawyers}<ArrowRight /></a></div>
-          <div className="jp-advocate-grid">
-            {featured.map((advocate, index) => {
-              const phone = extractPhone(advocate.contacts);
+      <section className="section section-soft">
+        <div className="shell">
+          <div className="section-heading centered reveal">
+            <div className="eyebrow"><span />{t.tasksEyebrow}<span /></div>
+            <h2>{t.tasksTitle}</h2>
+          </div>
+          <div className="task-grid">
+            {t.tasks.map(([title, description], index) => {
+              const Icon = taskIcons[index];
               return (
-                <article className="jp-advocate-card" key={advocate.id}>
-                  <div className={`jp-portrait portrait-${index + 1}`}><span>{advocate.initials || "JE"}</span><small>{t.source}</small></div>
-                  <div className="jp-advocate-info">
-                    <h3>{advocate.name}</h3>
-                    <p>{t.license} № {advocate.licenseNumber || "—"}</p>
-                    <span className="jp-location"><MapPin />{advocate.address || (locale === "ru" ? "Область Жетісу" : "Жетісу облысы")}</span>
-                    <div className="jp-tags"><span><BadgeCheck />{locale === "ru" ? "Запись Минюста РК" : "ҚР Әділет министрлігі"}</span><span><FileCheck2 />{locale === "ru" ? "Членство в коллегии" : "Алқа мүшелігі"}</span></div>
-                  </div>
-                  <div className="jp-card-actions"><a href={`/advokaty/${advocate.id}`}><UserRound />{t.profile}</a>{phone && <a href={`tel:+${phone}`}><Phone />{t.call}</a>}{phone && <a href={`https://wa.me/${phone}`} target="_blank" rel="noreferrer"><Mail />{t.write}</a>}</div>
+                <article className="task-card reveal" style={{ "--delay": `${index * 70}ms` } as React.CSSProperties} key={title}>
+                  <span className="center-icon"><Icon /></span>
+                  <h3>{title}</h3>
+                  <p>{description}</p>
                 </article>
               );
             })}
@@ -329,41 +207,84 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="jp-section jp-help" id="help">
-        <div className="jp-shell">
-          <div className="jp-section-head"><div><span className="jp-section-rule" /><h2>{t.helpTitle}</h2></div></div>
-          <div className="jp-service-grid">
-            {t.services.map(([title, description], index) => {
-              const Icon = serviceIcons[index];
-              return <a className="jp-service-card" href="/pomosh" key={title}><Icon /><h3>{title}</h3><p>{description}</p><ArrowRight className="jp-service-arrow" /></a>;
-            })}
+      <section className="section" id="advocates">
+        <div className="shell">
+          <div className="section-heading split-heading">
+            <div>
+              <div className="eyebrow"><span />{t.membersEyebrow}</div>
+              <h2>{t.membersTitle}</h2>
+              <p>{t.membersLead}</p>
+            </div>
+            <Link className="arrow-link" href="/advokaty">{t.viewAll}<ArrowRight /></Link>
+          </div>
+          <DataSourceNotice locale={locale} total={directory?.meta.total} />
+          <div className="member-preview-grid">
+            {featured.map((advocate) => (
+              <Link className="member-row" href={`/advokaty/${advocate.id}`} key={advocate.id}>
+                <span className="member-index">{String(advocate.sourceId).padStart(3, "0")}</span>
+                <span><strong>{advocate.name}</strong><small>{consultationName(advocate.consultation, locale)}</small></span>
+                <span className="round-arrow" aria-label={t.openProfile}><ArrowRight /></span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="jp-info-section" id="about">
-        <div className="jp-shell jp-info-grid">
-          <article className="jp-about-card"><div className="jp-ornament" aria-hidden="true">✦</div><span className="jp-section-rule" /><h2>{t.aboutTitle}</h2><p>{t.aboutText}</p><p>{t.aboutText2}</p><a className="jp-dark-cta" href="/regions">{t.more}<ArrowRight /></a></article>
-          <article className="jp-contact-card" id="contacts"><span className="jp-section-rule" /><h2>{t.contactsTitle}</h2><ul><li><MapPin /><span>{t.address}</span></li><li><Phone /><a href="tel:+77282244033">8 (7282) 24-40-33</a></li><li><Mail /><a href="mailto:advokatura-tk@bk.ru">advokatura-tk@bk.ru</a></li><li><Clock3 /><span>{t.hours}</span></li></ul></article>
-          <div className="jp-building-card" aria-label={locale === "ru" ? "Декоративная визуализация административного здания" : "Әкімшілік ғимараттың декоративтік визуализациясы"}><div className="jp-building-label">{locale === "ru" ? "Контакты коллегии" : "Алқа байланыстары"}</div></div>
+      <section className="section section-ink" id="consultations">
+        <div className="shell">
+          <div className="section-heading split-heading light-heading">
+            <div>
+              <div className="eyebrow light"><span />{t.groupsEyebrow}</div>
+              <h2>{t.groupsTitle}</h2>
+              <p>{t.groupsLead}</p>
+            </div>
+            <Link className="arrow-link light-link" href="/konsultacii">{t.viewGroups}<ArrowRight /></Link>
+          </div>
+          <div className="consultation-preview-grid">
+            {featuredConsultations.map((consultation, index) => (
+              <Link className="consultation-card" href={`/konsultacii#${consultation.id}`} key={consultation.id}>
+                <span className="consultation-number">{String(index + 1).padStart(2, "0")}</span>
+                <Building2 />
+                <h3>{consultationName(consultation.name, locale)}</h3>
+                <p>{consultation.count} {advocateWord(consultation.count, locale)}</p>
+                <ArrowRight className="consultation-arrow" />
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="jp-resources" id="resources">
-        <div className="jp-shell">
-          <div className="jp-section-head"><div><span className="jp-section-rule" /><h2>{t.resourcesTitle}</h2></div></div>
-          <div className="jp-resource-grid">{t.resources.map((item, index) => <a href="/pomosh" key={item}><span>0{index + 1}</span><strong>{item}</strong><ArrowRight /></a>)}</div>
+      <section className="section about-section" id="about">
+        <div className="shell about-grid">
+          <div className="about-copy">
+            <div className="eyebrow"><span />{t.aboutEyebrow}</div>
+            <h2>{t.aboutTitle}</h2>
+            <p>{t.aboutText}</p>
+            <Link className="button button-dark" href="/regions">{t.details}<ArrowRight /></Link>
+          </div>
+          <div className="official-facts">
+            <div><span><Scale /></span><small>{t.chair}</small><strong>{ASSOCIATION.chair[locale]}</strong></div>
+            <div><span><MapPin /></span><small>{t.address}</small><strong>{ASSOCIATION.address[locale]}</strong></div>
+            <div><span><BadgeCheck /></span><small>{locale === "ru" ? "БИН" : "БСН"}</small><strong>{ASSOCIATION.bin}</strong></div>
+          </div>
         </div>
       </section>
 
-      <footer className="jp-footer">
-        <div className="jp-shell jp-footer-grid">
-          <div className="jp-footer-brand"><div className="jp-brand"><span className="jp-emblem"><ShanyrakMark /></span><span className="jp-brand-text"><strong>{t.nameKk}</strong><small>{t.name}</small></span></div><p>{locale === "ru" ? "Профессиональная правовая помощь в области Жетісу." : "Жетісу облысындағы кәсіби құқықтық көмек."}</p></div>
-          {t.footerCols.map(([heading, ...links]) => <div className="jp-footer-col" key={heading}><strong>{heading}</strong>{links.map((link) => <a href="#top" key={link}>{link}</a>)}</div>)}
-          <div className="jp-footer-cta"><Scale /><strong>{t.needHelp}</strong><a href="/pomosh">{t.consultation}</a></div>
+      <section className="contact-band" id="contacts">
+        <div className="shell contact-band-grid">
+          <div>
+            <div className="eyebrow light"><span />{t.contactEyebrow}</div>
+            <h2>{t.contactTitle}</h2>
+            <p>{t.contactText}</p>
+          </div>
+          <div className="contact-links">
+            <a href={`tel:${ASSOCIATION.phoneHref}`}><span><Phone /></span><small>{t.office}</small><strong>{ASSOCIATION.phone}</strong></a>
+            <a href={`mailto:${ASSOCIATION.email}`}><span><Mail /></span><small>{t.email}</small><strong>{ASSOCIATION.email}</strong></a>
+          </div>
         </div>
-        <div className="jp-shell jp-footer-bottom"><span>{t.rights}</span><span>{locale === "ru" ? "Открытые данные · Минюст РК" : "Ашық деректер · ҚР Әділет министрлігі"}</span></div>
-      </footer>
+      </section>
+
+      <PortalFooter locale={locale} />
     </main>
   );
 }

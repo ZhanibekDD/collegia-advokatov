@@ -1,0 +1,1046 @@
+{
+  "meta": {
+    "organization": "Коллегия адвокатов области Жетісу",
+    "region": "область Жетісу",
+    "asOf": "2026-09-01",
+    "sourceLabel": "Общий список адвокатов КАОЖ по состоянию на 01.09.2026",
+    "sourceFile": "общий список за сентябрь 26.xlsx",
+    "total": 138,
+    "consultationCount": 13
+  },
+  "consultations": [
+    {
+      "id": "yuk-g-taldykorgan",
+      "name": "ЮК г. Талдыкорган",
+      "count": 44
+    },
+    {
+      "id": "yuvenalnaya-konsultatsiya",
+      "name": "Ювенальная консультация",
+      "count": 21
+    },
+    {
+      "id": "g-tekeli",
+      "name": "г. Текели",
+      "count": 5
+    },
+    {
+      "id": "yuk-koksuskogo-raiona",
+      "name": "ЮК Коксуского района",
+      "count": 3
+    },
+    {
+      "id": "yuk-karatalskogo-raiona",
+      "name": "ЮК Каратальского района",
+      "count": 2
+    },
+    {
+      "id": "yuk-kerbulakskogo-raiona",
+      "name": "ЮК Кербулакского района",
+      "count": 1
+    },
+    {
+      "id": "yuk-eskeldinskogo-raiona",
+      "name": "ЮК Ескельдинского района",
+      "count": 4
+    },
+    {
+      "id": "yuk-aksuskogo-raiona",
+      "name": "ЮК Аксуского района",
+      "count": 1
+    },
+    {
+      "id": "yuk-sarkanskogo-raiona",
+      "name": "ЮК Сарканского района",
+      "count": 1
+    },
+    {
+      "id": "yuk-alakolskogo-raiona-1",
+      "name": "ЮК Алакольского района №1",
+      "count": 2
+    },
+    {
+      "id": "yuk-alakolskogo-raiona-2",
+      "name": "ЮК Алакольского района №2",
+      "count": 2
+    },
+    {
+      "id": "yuk-panfilovskogo-raiona",
+      "name": "ЮК Панфиловского района",
+      "count": 9
+    },
+    {
+      "id": "individualy",
+      "name": "Индивидуалы",
+      "count": 43
+    }
+  ],
+  "advocates": [
+    {
+      "id": "1-adylbekov-amir-zhanatovich",
+      "sourceId": 1,
+      "name": "Адылбеков Амир Жанатович",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "2-akmoldanov-murathan-sergeevich",
+      "sourceId": 2,
+      "name": "Акмолданов Муратхан Сергеевич",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "3-arypbaeva-aigerim-berikqyzy",
+      "sourceId": 3,
+      "name": "Арыпбаева Әйгерім Берікқызы",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "4-baitleuov-rustem-abeugalievich",
+      "sourceId": 4,
+      "name": "Байтлеуов Рустем Абеугалиевич",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "5-bekesheva-dinara-medetovna",
+      "sourceId": 5,
+      "name": "Бекешева Динара Медетовна",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "6-bekpaeva-galiya-erzhanovna",
+      "sourceId": 6,
+      "name": "Бекпаева Галия Ержановна",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "7-berezovskaya-lidiya-georgievna",
+      "sourceId": 7,
+      "name": "Березовская Лидия Георгиевна",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "8-bidauletov-aset-kameevich",
+      "sourceId": 8,
+      "name": "Бидаулетов Асет Камеевич",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "9-darhambaev-damir-rahimzhanovich",
+      "sourceId": 9,
+      "name": "Дархамбаев Дамир Рахимжанович",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "10-doserbekov-baglan-sansyzbaevich",
+      "sourceId": 10,
+      "name": "Досербеков Баглан Сансызбаевич",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "11-ermenbekov-nurlyhan-zhaskairatovich",
+      "sourceId": 11,
+      "name": "Ерменбеков Нурлыхан Жаскайратович",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "12-eseibekov-ruslan-nurgalymovich",
+      "sourceId": 12,
+      "name": "Есейбеков Руслан Нургалымович",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "13-zharylkasynov-sarkytbek-smagulovich",
+      "sourceId": 13,
+      "name": "Жарылкасынов Саркытбек Смагулович",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "14-isimbekova-perizat-muhambekovna",
+      "sourceId": 14,
+      "name": "Исимбекова Перизат Мухамбековна",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "15-imangaliev-rymbek-umirgalievich",
+      "sourceId": 15,
+      "name": "Имангалиев Рымбек Умиргалиевич",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "16-kalbergenov-samat-maulenbaevich",
+      "sourceId": 16,
+      "name": "Калбергенов Самат Мауленбаевич",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "17-kairbek-aidyn-kairbekuly",
+      "sourceId": 17,
+      "name": "Кайрбек Айдын Кайрбекулы",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "18-kaliev-baurzhan-myrzakulovich",
+      "sourceId": 18,
+      "name": "Калиев Бауржан Мырзакулович",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "19-kalieva-saule-myrzakulovna",
+      "sourceId": 19,
+      "name": "Калиева Сауле Мырзакуловна",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "20-kundakbaev-rauan-aldabergenovich",
+      "sourceId": 20,
+      "name": "Кундакбаев Рауан Алдабергенович",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "21-kasenov-kuat-adilhanovich",
+      "sourceId": 21,
+      "name": "Касенов Куат Адилханович",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "22-kukin-vyacheslav-arturovich",
+      "sourceId": 22,
+      "name": "Кукин Вячеслав Артурович",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "23-qaisarov-sailaubek-qaisaruly",
+      "sourceId": 23,
+      "name": "Қайсаров Сайлаубек Қайсарұлы",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "24-lim-evgenii-pavlovich",
+      "sourceId": 24,
+      "name": "Лим Евгений Павлович",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "25-mukasheva-uruhiya-naimanhanovna",
+      "sourceId": 25,
+      "name": "Мукашева Урухия Найманхановна",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "26-museke-tilek-talgatuly",
+      "sourceId": 26,
+      "name": "Мусеке Тілек Талғатұлы",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "27-mulazakirova-alfiya-abdykadyrovna",
+      "sourceId": 27,
+      "name": "Мулазакирова Альфия Абдыкадыровна",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "28-mun-dmitrii-viktorovich",
+      "sourceId": 28,
+      "name": "Мун Дмитрий Викторович",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "29-musapirov-aidos-nurhanovich",
+      "sourceId": 29,
+      "name": "Мусапиров Айдос Нурханович",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "30-muqatai-dinislam-qairatuly",
+      "sourceId": 30,
+      "name": "Мұқатай Дінислам Қайратұлы",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "31-muhametsadykov-askar-kamelchievich",
+      "sourceId": 31,
+      "name": "Мухаметсадыков Аскар Камелчиевич",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "32-onalbaeva-asel-dyusembaevna",
+      "sourceId": 32,
+      "name": "Оналбаева Асель Дюсембаевна",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "33-ongarbaev-erkin-nurmoldaevich",
+      "sourceId": 33,
+      "name": "Онгарбаев Еркин Нурмолдаевич",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "34-saduakasov-nurmurat-maratovich",
+      "sourceId": 34,
+      "name": "Садуакасов Нурмурат Маратович",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "35-smagulov-altai-eltaevich",
+      "sourceId": 35,
+      "name": "Смагулов Алтай Елтаевич",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "36-tarybaev-eren-bakbergenovich",
+      "sourceId": 36,
+      "name": "Тарыбаев Ерен Бакбергенович",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "37-temirbekov-zhenis-nurlanovich",
+      "sourceId": 37,
+      "name": "Темирбеков Женис Нурланович",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "38-husainova-galiya-abdulkasymovna",
+      "sourceId": 38,
+      "name": "Хусаинова Галия Абдулкасымовна",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "39-husainova-malika-madzhitovna",
+      "sourceId": 39,
+      "name": "Хусаинова Малика Маджитовна",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "40-tsoi-mihail-yurevich",
+      "sourceId": 40,
+      "name": "Цой Михаил Юрьевич",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "41-chinyaeva-olesya-viktorovna",
+      "sourceId": 41,
+      "name": "Чиняева Олеся Викторовна",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "42-chuprynova-nadezhda-aleksandrovna",
+      "sourceId": 42,
+      "name": "Чупрынова Надежда Александровна",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "43-shingisbaev-bakyt-mynzhasarovich",
+      "sourceId": 43,
+      "name": "Шингисбаев Бакыт Мынжасарович",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "44-estiyarov-serik-ondasynovich",
+      "sourceId": 44,
+      "name": "Эстияров Серик Ондасынович",
+      "region": "область Жетісу",
+      "consultation": "ЮК г. Талдыкорган"
+    },
+    {
+      "id": "45-abdrahimova-bibigul-amangeldinovna",
+      "sourceId": 45,
+      "name": "Абдрахимова Бибигуль Амангельдиновна",
+      "region": "область Жетісу",
+      "consultation": "Ювенальная консультация"
+    },
+    {
+      "id": "46-amersanov-kadyrles-kadyrzhanovich",
+      "sourceId": 46,
+      "name": "Амерсанов Кадырлес Кадыржанович",
+      "region": "область Жетісу",
+      "consultation": "Ювенальная консультация"
+    },
+    {
+      "id": "47-asilov-rustam-bakytovich",
+      "sourceId": 47,
+      "name": "Асилов Рустам Бакытович",
+      "region": "область Жетісу",
+      "consultation": "Ювенальная консультация"
+    },
+    {
+      "id": "48-andreev-viktor-aleksandrovich",
+      "sourceId": 48,
+      "name": "Андреев Виктор Александрович",
+      "region": "область Жетісу",
+      "consultation": "Ювенальная консультация"
+    },
+    {
+      "id": "49-aralbaev-batyrbek-kadyrovich",
+      "sourceId": 49,
+      "name": "Аралбаев Батырбек Кадырович",
+      "region": "область Жетісу",
+      "consultation": "Ювенальная консультация"
+    },
+    {
+      "id": "50-bektasova-shynar-sainovna",
+      "sourceId": 50,
+      "name": "Бектасова Шынар Саиновна",
+      "region": "область Жетісу",
+      "consultation": "Ювенальная консультация"
+    },
+    {
+      "id": "51-galuza-tatyana-evgenevna",
+      "sourceId": 51,
+      "name": "Галуза Татьяна Евгеньевна",
+      "region": "область Жетісу",
+      "consultation": "Ювенальная консультация"
+    },
+    {
+      "id": "52-batyrbaev-serik-zholdasshaikovich",
+      "sourceId": 52,
+      "name": "Батырбаев Серик Жолдасшаикович",
+      "region": "область Жетісу",
+      "consultation": "Ювенальная консультация"
+    },
+    {
+      "id": "53-dzhaksybekov-erik-asylhanovich",
+      "sourceId": 53,
+      "name": "Джаксыбеков Ерик Асылханович",
+      "region": "область Жетісу",
+      "consultation": "Ювенальная консультация"
+    },
+    {
+      "id": "54-dosanova-mira-dosanovna",
+      "sourceId": 54,
+      "name": "Досанова Мира Досановна",
+      "region": "область Жетісу",
+      "consultation": "Ювенальная консультация"
+    },
+    {
+      "id": "55-dosumov-manat-sergazievich",
+      "sourceId": 55,
+      "name": "Досумов Манат Сергазиевич",
+      "region": "область Жетісу",
+      "consultation": "Ювенальная консультация"
+    },
+    {
+      "id": "56-dyusebaeva-karlygash-bagdatovna",
+      "sourceId": 56,
+      "name": "Дюсебаева Карлыгаш Багдатовна",
+      "region": "область Жетісу",
+      "consultation": "Ювенальная консультация"
+    },
+    {
+      "id": "57-dzhakupbekova-aiymbala-abdoldaevna",
+      "sourceId": 57,
+      "name": "Джакупбекова Айымбала Абдолдаевна",
+      "region": "область Жетісу",
+      "consultation": "Ювенальная консультация"
+    },
+    {
+      "id": "58-zhambulbaev-esimhan-korpebaevich",
+      "sourceId": 58,
+      "name": "Жамбулбаев Есимхан Корпебаевич",
+      "region": "область Жетісу",
+      "consultation": "Ювенальная консультация"
+    },
+    {
+      "id": "59-kakimov-almas-kakimovich",
+      "sourceId": 59,
+      "name": "Какимов Алмас Какимович",
+      "region": "область Жетісу",
+      "consultation": "Ювенальная консультация"
+    },
+    {
+      "id": "60-kametov-nurdaulet-temirgalievich",
+      "sourceId": 60,
+      "name": "Каметов Нурдаулет Темиргалиевич",
+      "region": "область Жетісу",
+      "consultation": "Ювенальная консультация"
+    },
+    {
+      "id": "61-meirmanov-erkinbai-baktiyarovich",
+      "sourceId": 61,
+      "name": "Меирманов Еркинбай Бактиярович",
+      "region": "область Жетісу",
+      "consultation": "Ювенальная консультация"
+    },
+    {
+      "id": "62-saparov-azamat-tolegenovich",
+      "sourceId": 62,
+      "name": "Сапаров Азамат Толегенович",
+      "region": "область Жетісу",
+      "consultation": "Ювенальная консультация"
+    },
+    {
+      "id": "63-sadykov-marat-manatbekovich",
+      "sourceId": 63,
+      "name": "Садыков Марат Манатбекович",
+      "region": "область Жетісу",
+      "consultation": "Ювенальная консультация"
+    },
+    {
+      "id": "64-sarkytov-zhanat-tulepbergenovich",
+      "sourceId": 64,
+      "name": "Саркытов Жанат Тулепбергенович",
+      "region": "область Жетісу",
+      "consultation": "Ювенальная консультация"
+    },
+    {
+      "id": "65-sydykov-kasym-bakytzhanovich",
+      "sourceId": 65,
+      "name": "Сыдыков Касым Бакытжанович",
+      "region": "область Жетісу",
+      "consultation": "Ювенальная консультация"
+    },
+    {
+      "id": "66-bekishev-serik-aldangarovich",
+      "sourceId": 66,
+      "name": "Бекишев Серик Алдангарович",
+      "region": "область Жетісу",
+      "consultation": "г. Текели"
+    },
+    {
+      "id": "67-zhanbulatov-talgat-tursynovich",
+      "sourceId": 67,
+      "name": "Жанбулатов Талгат Турсынович",
+      "region": "область Жетісу",
+      "consultation": "г. Текели"
+    },
+    {
+      "id": "68-kereibaeva-roza-nurgalievna",
+      "sourceId": 68,
+      "name": "Керейбаева Роза Нургалиевна",
+      "region": "область Жетісу",
+      "consultation": "г. Текели"
+    },
+    {
+      "id": "69-muratbekov-sayan-tursynbaevich",
+      "sourceId": 69,
+      "name": "Муратбеков Саян Турсынбаевич",
+      "region": "область Жетісу",
+      "consultation": "г. Текели"
+    },
+    {
+      "id": "70-fedorov-vladimir-semenovich",
+      "sourceId": 70,
+      "name": "Федоров Владимир Семенович",
+      "region": "область Жетісу",
+      "consultation": "г. Текели"
+    },
+    {
+      "id": "71-andasbaev-adil-beisenbekovich",
+      "sourceId": 71,
+      "name": "Андасбаев Адиль Бейсенбекович",
+      "region": "область Жетісу",
+      "consultation": "ЮК Коксуского района"
+    },
+    {
+      "id": "72-beisenov-dias-malikovich",
+      "sourceId": 72,
+      "name": "Бейсенов Диас Маликович",
+      "region": "область Жетісу",
+      "consultation": "ЮК Коксуского района"
+    },
+    {
+      "id": "73-beisenova-diana-zhanatbekovna",
+      "sourceId": 73,
+      "name": "Бейсенова Диана Жанатбековна",
+      "region": "область Жетісу",
+      "consultation": "ЮК Коксуского района"
+    },
+    {
+      "id": "74-baiseitov-bakytbek-bathanovich",
+      "sourceId": 74,
+      "name": "Байсеитов Бакытбек Батханович",
+      "region": "область Жетісу",
+      "consultation": "ЮК Каратальского района"
+    },
+    {
+      "id": "75-dyusembekov-bolatzhan-kyzyltaevich",
+      "sourceId": 75,
+      "name": "Дюсембеков Болатжан Кызылтаевич",
+      "region": "область Жетісу",
+      "consultation": "ЮК Каратальского района"
+    },
+    {
+      "id": "76-burkitbaev-aibek-kalkabekovich",
+      "sourceId": 76,
+      "name": "Буркитбаев Айбек Калкабекович",
+      "region": "область Жетісу",
+      "consultation": "ЮК Кербулакского района"
+    },
+    {
+      "id": "77-abdikarimova-dinara-amantaevna",
+      "sourceId": 77,
+      "name": "Абдикаримова Динара Амантаевна",
+      "region": "область Жетісу",
+      "consultation": "ЮК Ескельдинского района"
+    },
+    {
+      "id": "78-beisenbaeva-margarita-serikovna",
+      "sourceId": 78,
+      "name": "Бейсенбаева Маргарита Сериковна",
+      "region": "область Жетісу",
+      "consultation": "ЮК Ескельдинского района"
+    },
+    {
+      "id": "79-daurenbekov-kozhabergen-meirbaevich",
+      "sourceId": 79,
+      "name": "Дауренбеков Кожаберген Меирбаевич",
+      "region": "область Жетісу",
+      "consultation": "ЮК Ескельдинского района"
+    },
+    {
+      "id": "80-imanbekov-daulet-talgatovich",
+      "sourceId": 80,
+      "name": "Иманбеков Даулет Талгатович",
+      "region": "область Жетісу",
+      "consultation": "ЮК Ескельдинского района"
+    },
+    {
+      "id": "81-nusipov-murat-orazhanovich",
+      "sourceId": 81,
+      "name": "Нусипов Мурат Оразханович",
+      "region": "область Жетісу",
+      "consultation": "ЮК Аксуского района"
+    },
+    {
+      "id": "82-tazabekov-doszhan-aldabergenovich",
+      "sourceId": 82,
+      "name": "Тазабеков Досжан Алдабергенович",
+      "region": "область Жетісу",
+      "consultation": "ЮК Сарканского района"
+    },
+    {
+      "id": "83-bekishev-zhomart-toleubaevich",
+      "sourceId": 83,
+      "name": "Бекишев Жомарт Толеубаевич",
+      "region": "область Жетісу",
+      "consultation": "ЮК Алакольского района №1"
+    },
+    {
+      "id": "84-shaltaev-aidyn-orazhanovich",
+      "sourceId": 84,
+      "name": "Шалтаев Айдын Оразханович",
+      "region": "область Жетісу",
+      "consultation": "ЮК Алакольского района №1"
+    },
+    {
+      "id": "85-brikeev-bahyt-zheksembaevich",
+      "sourceId": 85,
+      "name": "Брикеев Бахыт Жексембаевич",
+      "region": "область Жетісу",
+      "consultation": "ЮК Алакольского района №2"
+    },
+    {
+      "id": "86-muratbekov-erbolat-nurgalievich",
+      "sourceId": 86,
+      "name": "Муратбеков Ерболат Нургалиевич",
+      "region": "область Жетісу",
+      "consultation": "ЮК Алакольского района №2"
+    },
+    {
+      "id": "87-ausadykov-erlan-nurkalykovich",
+      "sourceId": 87,
+      "name": "Аусадыков Ерлан Нуркалыкович",
+      "region": "область Жетісу",
+      "consultation": "ЮК Панфиловского района"
+    },
+    {
+      "id": "88-begadilov-erbol-muratovich",
+      "sourceId": 88,
+      "name": "Бегадилов Ербол Муратович",
+      "region": "область Жетісу",
+      "consultation": "ЮК Панфиловского района"
+    },
+    {
+      "id": "89-ismail-zhagda-manapuly",
+      "sourceId": 89,
+      "name": "Исмаил Жағда Манапұлы",
+      "region": "область Жетісу",
+      "consultation": "ЮК Панфиловского района"
+    },
+    {
+      "id": "90-kobdaliev-saken-mukashovich",
+      "sourceId": 90,
+      "name": "Кобдалиев Сакен Мукашович",
+      "region": "область Жетісу",
+      "consultation": "ЮК Панфиловского района"
+    },
+    {
+      "id": "91-nugmanov-nurlan-sherniyazovich",
+      "sourceId": 91,
+      "name": "Нугманов Нурлан Шерниязович",
+      "region": "область Жетісу",
+      "consultation": "ЮК Панфиловского района"
+    },
+    {
+      "id": "92-niyazhadzhieva-zumrad-ganievna",
+      "sourceId": 92,
+      "name": "Ниязхаджиева Зумрад Ганиевна",
+      "region": "область Жетісу",
+      "consultation": "ЮК Панфиловского района"
+    },
+    {
+      "id": "93-resnyanskii-aleksandr-pavlovich",
+      "sourceId": 93,
+      "name": "Реснянский Александр Павлович",
+      "region": "область Жетісу",
+      "consultation": "ЮК Панфиловского района"
+    },
+    {
+      "id": "94-sarsebekova-lyazat-kasymgazievna",
+      "sourceId": 94,
+      "name": "Сарсебекова Лязат Касымгазиевна",
+      "region": "область Жетісу",
+      "consultation": "ЮК Панфиловского района"
+    },
+    {
+      "id": "95-raqymzhan-olzhas-nurbolatuly",
+      "sourceId": 95,
+      "name": "Рақымжан Олжас Нурболатұлы",
+      "region": "область Жетісу",
+      "consultation": "ЮК Панфиловского района"
+    },
+    {
+      "id": "96-adilbekova-danipa-medetovna",
+      "sourceId": 96,
+      "name": "Адильбекова Данипа Медетовна",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "97-alibaev-ergali-kairgalievich",
+      "sourceId": 97,
+      "name": "Алибаев Ергали Кайргалиевич",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "98-abdraimov-sagynysh-karipzhanovich",
+      "sourceId": 98,
+      "name": "Абдраимов Сагыныш Карипжанович",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "99-abikenova-tolganai-nurlanbekovna",
+      "sourceId": 99,
+      "name": "Абикенова Толганай Нурланбековна",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "100-aimhanova-nurgul-muhametkalymovna",
+      "sourceId": 100,
+      "name": "Аймханова Нургул Мухаметкалымовна",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "101-askanov-dosan-damiruly",
+      "sourceId": 101,
+      "name": "Асканов Досан Дамирұлы",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "102-aripov-kunbolat-serikovich",
+      "sourceId": 102,
+      "name": "Арипов Кунболат Серикович",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "103-aukenov-madi-muhtarovich",
+      "sourceId": 103,
+      "name": "Аукенов Мади Мухтарович",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "104-baigazin-eldar-quanyshuly",
+      "sourceId": 104,
+      "name": "Байгазин Елдар Қуанышұлы",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "105-baigarashev-dulat-kanatuly",
+      "sourceId": 105,
+      "name": "Байгарашев Дулат Канатулы",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "106-baiduakasov-kaiyrzhan-malikovich",
+      "sourceId": 106,
+      "name": "Байдуакасов Кайыржан Маликович",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "107-baizhunusov-berikzhan-abenovich",
+      "sourceId": 107,
+      "name": "Байжунусов Берикжан Абенович",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "108-valimova-gulnara-mametzhanovna",
+      "sourceId": 108,
+      "name": "Валимова Гульнара Маметжановна",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "109-demesinov-almas-amanbolovich",
+      "sourceId": 109,
+      "name": "Демесинов Алмас Аманболович",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "110-dosanov-talgat-dzhanahmetovich",
+      "sourceId": 110,
+      "name": "Досанов Талгат Джанахметович",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "111-dosanova-alfiya-ashatovna",
+      "sourceId": 111,
+      "name": "Досанова Альфия Асхатовна",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "112-qaisarov-arnur-sailaubekuly",
+      "sourceId": 112,
+      "name": "Қайсаров Арнұр Сайлаубекұлы",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "113-zhagaparov-erzhan-murzabekovich",
+      "sourceId": 113,
+      "name": "Жагапаров Ержан Мурзабекович",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "114-qorganbaev-medet-maulenuly",
+      "sourceId": 114,
+      "name": "Қорғанбаев Медет Мауленұлы",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "116-erzhanov-maulen-erzhanovich",
+      "sourceId": 116,
+      "name": "Ержанов Маулен Ержанович",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "117-kalibekov-arman-seitkulovich",
+      "sourceId": 117,
+      "name": "Калибеков Арман Сейткулович",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "118-ermekov-rinat-kairatovich",
+      "sourceId": 118,
+      "name": "Ермеков Ринат Кайратович",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "119-kerimbek-erbol-baqytzhanuly",
+      "sourceId": 119,
+      "name": "Керімбек Ербол Бақытжанұлы",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "120-kozhabekov-talgat-elubekovich",
+      "sourceId": 120,
+      "name": "Кожабеков Талгат Елубекович",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "121-kuatkanov-nursultan-almatovich",
+      "sourceId": 121,
+      "name": "Куатканов Нурсултан Алматович",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "122-kanatov-askar-dzhenisovich",
+      "sourceId": 122,
+      "name": "Канатов Аскар Дженисович",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "123-qamali-qairat-qabiuly",
+      "sourceId": 123,
+      "name": "Қамали Қайрат Қабиұлы",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "124-mamyrkanov-esimbol-askabylovich",
+      "sourceId": 124,
+      "name": "Мамырканов Есимбол Аскабылович",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "125-mamytov-marat-umbetuly",
+      "sourceId": 125,
+      "name": "Мамытов Марат Умбетулы",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "126-muhmetov-serikbol-davletbekovich",
+      "sourceId": 126,
+      "name": "Мухметов Серикбол Давлетбекович",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "127-nazyrova-gulnara-talgatovna",
+      "sourceId": 127,
+      "name": "Назырова Гульнара Талгатовна",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "128-nisanbekov-rashit-suniyatovich",
+      "sourceId": 128,
+      "name": "Нисанбеков Рашит Суниятович",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "129-nurkasymova-saru-nurkasymovna",
+      "sourceId": 129,
+      "name": "Нуркасымова Сару Нуркасымовна",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "130-ongarova-gulnar-amanovna",
+      "sourceId": 130,
+      "name": "Онгарова Гульнар Амановна",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "131-sagindykova-gulnar-izbasarovna",
+      "sourceId": 131,
+      "name": "Сагиндыкова Гульнар Избасаровна",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "132-seitkozhanova-karina-renatovna",
+      "sourceId": 132,
+      "name": "Сейткожанова Карина Ренатовна",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "133-serikzhanqyzy-aigerim",
+      "sourceId": 133,
+      "name": "Серікжанқызы Айгерім",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "134-serikqyzy-moldir",
+      "sourceId": 134,
+      "name": "Серікқызы Мөлдір",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "135-sihimbaev-nurlan-dzholdasbekovich",
+      "sourceId": 135,
+      "name": "Сихимбаев Нурлан Джолдасбекович",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "136-torehanova-gulnaz-kanatovna",
+      "sourceId": 136,
+      "name": "Тореханова Гульназ Канатовна",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "137-tyan-vera-germanovna",
+      "sourceId": 137,
+      "name": "Тян Вера Германовна",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "138-sherneev-erlan-nurlanovich",
+      "sourceId": 138,
+      "name": "Шернеев Ерлан Нурланович",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    },
+    {
+      "id": "139-shugaibaeva-aigul-turlyhanovna",
+      "sourceId": 139,
+      "name": "Шугайбаева Айгуль Турлыхановна",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы"
+    }
+  ]
+}

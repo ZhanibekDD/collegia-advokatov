@@ -1,196 +1,114 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import {
-  ArrowLeft,
-  ArrowRight,
-  ArrowUpRight,
-  BriefcaseBusiness,
-  Check,
-  Gavel,
-  HeartHandshake,
-  House,
-  LockKeyhole,
-  MapPin,
-  RotateCcw,
-  Scale,
-  ShieldCheck,
-} from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, BriefcaseBusiness, Building2, FileCheck2, Gavel, HeartHandshake, Home, Scale, Search, ShieldAlert } from "lucide-react";
 import { PortalFooter, PortalHeader } from "../components/portal-shell";
-import { type Locale, practiceOptions } from "../lib/portal-data";
-
-const issues = [
-  { value: "Уголовное право", ru: "Уголовное дело", kk: "Қылмыстық іс", ruText: "Задержание, допрос, обвинение или защита потерпевшего", kkText: "Ұстау, жауап алу, айыптау немесе жәбірленушіні қорғау" },
-  { value: "Семейное право", ru: "Семья и дети", kk: "Отбасы және балалар", ruText: "Развод, алименты, дети или наследство", kkText: "Ажырасу, алимент, балалар немесе мұрагерлік" },
-  { value: "Бизнес и налоги", ru: "Бизнес", kk: "Бизнес", ruText: "Договоры, налоги, проверки и корпоративные споры", kkText: "Шарттар, салықтар, тексерулер және корпоративтік даулар" },
-  { value: "Гражданские споры", ru: "Гражданский спор", kk: "Азаматтық дау", ruText: "Долги, ущерб, обязательства и судебные дела", kkText: "Қарыздар, залал, міндеттемелер және сот істері" },
-  { value: "Недвижимость", ru: "Имущество", kk: "Мүлік", ruText: "Недвижимость, земля и жилищные вопросы", kkText: "Жылжымайтын мүлік, жер және тұрғын үй мәселелері" },
-];
-
-const urgency = [
-  { value: "urgent", ru: "Нужна помощь сейчас", kk: "Көмек қазір қажет", ruText: "Человек задержан, идёт следственное действие или есть срочный риск", kkText: "Адам ұсталды, тергеу әрекеті жүріп жатыр немесе шұғыл қауіп бар" },
-  { value: "soon", ru: "В течение 1–3 дней", kk: "1–3 күн ішінде", ruText: "Есть срок, заседание, проверка или важный документ", kkText: "Мерзім, отырыс, тексеру немесе маңызды құжат бар" },
-  { value: "planned", ru: "Плановая консультация", kk: "Жоспарлы кеңес", ruText: "Хочу спокойно оценить ситуацию и выбрать стратегию", kkText: "Жағдайды байыппен бағалап, стратегияны таңдағым келеді" },
-];
-
-const issueIcons = [Gavel, HeartHandshake, BriefcaseBusiness, Scale, House];
+import { usePersistentLocale } from "../lib/use-persistent-locale";
 
 const text = {
   ru: {
-    eyebrow: "Навигатор правовой помощи",
-    title: "Понятный маршрут за два шага",
-    lead: "Выберите ситуацию и срочность. Мы подготовим переход к региональному каталогу адвокатов области Жетісу — без передачи персональных данных.",
-    steps: ["Ситуация", "Срочность"],
-    question1: "Что произошло?",
-    question2: "Насколько срочно нужна помощь?",
-    back: "Назад",
-    next: "Продолжить",
-    resultEyebrow: "Ваш маршрут готов",
-    resultTitle: "Перейдите к адвокатам области Жетісу",
-    resultText: "Каталог ограничен областью Жетісу. Перед заключением соглашения дополнительно проверьте текущий статус лицензии и условия работы выбранного адвоката.",
-    open: "Открыть каталог адвокатов",
-    restart: "Начать заново",
-    privacy: "Ответы используются только для формирования маршрута на этом устройстве и никуда не отправляются.",
-    selected: "Ситуация",
-    priority: "Срочность",
-    location: "Регион",
-    locationValue: "Область Жетісу",
+    eyebrow: "Правовая помощь",
+    title: "С чего начать обращение к адвокату",
+    lead: "Определите тему вопроса, подготовьте основные документы и выберите адвоката из актуального состава коллегии.",
+    topicsEyebrow: "Частые вопросы",
+    topicsTitle: "Выберите направление ситуации",
+    topics: [
+      ["Уголовные дела", "Задержание, допрос, обвинение, защита подозреваемого или потерпевшего."],
+      ["Семья и дети", "Расторжение брака, алименты, место жительства детей, наследство."],
+      ["Гражданские споры", "Долги, ущерб, обязательства, защита прав в судебном процессе."],
+      ["Бизнес", "Договоры, проверки, корпоративные и экономические споры."],
+      ["Имущество", "Недвижимость, земля, жильё и регистрация прав."],
+    ],
+    note: "Список коллегии не содержит специализации адвокатов. Направления ниже помогают сформулировать вопрос, но не являются рейтингом или рекомендацией конкретного специалиста.",
+    stepsEyebrow: "Перед обращением",
+    stepsTitle: "Три практических шага",
+    steps: [
+      ["Кратко опишите ситуацию", "Зафиксируйте ключевые события, даты, участников и желаемый результат."],
+      ["Соберите документы", "Подготовьте договоры, уведомления, судебные документы и переписку по делу."],
+      ["Выберите адвоката", "Найдите фамилию в актуальном списке или откройте юридическую консультацию своего района."],
+    ],
+    directory: "Открыть список адвокатов",
+    consultations: "Юридические консультации",
   },
   kk: {
-    eyebrow: "Құқықтық көмек навигаторы",
-    title: "Екі қадамда түсінікті бағыт алыңыз",
-    lead: "Жағдай мен жеделдікті таңдаңыз. Біз жеке деректерді бермей-ақ Жетісу облысы адвокаттарының өңірлік каталогына өтуді дайындаймыз.",
-    steps: ["Жағдай", "Жеделдік"],
-    question1: "Не болды?",
-    question2: "Көмек қаншалықты жедел қажет?",
-    back: "Артқа",
-    next: "Жалғастыру",
-    resultEyebrow: "Бағытыңыз дайын",
-    resultTitle: "Жетісу облысының адвокаттарына өтіңіз",
-    resultText: "Каталог Жетісу облысымен шектелген. Келісім жасамас бұрын таңдалған адвокаттың лицензиясының ағымдағы мәртебесін және жұмыс шарттарын қосымша тексеріңіз.",
-    open: "Адвокаттар каталогын ашу",
-    restart: "Қайта бастау",
-    privacy: "Жауаптар тек осы құрылғыда бағыт құру үшін пайдаланылады және ешқайда жіберілмейді.",
-    selected: "Жағдай",
-    priority: "Жеделдік",
-    location: "Өңір",
-    locationValue: "Жетісу облысы",
+    eyebrow: "Құқықтық көмек",
+    title: "Адвокатқа жүгінуді неден бастау керек",
+    lead: "Сұрақтың тақырыбын анықтап, негізгі құжаттарды дайындаңыз және алқаның өзекті құрамынан адвокатты таңдаңыз.",
+    topicsEyebrow: "Жиі кездесетін сұрақтар",
+    topicsTitle: "Жағдайдың бағытын таңдаңыз",
+    topics: [
+      ["Қылмыстық істер", "Ұстау, жауап алу, айыптау, күдіктіні немесе жәбірленушіні қорғау."],
+      ["Отбасы және балалар", "Некені бұзу, алимент, балалардың тұрғылықты жері, мұрагерлік."],
+      ["Азаматтық даулар", "Қарыздар, залал, міндеттемелер, сот процесінде құқықтарды қорғау."],
+      ["Бизнес", "Шарттар, тексерулер, корпоративтік және экономикалық даулар."],
+      ["Мүлік", "Жылжымайтын мүлік, жер, тұрғын үй және құқықтарды тіркеу."],
+    ],
+    note: "Алқа тізімінде адвокаттардың мамандануы жоқ. Төмендегі бағыттар сұрақты тұжырымдауға көмектеседі, бірақ нақты маманның рейтингі немесе ұсынысы емес.",
+    stepsEyebrow: "Жүгінер алдында",
+    stepsTitle: "Үш практикалық қадам",
+    steps: [
+      ["Жағдайды қысқаша сипаттаңыз", "Негізгі оқиғаларды, күндерді, қатысушыларды және қалаған нәтижені белгілеңіз."],
+      ["Құжаттарды жинаңыз", "Шарттарды, хабарламаларды, сот құжаттарын және іс бойынша хат алмасуды дайындаңыз."],
+      ["Адвокатты таңдаңыз", "Өзекті тізімнен тегін табыңыз немесе ауданыңыздың заң консультациясын ашыңыз."],
+    ],
+    directory: "Адвокаттар тізімін ашу",
+    consultations: "Заң консультациялары",
   },
 };
 
+const topicIcons = [Gavel, HeartHandshake, Scale, BriefcaseBusiness, Home];
+const stepIcons = [Search, FileCheck2, Building2];
+
 export default function HelpPage() {
-  const [locale, setLocale] = useState<Locale>("ru");
-  const [step, setStep] = useState(0);
-  const [issue, setIssue] = useState("");
-  const [priority, setPriority] = useState("");
+  const [locale, setLocale] = usePersistentLocale();
   const t = text[locale];
 
-  useEffect(() => {
-    const timer = window.setTimeout(() => {
-      const params = new URLSearchParams(window.location.search);
-      const suggestedPractice = params.get("practice");
-      if (suggestedPractice && practiceOptions.some((item) => item.value === suggestedPractice)) setIssue(suggestedPractice);
-    }, 0);
-    return () => window.clearTimeout(timer);
-  }, []);
-
-  const selectedIssue = useMemo(() => issues.find((item) => item.value === issue), [issue]);
-  const selectedUrgency = useMemo(() => urgency.find((item) => item.value === priority), [priority]);
-  const canContinue = step === 0 ? Boolean(issue) : Boolean(priority);
-  const resultUrl = "/advokaty";
-
-  function restart() {
-    setStep(0);
-    setIssue("");
-    setPriority("");
-  }
-
   return (
-    <main className="portal-page help-flow-page">
+    <main>
       <PortalHeader locale={locale} onLocaleChange={setLocale} />
-
-      <section className="flow-hero">
-        <div className="shell flow-hero-grid">
-          <div>
-            <div className="eyebrow light"><span />{t.eyebrow}</div>
-            <h1>{t.title}</h1>
-            <p>{t.lead}</p>
-          </div>
-          <div className="flow-privacy"><span><LockKeyhole /></span><p>{t.privacy}</p></div>
+      <section className="page-hero help-hero">
+        <div className="page-hero-grid" aria-hidden="true" />
+        <div className="shell page-hero-inner">
+          <div className="eyebrow light"><span />{t.eyebrow}</div>
+          <h1>{t.title}</h1>
+          <p>{t.lead}</p>
         </div>
       </section>
 
-      <section className="flow-content">
-        <div className="shell flow-shell">
-          <div className="flow-progress">
-            {t.steps.map((label, index) => (
-              <div className={step >= index ? "is-active" : ""} key={label}>
-                <span>{index + 1}</span><strong>{label}</strong>
-              </div>
-            ))}
+      <section className="section">
+        <div className="shell">
+          <div className="guidance-note"><ShieldAlert /><p>{t.note}</p></div>
+          <div className="section-heading centered">
+            <div className="eyebrow"><span />{t.topicsEyebrow}<span /></div>
+            <h2>{t.topicsTitle}</h2>
           </div>
-
-          {step === 0 && (
-            <div className="flow-stage">
-              <div className="flow-question"><small>01 / 02</small><h2>{t.question1}</h2></div>
-              <div className="issue-options">
-                {issues.map((item, index) => {
-                  const IssueIcon = issueIcons[index];
-                  return (
-                    <button className={issue === item.value ? "is-selected" : ""} onClick={() => setIssue(item.value)} key={item.value}>
-                      <span><IssueIcon /></span>
-                      <div><strong>{item[locale]}</strong><p>{locale === "ru" ? item.ruText : item.kkText}</p></div>
-                      <i><Check /></i>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {step === 1 && (
-            <div className="flow-stage">
-              <div className="flow-question"><small>02 / 02</small><h2>{t.question2}</h2></div>
-              <div className="urgency-options">
-                {urgency.map((item, index) => (
-                  <button className={priority === item.value ? "is-selected" : ""} onClick={() => setPriority(item.value)} key={item.value}>
-                    <span>{item.value === "urgent" ? <ShieldCheck /> : String(index + 1).padStart(2, "0")}</span>
-                    <strong>{item[locale]}</strong>
-                    <p>{locale === "ru" ? item.ruText : item.kkText}</p>
-                    <i><Check /></i>
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {step < 2 && (
-            <div className="flow-actions">
-              <button className="flow-back" disabled={step === 0} onClick={() => setStep((value) => Math.max(0, value - 1))}><ArrowLeft /> {t.back}</button>
-              <button className="button button-dark" disabled={!canContinue} onClick={() => setStep((value) => value + 1)}>{t.next}<ArrowRight /></button>
-            </div>
-          )}
-
-          {step === 2 && (
-            <div className="flow-result">
-              <div className="result-seal"><span><ShieldCheck /></span><small>JETISU</small></div>
-              <div className="eyebrow"><span />{t.resultEyebrow}</div>
-              <h2>{t.resultTitle}</h2>
-              <p>{t.resultText}</p>
-              <div className="result-summary">
-                <div><small>{t.selected}</small><strong>{locale === "ru" ? selectedIssue?.ru : selectedIssue?.kk}</strong></div>
-                <div><small>{t.priority}</small><strong>{locale === "ru" ? selectedUrgency?.ru : selectedUrgency?.kk}</strong></div>
-                <div><small>{t.location}</small><strong><MapPin /> {t.locationValue}</strong></div>
-              </div>
-              <div className="flow-result-actions">
-                <a className="button button-primary" href={resultUrl}>{t.open}<ArrowUpRight /></a>
-                <button onClick={restart}><RotateCcw />{t.restart}</button>
-              </div>
-            </div>
-          )}
+          <div className="topic-grid">
+            {t.topics.map(([title, description], index) => {
+              const Icon = topicIcons[index];
+              return <article className="topic-card" key={title}><span className="center-icon"><Icon /></span><h3>{title}</h3><p>{description}</p></article>;
+            })}
+          </div>
         </div>
       </section>
 
+      <section className="section section-soft">
+        <div className="shell">
+          <div className="section-heading">
+            <div className="eyebrow"><span />{t.stepsEyebrow}</div>
+            <h2>{t.stepsTitle}</h2>
+          </div>
+          <div className="steps-list">
+            {t.steps.map(([title, description], index) => {
+              const Icon = stepIcons[index];
+              return <article key={title}><span className="step-number">0{index + 1}</span><span className="center-icon"><Icon /></span><div><h3>{title}</h3><p>{description}</p></div></article>;
+            })}
+          </div>
+          <div className="help-actions">
+            <Link className="button button-dark" href="/advokaty">{t.directory}<ArrowRight /></Link>
+            <Link className="button button-outline-dark" href="/konsultacii">{t.consultations}<Building2 /></Link>
+          </div>
+        </div>
+      </section>
       <PortalFooter locale={locale} />
     </main>
   );

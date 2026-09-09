@@ -1,42 +1,33 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import "./jetisu-premium.css";
-import "./jetisu-premium-content.css";
-import "./jetisu-premium-responsive.css";
 
-const jetisuEmblem =
-  "https://upload.wikimedia.org/wikipedia/commons/f/f1/%D0%93%D0%B5%D1%80%D0%B1_%D0%96%D0%B5%D1%82%D1%8B%D1%81%D1%83%D1%81%D0%BA%D0%BE%D0%B9_%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D0%B8.svg";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://collegia-advokatov.zhanibekdauletovich.chatgpt.site";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Коллегия адвокатов области Жетісу",
-    template: "%s · Коллегия адвокатов области Жетісу",
+    template: "%s · KAOJ.KZ",
   },
   description:
-    "Цифровой портал Коллегии адвокатов области Жетісу: поиск адвокатов региона по ФИО и номеру лицензии, правовая помощь и сведения из открытых данных Министерства юстиции РК.",
+    "Официальный портал Коллегии адвокатов области Жетісу: список адвокатов, юридические консультации и контакты коллегии.",
   keywords: [
+    "KAOJ.KZ",
     "Коллегия адвокатов области Жетісу",
-    "коллегия адвокатов Жетісу",
     "адвокат Талдыкорган",
     "адвокат область Жетісу",
-    "найти адвоката Жетісу",
     "Жетісу облыстық адвокаттар алқасы",
-    "Талдықорған адвокат",
   ],
   openGraph: {
     title: "Коллегия адвокатов области Жетісу",
-    description: "Поиск адвокатов и профессиональная правовая помощь в области Жетісу.",
+    description: "Актуальный список адвокатов и юридических консультаций области Жетісу.",
     locale: "ru_KZ",
     alternateLocale: "kk_KZ",
     type: "website",
   },
   robots: { index: true, follow: true },
   other: { "codex-preview": "development" },
-  icons: {
-    icon: [{ url: jetisuEmblem, type: "image/svg+xml" }],
-    shortcut: jetisuEmblem,
-    apple: jetisuEmblem,
-  },
+  icons: { icon: "/favicon.svg", shortcut: "/favicon.svg", apple: "/favicon.svg" },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
