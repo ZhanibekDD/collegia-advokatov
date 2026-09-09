@@ -39,7 +39,7 @@ export default function ConsultationsPage() {
   const t = text[locale];
 
   return (
-    <main>
+    <main id="main-content">
       <PortalHeader locale={locale} onLocaleChange={setLocale} />
       <section className="page-hero consultations-hero">
         <div className="page-hero-grid" aria-hidden="true" />

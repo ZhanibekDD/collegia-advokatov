@@ -159,7 +159,7 @@ export default function HomePage() {
   }
 
   return (
-    <main id="top" className="home-page-v2">
+    <main id="main-content" className="home-page-v2">
       <PortalHeader locale={locale} onLocaleChange={setLocale} />
 
       <section className="home-hero home-hero-v2">
@@ -176,7 +176,7 @@ export default function HomePage() {
               <div className="hero-search-control">
                 <Search />
                 <label className="sr-only" htmlFor="home-directory-search">{t.placeholder}</label>
-                <input id="home-directory-search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder={t.placeholder} autoComplete="off" aria-controls="home-search-suggestions" />
+                <input id="home-directory-search" type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder={t.placeholder} autoComplete="off" role="combobox" aria-autocomplete="list" aria-controls={query.trim().length >= 2 ? "home-search-suggestions" : undefined} aria-expanded={query.trim().length >= 2} />
                 <button type="submit">{t.search}<ArrowRight /></button>
               </div>
 

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { ArrowLeft, ArrowRight, BadgeCheck, Building2, Check, Copy, Database, MapPin, ShieldCheck, UserRound } from "lucide-react";
+import { ArrowLeft, ArrowRight, BadgeCheck, Building2, Check, Copy, Database, MapPin, Printer, ShieldCheck, UserRound } from "lucide-react";
 import { DataSourceNotice, PortalFooter, PortalHeader } from "../../components/portal-shell";
 import { consultationName, formatDirectoryDate, type OfficialAdvocate } from "../../lib/portal-data";
 import { usePersistentLocale } from "../../lib/use-persistent-locale";
@@ -19,7 +19,7 @@ export default function ProfileClient({ advocate, total }: { advocate: OfficialA
   }
 
   return (
-    <main>
+    <main id="main-content">
       <PortalHeader locale={locale} onLocaleChange={setLocale} />
       <section className="profile-hero">
         <div className="shell">
@@ -31,7 +31,10 @@ export default function ProfileClient({ advocate, total }: { advocate: OfficialA
               <h1>{advocate.name}</h1>
               <p><MapPin />{kk ? "Жетісу облысы" : "Область Жетісу"}</p>
             </div>
-            <button className="copy-button" type="button" onClick={copyProfileLink}>{copied ? <Check /> : <Copy />}{copied ? (kk ? "Көшірілді" : "Скопировано") : (kk ? "Сілтемені көшіру" : "Копировать ссылку")}</button>
+            <div className="profile-actions">
+              <button className="copy-button" type="button" aria-live="polite" onClick={copyProfileLink}>{copied ? <Check /> : <Copy />}{copied ? (kk ? "Көшірілді" : "Скопировано") : (kk ? "Сілтемені көшіру" : "Копировать ссылку")}</button>
+              <button className="copy-button" type="button" onClick={() => window.print()}><Printer />{kk ? "Басып шығару" : "Распечатать"}</button>
+            </div>
           </div>
         </div>
       </section>

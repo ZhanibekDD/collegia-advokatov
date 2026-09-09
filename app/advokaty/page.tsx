@@ -90,7 +90,7 @@ function DirectoryContent() {
   }
 
   return (
-    <main>
+    <main id="main-content">
       <PortalHeader locale={locale} onLocaleChange={setLocale} />
       <section className="page-hero">
         <div className="page-hero-grid" aria-hidden="true" />
@@ -110,7 +110,7 @@ function DirectoryContent() {
             <label className="search-field">
               <Search />
               <span className="sr-only">{t.search}</span>
-              <input value={query} onChange={(event) => { setQuery(event.target.value); setPage(1); }} placeholder={t.search} />
+              <input type="search" value={query} onChange={(event) => { setQuery(event.target.value); setPage(1); }} placeholder={t.search} />
               {query && <button type="button" aria-label={t.reset} onClick={() => { setQuery(""); setPage(1); }}><X /></button>}
             </label>
             <label className="select-field">
@@ -126,7 +126,7 @@ function DirectoryContent() {
           </div>
 
           <div className="directory-summary">
-            <p><strong>{t.found}: {filtered.length}</strong> {t.of} {directory?.meta.total ?? "—"} {t.advocates}</p>
+            <p aria-live="polite"><strong>{t.found}: {filtered.length}</strong> {t.of} {directory?.meta.total ?? "—"} {t.advocates}</p>
             {(query || consultation !== "all") && <button type="button" onClick={reset}><X />{t.reset}</button>}
             <Link href="/konsultacii"><Building2 />{t.consultations}<ArrowRight /></Link>
           </div>
@@ -154,7 +154,7 @@ function DirectoryContent() {
           {directory && pageCount > 1 && (
             <nav className="pagination" aria-label={t.page}>
               <button type="button" disabled={safePage === 1} onClick={() => setPage((value) => Math.max(1, value - 1))}><ArrowLeft />{t.back}</button>
-              <span>{t.page} <strong>{safePage}</strong> / {pageCount}</span>
+              <span aria-current="page">{t.page} <strong>{safePage}</strong> / {pageCount}</span>
               <button type="button" disabled={safePage === pageCount} onClick={() => setPage((value) => Math.min(pageCount, value + 1))}>{t.next}<ArrowRight /></button>
             </nav>
           )}

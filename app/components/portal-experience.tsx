@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { ArrowRight, Building2, Gavel, Landmark, Search, Sparkles, UserRoundSearch, X } from "lucide-react";
+import { ArrowRight, ArrowUp, Building2, Gavel, Landmark, Search, Sparkles, UserRoundSearch, X } from "lucide-react";
 import { consultationName, type Locale } from "../lib/portal-data";
 import { useDirectory } from "../lib/use-directory";
 
@@ -67,6 +67,7 @@ export function PortalCommand({ locale }: { locale: Locale }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
   const { directory } = useDirectory();
   const routes = portalRoutes[locale];
 
@@ -74,13 +75,23 @@ export function PortalCommand({ locale }: { locale: Locale }) {
     const handleKey = (event: KeyboardEvent) => {
       if ((event.ctrlKey || event.metaKey) && event.key.toLocaleLowerCase() === "k") {
         event.preventDefault();
-        setOpen((value) => !value);
+        if (open) {
+          setOpen(false);
+          setQuery("");
+          window.setTimeout(() => triggerRef.current?.focus(), 0);
+        } else {
+          setOpen(true);
+        }
       }
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape" && open) {
+        setOpen(false);
+        setQuery("");
+        window.setTimeout(() => triggerRef.current?.focus(), 0);
+      }
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, []);
+  }, [open]);
 
   useEffect(() => {
     if (!open) return;
@@ -110,13 +121,32 @@ export function PortalCommand({ locale }: { locale: Locale }) {
   const close = () => {
     setOpen(false);
     setQuery("");
+    window.setTimeout(() => triggerRef.current?.focus(), 0);
+  };
+
+  const trapFocus = (event: React.KeyboardEvent<HTMLElement>) => {
+    if (event.key !== "Tab") return;
+    const focusable = Array.from(event.currentTarget.querySelectorAll<HTMLElement>('button, input, a[href], [tabindex]:not([tabindex="-1"])'));
+    if (focusable.length === 0) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
   };
 
   return (
     <>
       <button
+        ref={triggerRef}
         className="command-trigger"
         type="button"
+        aria-controls="portal-command"
+        aria-expanded={open}
         aria-label={locale === "ru" ? "Быстрый поиск по порталу" : "Портал бойынша жылдам іздеу"}
         title={locale === "ru" ? "Быстрый поиск — Ctrl + K" : "Жылдам іздеу — Ctrl + K"}
         onClick={() => setOpen(true)}
@@ -127,7 +157,7 @@ export function PortalCommand({ locale }: { locale: Locale }) {
 
       {open && createPortal(
         <div className="command-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) close(); }}>
-          <section className="command-panel" role="dialog" aria-modal="true" aria-label={locale === "ru" ? "Навигация и поиск" : "Навигация және іздеу"}>
+          <section className="command-panel" id="portal-command" role="dialog" aria-modal="true" aria-label={locale === "ru" ? "Навигация и поиск" : "Навигация және іздеу"} onKeyDown={trapFocus}>
             <header className="command-head">
               <span><Sparkles /></span>
               <div>
@@ -142,15 +172,20 @@ export function PortalCommand({ locale }: { locale: Locale }) {
               <span className="sr-only">{locale === "ru" ? "Найти адвоката или раздел" : "Адвокат немесе бөлім табу"}</span>
               <input
                 ref={inputRef}
+                type="search"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder={locale === "ru" ? "Фамилия адвоката или нужный раздел…" : "Адвокаттың тегі немесе қажетті бөлім…"}
                 autoComplete="off"
+                role="combobox"
+                aria-autocomplete="list"
+                aria-controls="portal-command-results"
+                aria-expanded="true"
               />
               <kbd>ESC</kbd>
             </label>
 
-            <div className="command-results">
+            <div className="command-results" id="portal-command-results" aria-live="polite">
               {routeMatches.length > 0 && (
                 <div className="command-group">
                   <p>{locale === "ru" ? "Разделы портала" : "Портал бөлімдері"}</p>
@@ -192,6 +227,27 @@ export function PortalCommand({ locale }: { locale: Locale }) {
         document.body,
       )}
     </>
+  );
+}
+
+export function BackToTop({ locale }: { locale: Locale }) {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const update = () => setVisible(window.scrollY > 520);
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, []);
+
+  return (
+    <button
+      className={visible ? "back-to-top is-visible" : "back-to-top"}
+      type="button"
+      aria-label={locale === "ru" ? "Наверх страницы" : "Беттің басына"}
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+    >
+      <ArrowUp />
+    </button>
   );
 }
 

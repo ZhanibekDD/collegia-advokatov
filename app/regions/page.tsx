@@ -65,7 +65,7 @@ export default function AboutPage() {
   const t = text[locale];
 
   return (
-    <main>
+    <main id="main-content">
       <PortalHeader locale={locale} onLocaleChange={setLocale} />
       <section className="page-hero about-hero">
         <div className="page-hero-grid" aria-hidden="true" />

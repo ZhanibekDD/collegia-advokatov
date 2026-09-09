@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Database, ExternalLink, Mail, MapPin, Menu, Phone, ShieldCheck, X } from "lucide-react";
 import {
   ASSOCIATION,
@@ -11,7 +11,7 @@ import {
   type Locale,
 } from "../lib/portal-data";
 import { ShanyrakMark } from "./shanyrak-mark";
-import { PortalAtmosphere, PortalCommand } from "./portal-experience";
+import { BackToTop, PortalAtmosphere, PortalCommand } from "./portal-experience";
 import { MotionController } from "./motion-stage";
 
 const nav = {
@@ -55,10 +55,21 @@ export function PortalHeader({
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [menuOpen]);
+
   return (
     <>
+      <a className="skip-link" href="#main-content">{locale === "ru" ? "Перейти к содержанию" : "Мазмұнға өту"}</a>
       <MotionController />
       <PortalAtmosphere />
+      <BackToTop locale={locale} />
       <div className="service-bar">
         <div className="shell service-bar-inner">
           <span><ShieldCheck />{locale === "ru" ? "Региональный портал адвокатуры" : "Өңірлік адвокатура порталы"}</span>
@@ -75,7 +86,7 @@ export function PortalHeader({
             {nav[locale].map(([label, href]) => {
               const active = href === "/" ? pathname === "/" : pathname.startsWith(href);
               return (
-                <Link className={active ? "active" : ""} href={href} key={href} onClick={() => setMenuOpen(false)}>
+                <Link className={active ? "active" : ""} href={href} key={href} aria-current={active ? "page" : undefined} onClick={() => setMenuOpen(false)}>
                   {label}
                 </Link>
               );
@@ -88,7 +99,7 @@ export function PortalHeader({
               <button type="button" className={locale === "kk" ? "active" : ""} aria-pressed={locale === "kk"} onClick={() => onLocaleChange("kk")}>ҚАЗ</button>
               <button type="button" className={locale === "ru" ? "active" : ""} aria-pressed={locale === "ru"} onClick={() => onLocaleChange("ru")}>РУС</button>
             </div>
-            <button className="menu-button" type="button" aria-label={locale === "ru" ? "Открыть меню" : "Мәзірді ашу"} aria-expanded={menuOpen} onClick={() => setMenuOpen((value) => !value)}>
+            <button className="menu-button" type="button" aria-label={menuOpen ? (locale === "ru" ? "Закрыть меню" : "Мәзірді жабу") : (locale === "ru" ? "Открыть меню" : "Мәзірді ашу")} aria-expanded={menuOpen} onClick={() => setMenuOpen((value) => !value)}>
               {menuOpen ? <X /> : <Menu />}
             </button>
           </div>
