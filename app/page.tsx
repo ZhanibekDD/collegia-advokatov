@@ -21,7 +21,7 @@ import {
   UserRoundSearch,
   UsersRound,
 } from "lucide-react";
-import { AnimatedNumber, CivicMotionStage, MotionController } from "./components/motion-stage";
+import { AnimatedNumber, CivicMotionStage } from "./components/motion-stage";
 import { DataSourceNotice, PortalFooter, PortalHeader } from "./components/portal-shell";
 import {
   ASSOCIATION,
@@ -160,7 +160,6 @@ export default function HomePage() {
 
   return (
     <main id="top" className="home-page-v2">
-      <MotionController />
       <PortalHeader locale={locale} onLocaleChange={setLocale} />
 
       <section className="home-hero home-hero-v2">

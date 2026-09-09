@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowRight, BadgeCheck, Building2, Landmark, Mail, MapPin, Phone, Scale, ShieldCheck, UsersRound } from "lucide-react";
 import { DataSourceNotice, PortalFooter, PortalHeader } from "../components/portal-shell";
+import { JetisuSignature } from "../components/portal-experience";
 import { ASSOCIATION } from "../lib/portal-data";
 import { useDirectory } from "../lib/use-directory";
 import { usePersistentLocale } from "../lib/use-persistent-locale";
@@ -68,7 +69,8 @@ export default function AboutPage() {
       <PortalHeader locale={locale} onLocaleChange={setLocale} />
       <section className="page-hero about-hero">
         <div className="page-hero-grid" aria-hidden="true" />
-        <div className="shell page-hero-split">
+        <JetisuSignature locale={locale} />
+        <div className="shell page-hero-split" data-reveal>
           <div>
             <div className="eyebrow light"><span />{t.eyebrow}</div>
             <h1>{t.title}</h1>
@@ -80,8 +82,8 @@ export default function AboutPage() {
 
       <section className="section">
         <div className="shell">
-          <DataSourceNotice locale={locale} total={directory?.meta.total} />
-          <div className="mission-grid">
+          <div data-reveal><DataSourceNotice locale={locale} total={directory?.meta.total} /></div>
+          <div className="mission-grid" data-reveal>
             <div className="mission-copy">
               <div className="eyebrow"><span />{t.missionEyebrow}</div>
               <h2>{t.missionTitle}</h2>
@@ -99,11 +101,11 @@ export default function AboutPage() {
 
       <section className="section section-soft legal-section">
         <div className="shell">
-          <div className="section-heading">
+          <div className="section-heading" data-reveal>
             <div className="eyebrow"><span />{t.legalEyebrow}</div>
             <h2>{t.legalTitle}</h2>
           </div>
-          <div className="legal-details-grid">
+          <div className="legal-details-grid" data-reveal>
             <article className="leadership-card">
               <span className="center-icon"><Scale /></span>
               <small>{t.chair}</small>

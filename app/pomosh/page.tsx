@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowRight, BriefcaseBusiness, Building2, FileCheck2, Gavel, HeartHandshake, Home, Scale, Search, ShieldAlert } from "lucide-react";
 import { PortalFooter, PortalHeader } from "../components/portal-shell";
+import { JetisuSignature } from "../components/portal-experience";
 import { usePersistentLocale } from "../lib/use-persistent-locale";
 
 const text = {
@@ -68,7 +69,8 @@ export default function HelpPage() {
       <PortalHeader locale={locale} onLocaleChange={setLocale} />
       <section className="page-hero help-hero">
         <div className="page-hero-grid" aria-hidden="true" />
-        <div className="shell page-hero-inner">
+        <JetisuSignature locale={locale} />
+        <div className="shell page-hero-inner" data-reveal>
           <div className="eyebrow light"><span />{t.eyebrow}</div>
           <h1>{t.title}</h1>
           <p>{t.lead}</p>
@@ -77,15 +79,15 @@ export default function HelpPage() {
 
       <section className="section">
         <div className="shell">
-          <div className="guidance-note"><ShieldAlert /><p>{t.note}</p></div>
-          <div className="section-heading centered">
+          <div className="guidance-note" data-reveal><ShieldAlert /><p>{t.note}</p></div>
+          <div className="section-heading centered" data-reveal>
             <div className="eyebrow"><span />{t.topicsEyebrow}<span /></div>
             <h2>{t.topicsTitle}</h2>
           </div>
           <div className="topic-grid">
             {t.topics.map(([title, description], index) => {
               const Icon = topicIcons[index];
-              return <article className="topic-card" key={title}><span className="center-icon"><Icon /></span><h3>{title}</h3><p>{description}</p></article>;
+              return <article className="topic-card" data-reveal key={title}><span className="center-icon"><Icon /></span><h3>{title}</h3><p>{description}</p></article>;
             })}
           </div>
         </div>
@@ -93,14 +95,14 @@ export default function HelpPage() {
 
       <section className="section section-soft">
         <div className="shell">
-          <div className="section-heading">
+          <div className="section-heading" data-reveal>
             <div className="eyebrow"><span />{t.stepsEyebrow}</div>
             <h2>{t.stepsTitle}</h2>
           </div>
           <div className="steps-list">
             {t.steps.map(([title, description], index) => {
               const Icon = stepIcons[index];
-              return <article key={title}><span className="step-number">0{index + 1}</span><span className="center-icon"><Icon /></span><div><h3>{title}</h3><p>{description}</p></div></article>;
+              return <article data-reveal key={title}><span className="step-number">0{index + 1}</span><span className="center-icon"><Icon /></span><div><h3>{title}</h3><p>{description}</p></div></article>;
             })}
           </div>
           <div className="help-actions">

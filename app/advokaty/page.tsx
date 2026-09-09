@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { Suspense, useDeferredValue, useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, Building2, ListFilter, Search, ShieldCheck, X } from "lucide-react";
 import { DataSourceNotice, PortalFooter, PortalHeader } from "../components/portal-shell";
+import { JetisuSignature } from "../components/portal-experience";
 import { consultationName } from "../lib/portal-data";
 import { useDirectory } from "../lib/use-directory";
 import { usePersistentLocale } from "../lib/use-persistent-locale";
@@ -93,7 +94,8 @@ function DirectoryContent() {
       <PortalHeader locale={locale} onLocaleChange={setLocale} />
       <section className="page-hero">
         <div className="page-hero-grid" aria-hidden="true" />
-        <div className="shell page-hero-inner">
+        <JetisuSignature locale={locale} />
+        <div className="shell page-hero-inner" data-reveal>
           <div className="eyebrow light"><span />{t.eyebrow}</div>
           <h1>{t.title}</h1>
           <p>{t.lead}</p>
@@ -102,9 +104,9 @@ function DirectoryContent() {
 
       <section className="directory-section">
         <div className="shell">
-          <DataSourceNotice locale={locale} total={directory?.meta.total} />
+          <div data-reveal><DataSourceNotice locale={locale} total={directory?.meta.total} /></div>
 
-          <div className="directory-controls">
+          <div className="directory-controls" data-reveal>
             <label className="search-field">
               <Search />
               <span className="sr-only">{t.search}</span>

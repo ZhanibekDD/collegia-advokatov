@@ -8,7 +8,6 @@ import { ShanyrakMark } from "./shanyrak-mark";
 export function MotionController() {
   useEffect(() => {
     const root = document.documentElement;
-    const items = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
     root.classList.add("motion-enabled");
 
     const observer = new IntersectionObserver(
@@ -22,8 +21,18 @@ export function MotionController() {
       { rootMargin: "0px 0px -8%", threshold: 0.12 },
     );
 
-    items.forEach((item) => observer.observe(item));
+    const observeItems = () => {
+      document.querySelectorAll<HTMLElement>("[data-reveal]:not([data-motion-observed])").forEach((item) => {
+        item.dataset.motionObserved = "true";
+        observer.observe(item);
+      });
+    };
+    observeItems();
+    const mutations = new MutationObserver(observeItems);
+    mutations.observe(document.body, { childList: true, subtree: true });
+
     return () => {
+      mutations.disconnect();
       observer.disconnect();
       root.classList.remove("motion-enabled");
     };
@@ -72,6 +81,9 @@ export function CivicMotionStage({
   return (
     <div className="motion-stage" ref={stageRef} onPointerMove={move} onPointerLeave={reset} aria-hidden="true">
       <div className="stage-glow" />
+      <div className="stage-streams">
+        {Array.from({ length: 7 }, (_, index) => <i style={{ "--stream": index } as React.CSSProperties} key={index} />)}
+      </div>
       <div className="stage-orbit stage-orbit-outer"><span /><span /><span /></div>
       <div className="stage-orbit stage-orbit-inner"><span /><span /></div>
 
@@ -95,6 +107,7 @@ export function CivicMotionStage({
         <span>{locale === "ru" ? "Список проверен" : "Тізім тексерілді"}</span>
       </div>
       <div className="stage-status"><ShieldCheck /><span>{locale === "ru" ? "Официальные сведения" : "Ресми мәліметтер"}</span></div>
+      <div className="stage-seven-mark"><strong>07</strong><span>{locale === "ru" ? "потоков Жетісу" : "Жетісу ағыны"}</span></div>
     </div>
   );
 }

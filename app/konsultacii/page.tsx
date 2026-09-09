@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowRight, Building2, ChevronDown, MapPinned, Scale, UsersRound } from "lucide-react";
 import { DataSourceNotice, PortalFooter, PortalHeader } from "../components/portal-shell";
+import { JetisuSignature } from "../components/portal-experience";
 import { advocateWord, consultationName } from "../lib/portal-data";
 import { useDirectory } from "../lib/use-directory";
 import { usePersistentLocale } from "../lib/use-persistent-locale";
@@ -42,7 +43,8 @@ export default function ConsultationsPage() {
       <PortalHeader locale={locale} onLocaleChange={setLocale} />
       <section className="page-hero consultations-hero">
         <div className="page-hero-grid" aria-hidden="true" />
-        <div className="shell page-hero-split">
+        <JetisuSignature locale={locale} />
+        <div className="shell page-hero-split" data-reveal>
           <div>
             <div className="eyebrow light"><span />{t.eyebrow}</div>
             <h1>{t.title}</h1>
@@ -54,14 +56,14 @@ export default function ConsultationsPage() {
 
       <section className="consultations-section">
         <div className="shell">
-          <DataSourceNotice locale={locale} total={directory?.meta.total} />
+          <div data-reveal><DataSourceNotice locale={locale} total={directory?.meta.total} /></div>
           {!directory && <div className="status-panel"><span className="spinner" />{t.loading}</div>}
           <div className="consultations-directory">
             {directory?.consultations.map((consultation, index) => {
               const members = directory.advocates.filter((advocate) => advocate.consultation === consultation.name);
               const Icon = consultation.name === "Индивидуалы" ? Scale : consultation.name.includes("Ювенал") ? UsersRound : MapPinned;
               return (
-                <article className="consultation-directory-card" id={consultation.id} key={consultation.id}>
+                <article className="consultation-directory-card" id={consultation.id} data-reveal style={{ "--reveal-delay": `${(index % 2) * 80}ms` } as React.CSSProperties} key={consultation.id}>
                   <header>
                     <span className="consultation-card-index">{String(index + 1).padStart(2, "0")}</span>
                     <span className="center-icon"><Icon /></span>

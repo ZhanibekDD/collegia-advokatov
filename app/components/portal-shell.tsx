@@ -11,6 +11,8 @@ import {
   type Locale,
 } from "../lib/portal-data";
 import { ShanyrakMark } from "./shanyrak-mark";
+import { PortalAtmosphere, PortalCommand } from "./portal-experience";
+import { MotionController } from "./motion-stage";
 
 const nav = {
   ru: [
@@ -55,6 +57,8 @@ export function PortalHeader({
 
   return (
     <>
+      <MotionController />
+      <PortalAtmosphere />
       <div className="service-bar">
         <div className="shell service-bar-inner">
           <span><ShieldCheck />{locale === "ru" ? "Региональный портал адвокатуры" : "Өңірлік адвокатура порталы"}</span>
@@ -79,6 +83,7 @@ export function PortalHeader({
           </nav>
 
           <div className="header-actions">
+            <PortalCommand locale={locale} />
             <div className="language-switch" aria-label={locale === "ru" ? "Выбор языка" : "Тілді таңдау"}>
               <button type="button" className={locale === "kk" ? "active" : ""} aria-pressed={locale === "kk"} onClick={() => onLocaleChange("kk")}>ҚАЗ</button>
               <button type="button" className={locale === "ru" ? "active" : ""} aria-pressed={locale === "ru"} onClick={() => onLocaleChange("ru")}>РУС</button>
