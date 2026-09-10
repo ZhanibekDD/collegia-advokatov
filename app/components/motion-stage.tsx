@@ -138,6 +138,14 @@ export function CivicMotionStage({
     stage.style.setProperty("--shift-y", `${y * 18}px`);
     stage.style.setProperty("--shift-x-reverse", `${x * -12}px`);
     stage.style.setProperty("--shift-y-reverse", `${y * -12}px`);
+    stage.style.setProperty("--stage-tilt-x", `${y * -7}deg`);
+    stage.style.setProperty("--stage-tilt-y", `${x * 8}deg`);
+    stage.style.setProperty("--stage-card-tilt-x", `${y * -4}deg`);
+    stage.style.setProperty("--stage-card-tilt-y", `${x * 5}deg`);
+    stage.style.setProperty("--stage-card-tilt-x-reverse", `${y * 4}deg`);
+    stage.style.setProperty("--stage-card-tilt-y-reverse", `${x * -5}deg`);
+    stage.style.setProperty("--stage-light-x", `${(x + 0.5) * 100}%`);
+    stage.style.setProperty("--stage-light-y", `${(y + 0.5) * 100}%`);
   }
 
   function reset() {
@@ -147,11 +155,24 @@ export function CivicMotionStage({
     stage.style.setProperty("--shift-y", "0px");
     stage.style.setProperty("--shift-x-reverse", "0px");
     stage.style.setProperty("--shift-y-reverse", "0px");
+    stage.style.setProperty("--stage-tilt-x", "0deg");
+    stage.style.setProperty("--stage-tilt-y", "0deg");
+    stage.style.setProperty("--stage-card-tilt-x", "0deg");
+    stage.style.setProperty("--stage-card-tilt-y", "0deg");
+    stage.style.setProperty("--stage-card-tilt-x-reverse", "0deg");
+    stage.style.setProperty("--stage-card-tilt-y-reverse", "0deg");
+    stage.style.setProperty("--stage-light-x", "50%");
+    stage.style.setProperty("--stage-light-y", "50%");
   }
 
   return (
     <div className="motion-stage" ref={stageRef} onPointerMove={move} onPointerLeave={reset} aria-hidden="true">
       <div className="stage-glow" />
+      <div className="stage-ambient-light" />
+      <div className="stage-radar"><span /></div>
+      <div className="stage-particles">
+        {Array.from({ length: 12 }, (_, index) => <i style={{ "--particle": index } as React.CSSProperties} key={index} />)}
+      </div>
       <div className="stage-streams">
         {Array.from({ length: 7 }, (_, index) => <i style={{ "--stream": index } as React.CSSProperties} key={index} />)}
       </div>
@@ -159,6 +180,7 @@ export function CivicMotionStage({
       <div className="stage-orbit stage-orbit-inner"><span /><span /></div>
 
       <div className="stage-core">
+        <div className="stage-core-energy"><i /><i /><i /></div>
         <div className="stage-core-pulse" />
         <div className="stage-emblem"><ShanyrakMark /></div>
         <strong>KAOJ.KZ</strong>
