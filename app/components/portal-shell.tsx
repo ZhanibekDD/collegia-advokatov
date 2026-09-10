@@ -11,7 +11,7 @@ import {
   type Locale,
 } from "../lib/portal-data";
 import { ShanyrakMark } from "./shanyrak-mark";
-import { BackToTop, PortalAtmosphere, PortalCommand } from "./portal-experience";
+import { BackToTop, PortalAtmosphere, PortalCommand, RouteTransition, SectionNavigator } from "./portal-experience";
 import { MotionController } from "./motion-stage";
 
 const nav = {
@@ -68,8 +68,10 @@ export function PortalHeader({
     <>
       <a className="skip-link" href="#main-content">{locale === "ru" ? "Перейти к содержанию" : "Мазмұнға өту"}</a>
       <MotionController />
+      <RouteTransition />
       <PortalAtmosphere />
       <BackToTop locale={locale} />
+      {pathname === "/" && <SectionNavigator locale={locale} />}
       <div className="service-bar">
         <div className="shell service-bar-inner">
           <span><ShieldCheck />{locale === "ru" ? "Региональный портал адвокатуры" : "Өңірлік адвокатура порталы"}</span>

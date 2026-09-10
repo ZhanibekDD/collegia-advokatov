@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { ArrowRight, ArrowUp, Building2, Gavel, Landmark, Search, Sparkles, UserRoundSearch, X } from "lucide-react";
@@ -22,6 +23,73 @@ const portalRoutes = {
   ],
 } as const;
 
+const homeSections = {
+  ru: [
+    ["Начало", "home-top"],
+    ["Маршруты", "quick-routes"],
+    ["Жетісу", "region-story"],
+    ["Адвокаты", "advocates"],
+    ["Консультации", "consultations"],
+  ],
+  kk: [
+    ["Басты", "home-top"],
+    ["Бағыттар", "quick-routes"],
+    ["Жетісу", "region-story"],
+    ["Адвокаттар", "advocates"],
+    ["Консультациялар", "consultations"],
+  ],
+} as const;
+
+export function RouteTransition() {
+  const pathname = usePathname();
+  return (
+    <div className="route-transition" key={pathname} aria-hidden="true">
+      {Array.from({ length: 7 }, (_, index) => <span style={{ "--curtain": index } as React.CSSProperties} key={index} />)}
+    </div>
+  );
+}
+
+export function SectionNavigator({ locale }: { locale: Locale }) {
+  const sections = homeSections[locale];
+  const [active, setActive] = useState(sections[0][1]);
+
+  useEffect(() => {
+    let frame = 0;
+    const update = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const anchor = window.innerHeight * 0.42;
+        const nearest = sections
+          .map(([, id]) => ({ id, distance: Math.abs((document.getElementById(id)?.getBoundingClientRect().top ?? Infinity) - anchor) }))
+          .sort((a, b) => a.distance - b.distance)[0];
+        if (nearest && Number.isFinite(nearest.distance)) setActive(nearest.id);
+      });
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update, { passive: true });
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, [sections]);
+
+  const activeIndex = Math.max(0, sections.findIndex(([, id]) => id === active));
+  return (
+    <aside className="section-navigator">
+      <span className="section-nav-count"><strong>{String(activeIndex + 1).padStart(2, "0")}</strong><i />{String(sections.length).padStart(2, "0")}</span>
+      <nav aria-label={locale === "ru" ? "Навигация по главной странице" : "Басты бет навигациясы"}>
+        {sections.map(([label, id], index) => (
+          <a className={active === id ? "active" : ""} href={`#${id}`} aria-current={active === id ? "location" : undefined} key={id}>
+            <span>{label}</span><i /><em>{String(index + 1).padStart(2, "0")}</em>
+          </a>
+        ))}
+      </nav>
+    </aside>
+  );
+}
+
 export function PortalAtmosphere() {
   useEffect(() => {
     const root = document.documentElement;
@@ -39,6 +107,8 @@ export function PortalAtmosphere() {
       frame = requestAnimationFrame(() => {
         root.style.setProperty("--pointer-x", `${event.clientX}px`);
         root.style.setProperty("--pointer-y", `${event.clientY}px`);
+        root.style.setProperty("--pointer-shift-x", `${(event.clientX / window.innerWidth - 0.5) * 14}px`);
+        root.style.setProperty("--pointer-shift-y", `${(event.clientY / window.innerHeight - 0.5) * 10}px`);
       });
     };
 

@@ -9,6 +9,11 @@ export function MotionController() {
   useEffect(() => {
     const root = document.documentElement;
     root.classList.add("motion-enabled");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
+    let interactionFrame = 0;
+    let activeTilt: HTMLElement | null = null;
+    let activeMagnetic: HTMLElement | null = null;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -31,7 +36,73 @@ export function MotionController() {
     const mutations = new MutationObserver(observeItems);
     mutations.observe(document.body, { childList: true, subtree: true });
 
+    const resetTilt = (target: HTMLElement | null) => {
+      if (!target) return;
+      target.style.setProperty("--tilt-rx", "0deg");
+      target.style.setProperty("--tilt-ry", "0deg");
+      target.style.setProperty("--glow-x", "50%");
+      target.style.setProperty("--glow-y", "50%");
+    };
+
+    const resetMagnetic = (target: HTMLElement | null) => {
+      if (!target) return;
+      target.style.setProperty("--magnetic-x", "0px");
+      target.style.setProperty("--magnetic-y", "0px");
+    };
+
+    const resetInteractions = () => {
+      resetTilt(activeTilt);
+      resetMagnetic(activeMagnetic);
+      activeTilt = null;
+      activeMagnetic = null;
+    };
+
+    const handleInteraction = (event: PointerEvent) => {
+      if (reducedMotion || coarsePointer || event.pointerType === "touch" || !(event.target instanceof Element)) return;
+      cancelAnimationFrame(interactionFrame);
+      interactionFrame = requestAnimationFrame(() => {
+        const tilt = event.target instanceof Element ? event.target.closest("[data-tilt]") as HTMLElement | null : null;
+        if (tilt !== activeTilt) {
+          resetTilt(activeTilt);
+          activeTilt = tilt;
+        }
+        if (tilt) {
+          const bounds = tilt.getBoundingClientRect();
+          const x = Math.min(1, Math.max(0, (event.clientX - bounds.left) / bounds.width));
+          const y = Math.min(1, Math.max(0, (event.clientY - bounds.top) / bounds.height));
+          tilt.style.setProperty("--tilt-rx", `${(0.5 - y) * 6}deg`);
+          tilt.style.setProperty("--tilt-ry", `${(x - 0.5) * 7}deg`);
+          tilt.style.setProperty("--glow-x", `${x * 100}%`);
+          tilt.style.setProperty("--glow-y", `${y * 100}%`);
+        }
+
+        const magnetic = event.target.closest(".button, .hero-search-control button, .command-trigger") as HTMLElement | null;
+        if (magnetic !== activeMagnetic) {
+          resetMagnetic(activeMagnetic);
+          activeMagnetic = magnetic;
+        }
+        if (magnetic) {
+          const bounds = magnetic.getBoundingClientRect();
+          const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+          const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+          magnetic.style.setProperty("--magnetic-x", `${x * 8}px`);
+          magnetic.style.setProperty("--magnetic-y", `${y * 6}px`);
+        }
+      });
+    };
+
+    const handlePointerOut = (event: PointerEvent) => {
+      if (event.relatedTarget === null) resetInteractions();
+    };
+
+    document.addEventListener("pointermove", handleInteraction, { passive: true });
+    document.addEventListener("pointerout", handlePointerOut, { passive: true });
+
     return () => {
+      cancelAnimationFrame(interactionFrame);
+      resetInteractions();
+      document.removeEventListener("pointermove", handleInteraction);
+      document.removeEventListener("pointerout", handlePointerOut);
       mutations.disconnect();
       observer.disconnect();
       root.classList.remove("motion-enabled");

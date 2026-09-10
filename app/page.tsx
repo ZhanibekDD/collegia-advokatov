@@ -174,7 +174,7 @@ export default function HomePage() {
     <main id="main-content" className="home-page-v2">
       <PortalHeader locale={locale} onLocaleChange={setLocale} />
 
-      <section className="home-hero home-hero-v2">
+      <section className="home-hero home-hero-v2" id="home-top">
         <div className="hero-aurora hero-aurora-one" aria-hidden="true" />
         <div className="hero-aurora hero-aurora-two" aria-hidden="true" />
         <div className="shell hero-v2-grid">
@@ -240,16 +240,16 @@ export default function HomePage() {
               const Icon = routeIcons[index];
               // The source asset is already an optimized, responsive-safe WebP; Vinext's image endpoint is not available in this static Worker build.
               // eslint-disable-next-line @next/next/no-img-element
-              const content = <>{index === 0 && <img className="route-card-image" src="/images/legal-architecture-v1.webp" alt="" loading="lazy" aria-hidden="true" />}<div className="route-card-top"><span className="route-number">0{index + 1}</span><span className="route-icon"><Icon /></span></div><h3>{title}</h3><p>{description}</p><span className="route-card-action">{locale === "ru" ? "Перейти" : "Ашу"}<ArrowRight />{index === 3 && <ExternalLink />}</span></>;
+              const content = <>{index === 0 && <img className="route-card-image" src="/images/legal-architecture-v1.webp" alt="" loading="lazy" aria-hidden="true" />}<span className="surface-glow" aria-hidden="true" /><div className="route-card-top"><span className="route-number">0{index + 1}</span><span className="route-icon"><Icon /></span></div><h3>{title}</h3><p>{description}</p><span className="route-card-action">{locale === "ru" ? "Перейти" : "Ашу"}<ArrowRight />{index === 3 && <ExternalLink />}</span></>;
               const className = `route-card-v2 route-card-${index + 1}`;
               const style = { "--reveal-delay": `${index * 80}ms` } as React.CSSProperties;
-              return index === 3 ? <a className={className} style={style} data-reveal href={routeHrefs[index]} target="_blank" rel="noreferrer" key={title}>{content}</a> : <Link className={className} style={style} data-reveal href={routeHrefs[index]} key={title}>{content}</Link>;
+              return index === 3 ? <a className={className} style={style} data-reveal data-tilt href={routeHrefs[index]} target="_blank" rel="noreferrer" key={title}>{content}</a> : <Link className={className} style={style} data-reveal data-tilt href={routeHrefs[index]} key={title}>{content}</Link>;
             })}
           </div>
         </div>
       </section>
 
-      <section className="region-story" aria-labelledby="region-story-title">
+      <section className="region-story" id="region-story" aria-labelledby="region-story-title">
         {/* This decorative WebP is pre-compressed and intentionally bypasses Vinext's unavailable runtime image endpoint. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img className="region-story-image" src="/images/jetisu-panorama-v1.webp" alt="" loading="lazy" aria-hidden="true" />
@@ -285,7 +285,7 @@ export default function HomePage() {
         <div className="shell">
           <div className="section-heading split-heading light-heading" data-reveal><div><div className="eyebrow light"><span />{t.groupsEyebrow}</div><h2>{t.groupsTitle}</h2><p>{t.groupsLead}</p></div><Link className="arrow-link light-link" href="/konsultacii">{t.viewGroups}<ArrowRight /></Link></div>
           <div className="consultation-preview-grid consultation-preview-v2">
-            {featuredConsultations.map((consultation, index) => <Link className="consultation-card" data-reveal style={{ "--reveal-delay": `${index * 70}ms` } as React.CSSProperties} href={`/konsultacii#${consultation.id}`} key={consultation.id}><span className="consultation-number">{String(index + 1).padStart(2, "0")}</span><Building2 /><h3>{consultationName(consultation.name, locale)}</h3><p>{consultation.count} {advocateWord(consultation.count, locale)}</p><ArrowRight className="consultation-arrow" /></Link>)}
+            {featuredConsultations.map((consultation, index) => <Link className="consultation-card" data-reveal data-tilt style={{ "--reveal-delay": `${index * 70}ms` } as React.CSSProperties} href={`/konsultacii#${consultation.id}`} key={consultation.id}><span className="surface-glow" aria-hidden="true" /><span className="consultation-number">{String(index + 1).padStart(2, "0")}</span><Building2 /><h3>{consultationName(consultation.name, locale)}</h3><p>{consultation.count} {advocateWord(consultation.count, locale)}</p><ArrowRight className="consultation-arrow" /></Link>)}
           </div>
         </div>
       </section>
