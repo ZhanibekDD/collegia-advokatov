@@ -53,6 +53,12 @@ const text = {
     routesEyebrow: "Быстрый маршрут",
     routesTitle: "Нужный раздел — в один шаг",
     routesLead: "Мы убрали лишние экраны: сразу переходите к поиску, подразделениям или памятке по правовой помощи.",
+    regionEyebrow: "Регион присутствия",
+    regionTitle: "Правовая помощь — рядом с жителями Жетісу",
+    regionText: "Коллегия объединяет адвокатов Талдыкоргана и районов области. Выберите ближайшую юридическую консультацию или найдите специалиста по фамилии.",
+    regionCta: "Открыть консультации",
+    regionMembers: "адвокатов",
+    regionGroups: "подразделений",
     routes: [
       ["Найти адвоката", "Поиск по ФИО и подразделению в полном составе коллегии."],
       ["Выбрать консультацию", "Городские, районные и ювенальная юридические консультации."],
@@ -100,6 +106,12 @@ const text = {
     routesEyebrow: "Жылдам бағыт",
     routesTitle: "Қажетті бөлім — бір қадамда",
     routesLead: "Артық экрандарды алып тастадық: іздеуге, бөлімшелерге немесе құқықтық көмек нұсқаулығына бірден өтіңіз.",
+    regionEyebrow: "Қызмет көрсету өңірі",
+    regionTitle: "Құқықтық көмек — Жетісу тұрғындарына жақын",
+    regionText: "Алқа Талдықорған қаласы мен облыс аудандарындағы адвокаттарды біріктіреді. Жақын заң консультациясын таңдаңыз немесе адвокатты тегі бойынша табыңыз.",
+    regionCta: "Консультацияларды ашу",
+    regionMembers: "адвокат",
+    regionGroups: "бөлімше",
     routes: [
       ["Адвокат табу", "Алқаның толық құрамынан аты-жөні және бөлімшесі бойынша іздеу."],
       ["Консультация таңдау", "Қалалық, аудандық және ювеналдық заң консультациялары."],
@@ -226,11 +238,34 @@ export default function HomePage() {
           <div className="route-grid-v2">
             {t.routes.map(([title, description], index) => {
               const Icon = routeIcons[index];
-              const content = <><div className="route-card-top"><span className="route-number">0{index + 1}</span><span className="route-icon"><Icon /></span></div><h3>{title}</h3><p>{description}</p><span className="route-card-action">{locale === "ru" ? "Перейти" : "Ашу"}<ArrowRight />{index === 3 && <ExternalLink />}</span></>;
+              // The source asset is already an optimized, responsive-safe WebP; Vinext's image endpoint is not available in this static Worker build.
+              // eslint-disable-next-line @next/next/no-img-element
+              const content = <>{index === 0 && <img className="route-card-image" src="/images/legal-architecture-v1.webp" alt="" loading="lazy" aria-hidden="true" />}<div className="route-card-top"><span className="route-number">0{index + 1}</span><span className="route-icon"><Icon /></span></div><h3>{title}</h3><p>{description}</p><span className="route-card-action">{locale === "ru" ? "Перейти" : "Ашу"}<ArrowRight />{index === 3 && <ExternalLink />}</span></>;
               const className = `route-card-v2 route-card-${index + 1}`;
               const style = { "--reveal-delay": `${index * 80}ms` } as React.CSSProperties;
               return index === 3 ? <a className={className} style={style} data-reveal href={routeHrefs[index]} target="_blank" rel="noreferrer" key={title}>{content}</a> : <Link className={className} style={style} data-reveal href={routeHrefs[index]} key={title}>{content}</Link>;
             })}
+          </div>
+        </div>
+      </section>
+
+      <section className="region-story" aria-labelledby="region-story-title">
+        {/* This decorative WebP is pre-compressed and intentionally bypasses Vinext's unavailable runtime image endpoint. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img className="region-story-image" src="/images/jetisu-panorama-v1.webp" alt="" loading="lazy" aria-hidden="true" />
+        <div className="region-story-shade" aria-hidden="true" />
+        <div className="shell region-story-inner">
+          <div className="region-story-copy" data-reveal>
+            <div className="eyebrow light"><span />{t.regionEyebrow}</div>
+            <h2 id="region-story-title">{t.regionTitle}</h2>
+            <p>{t.regionText}</p>
+            <div className="region-story-actions">
+              <Link className="button region-story-button" href="/konsultacii">{t.regionCta}<ArrowRight /></Link>
+              <div className="region-story-facts" aria-label={locale === "ru" ? "Охват коллегии" : "Алқаның қамтуы"}>
+                <span><strong>{directory?.meta.total ?? 138}</strong>{t.regionMembers}</span>
+                <span><strong>{directory?.meta.consultationCount ?? 13}</strong>{t.regionGroups}</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
