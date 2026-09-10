@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useDeferredValue, useMemo, useState } from "react";
-import { ArrowLeft, ArrowRight, Building2, ListFilter, Search, ShieldCheck, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Building2, ListFilter, Scale, Search, ShieldCheck, X } from "lucide-react";
 import { DataSourceNotice, PortalFooter, PortalHeader } from "../components/portal-shell";
 import { JetisuSignature } from "../components/portal-experience";
 import { consultationName } from "../lib/portal-data";
@@ -16,8 +16,8 @@ const text = {
   ru: {
     eyebrow: "Состав коллегии · 01.09.2026",
     title: "Адвокаты области Жетісу",
-    lead: "Актуальный список, переданный коллегией. Ищите по ФИО или подразделению — без фотографий, рекламных рейтингов и неподтверждённых специализаций.",
-    search: "Фамилия, имя или отчество",
+    lead: "Актуальный список, переданный коллегией. Ищите по ФИО, подразделению или телефону и отдельно открывайте участников ГГЮП 2026.",
+    search: "ФИО, подразделение или телефон",
     group: "Все подразделения",
     found: "Найдено",
     of: "из",
@@ -33,12 +33,14 @@ const text = {
     back: "Назад",
     next: "Дальше",
     consultations: "Смотреть юридические консультации",
+    ggup: "ГГЮП 2026",
+    ggupLabel: "Только участники ГГЮП",
   },
   kk: {
     eyebrow: "Алқа құрамы · 01.09.2026",
     title: "Жетісу облысының адвокаттары",
-    lead: "Алқа ұсынған өзекті тізім. Фотосуреттерсіз, жарнамалық рейтингтерсіз және расталмаған мамандануларсыз аты-жөні немесе бөлімшесі бойынша іздеңіз.",
-    search: "Тегі, аты немесе әкесінің аты",
+    lead: "Алқа ұсынған өзекті тізім. Аты-жөні, бөлімшесі немесе телефоны бойынша іздеп, 2026 жылғы МКБЗК қатысушыларын бөлек ашыңыз.",
+    search: "Аты-жөні, бөлімше немесе телефон",
     group: "Барлық бөлімшелер",
     found: "Табылды",
     of: "барлығы",
@@ -54,6 +56,8 @@ const text = {
     back: "Артқа",
     next: "Келесі",
     consultations: "Заң консультацияларын көру",
+    ggup: "МКБЗК 2026",
+    ggupLabel: "Тек МКБЗК қатысушылары",
   },
 };
 
@@ -62,6 +66,7 @@ function DirectoryContent() {
   const [locale, setLocale] = usePersistentLocale();
   const [query, setQuery] = useState(searchParams.get("q") ?? "");
   const [consultation, setConsultation] = useState(searchParams.get("consultation") ?? "all");
+  const [ggupOnly, setGgupOnly] = useState(searchParams.get("ggup") === "1");
   const [page, setPage] = useState(1);
   const deferredQuery = useDeferredValue(query);
   const { directory, failed } = useDirectory();
@@ -72,12 +77,15 @@ function DirectoryContent() {
     const needle = deferredQuery.trim().toLocaleLowerCase(locale === "kk" ? "kk-KZ" : "ru-RU");
     return directory.advocates
       .filter((advocate) => consultation === "all" || advocate.consultation === consultation)
+      .filter((advocate) => !ggupOnly || advocate.ggup2026)
       .filter((advocate) => {
         if (!needle) return true;
-        return `${advocate.name} ${advocate.consultation}`.toLocaleLowerCase(locale === "kk" ? "kk-KZ" : "ru-RU").includes(needle);
+        return `${advocate.name} ${advocate.consultation} ${advocate.contacts.map((contact) => contact.display).join(" ")}`
+          .toLocaleLowerCase(locale === "kk" ? "kk-KZ" : "ru-RU")
+          .includes(needle);
       })
       .sort((a, b) => a.name.localeCompare(b.name, locale === "kk" ? "kk" : "ru"));
-  }, [consultation, deferredQuery, directory, locale]);
+  }, [consultation, deferredQuery, directory, ggupOnly, locale]);
 
   const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const safePage = Math.min(page, pageCount);
@@ -86,6 +94,7 @@ function DirectoryContent() {
   function reset() {
     setQuery("");
     setConsultation("all");
+    setGgupOnly(false);
     setPage(1);
   }
 
@@ -104,7 +113,7 @@ function DirectoryContent() {
 
       <section className="directory-section">
         <div className="shell">
-          <div data-reveal><DataSourceNotice locale={locale} total={directory?.meta.total} /></div>
+          <div data-reveal><DataSourceNotice locale={locale} total={directory?.meta.total} ggupTotal={directory?.meta.ggup.total} /></div>
 
           <div className="directory-controls" data-reveal>
             <label className="search-field">
@@ -123,11 +132,20 @@ function DirectoryContent() {
                 ))}
               </select>
             </label>
+            <button
+              className={ggupOnly ? "ggup-filter active" : "ggup-filter"}
+              type="button"
+              aria-pressed={ggupOnly}
+              aria-label={t.ggupLabel}
+              onClick={() => { setGgupOnly((value) => !value); setPage(1); }}
+            >
+              <Scale /><span>{t.ggup}</span><strong>{directory?.meta.ggup.total ?? "—"}</strong>
+            </button>
           </div>
 
           <div className="directory-summary">
             <p aria-live="polite"><strong>{t.found}: {filtered.length}</strong> {t.of} {directory?.meta.total ?? "—"} {t.advocates}</p>
-            {(query || consultation !== "all") && <button type="button" onClick={reset}><X />{t.reset}</button>}
+            {(query || consultation !== "all" || ggupOnly) && <button type="button" onClick={reset}><X />{t.reset}</button>}
             <Link href="/konsultacii"><Building2 />{t.consultations}<ArrowRight /></Link>
           </div>
 
@@ -139,7 +157,11 @@ function DirectoryContent() {
               {visible.map((advocate) => (
                 <Link className="directory-row" href={`/advokaty/${advocate.id}`} key={advocate.id}>
                   <span className="directory-id">{String(advocate.sourceId).padStart(3, "0")}</span>
-                  <span className="directory-person"><strong>{advocate.name}</strong><small>{locale === "ru" ? "Член Коллегии адвокатов области Жетісу" : "Жетісу облыстық адвокаттар алқасының мүшесі"}</small></span>
+                  <span className="directory-person">
+                    <strong>{advocate.name}</strong>
+                    <small>{locale === "ru" ? "Член Коллегии адвокатов области Жетісу" : "Жетісу облыстық адвокаттар алқасының мүшесі"}</small>
+                    {advocate.ggup2026 && <em className="ggup-badge"><Scale />{t.ggup}</em>}
+                  </span>
                   <span className="directory-group"><small>{t.groupLabel}</small><strong><Building2 />{consultationName(advocate.consultation, locale)}</strong></span>
                   <span className="round-arrow" aria-label={t.open}><ArrowRight /></span>
                 </Link>

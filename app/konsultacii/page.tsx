@@ -56,7 +56,7 @@ export default function ConsultationsPage() {
 
       <section className="consultations-section">
         <div className="shell">
-          <div data-reveal><DataSourceNotice locale={locale} total={directory?.meta.total} /></div>
+          <div data-reveal><DataSourceNotice locale={locale} total={directory?.meta.total} ggupTotal={directory?.meta.ggup.total} /></div>
           {!directory && <div className="status-panel"><span className="spinner" />{t.loading}</div>}
           <div className="consultations-directory">
             {directory?.consultations.map((consultation, index) => {

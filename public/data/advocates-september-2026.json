@@ -3,10 +3,17 @@
     "organization": "Коллегия адвокатов области Жетісу",
     "region": "область Жетісу",
     "asOf": "2026-09-01",
-    "sourceLabel": "Общий список адвокатов КАОЖ по состоянию на 01.09.2026",
-    "sourceFile": "общий список за сентябрь 26.xlsx",
-    "total": 138,
-    "consultationCount": 13
+    "sourceLabel": "Список адвокатов КАОЖ по состоянию на 01.09.2026",
+    "sourceFile": "общий список 139.xlsx",
+    "total": 139,
+    "consultationCount": 13,
+    "contactReviewCount": 2,
+    "ggup": {
+      "asOf": "2026-01",
+      "sourceLabel": "Список адвокатов, участвующих в ГГЮП в 2026 году",
+      "sourceFile": "список ГГЮП 2026 г. Жетісу январь.xlsx",
+      "total": 50
+    }
   },
   "consultations": [
     {
@@ -72,975 +79,2111 @@
     {
       "id": "individualy",
       "name": "Индивидуалы",
-      "count": 43
+      "count": 44
     }
   ],
   "advocates": [
     {
-      "id": "1-adylbekov-amir-zhanatovich",
       "sourceId": 1,
       "name": "Адылбеков Амир Жанатович",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (701) 777-70-68",
+          "href": "+77017777068"
+        }
+      ],
+      "id": "1-adylbekov-amir-zhanatovich",
+      "ggup2026": true,
+      "ggupSourceId": 4
     },
     {
-      "id": "2-akmoldanov-murathan-sergeevich",
       "sourceId": 2,
       "name": "Акмолданов Муратхан Сергеевич",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (775) 697-94-50",
+          "href": "+77756979450"
+        },
+        {
+          "display": "+7 (777) 292-04-62",
+          "href": "+77772920462"
+        }
+      ],
+      "id": "2-akmoldanov-murathan-sergeevich",
+      "ggup2026": false
     },
     {
-      "id": "3-arypbaeva-aigerim-berikqyzy",
       "sourceId": 3,
       "name": "Арыпбаева Әйгерім Берікқызы",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (776) 208-12-17",
+          "href": "+77762081217"
+        },
+        {
+          "display": "+7 (777) 013-50-04",
+          "href": "+77770135004"
+        }
+      ],
+      "id": "3-arypbaeva-aigerim-berikqyzy",
+      "ggup2026": true,
+      "ggupSourceId": 7
     },
     {
-      "id": "4-baitleuov-rustem-abeugalievich",
       "sourceId": 4,
       "name": "Байтлеуов Рустем Абеугалиевич",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (701) 955-34-44",
+          "href": "+77019553444"
+        },
+        {
+          "display": "+7 (771) 848-65-88",
+          "href": "+77718486588"
+        }
+      ],
+      "id": "4-baitleuov-rustem-abeugalievich",
+      "ggup2026": false
     },
     {
-      "id": "5-bekesheva-dinara-medetovna",
       "sourceId": 5,
       "name": "Бекешева Динара Медетовна",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (705) 249-91-50",
+          "href": "+77052499150"
+        }
+      ],
+      "id": "5-bekesheva-dinara-medetovna",
+      "ggup2026": true,
+      "ggupSourceId": 12
     },
     {
-      "id": "6-bekpaeva-galiya-erzhanovna",
       "sourceId": 6,
       "name": "Бекпаева Галия Ержановна",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (777) 243-66-22",
+          "href": "+77772436622"
+        }
+      ],
+      "id": "6-bekpaeva-galiya-erzhanovna",
+      "ggup2026": false
     },
     {
-      "id": "7-berezovskaya-lidiya-georgievna",
       "sourceId": 7,
       "name": "Березовская Лидия Георгиевна",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (777) 279-37-93",
+          "href": "+77772793793"
+        }
+      ],
+      "id": "7-berezovskaya-lidiya-georgievna",
+      "ggup2026": false
     },
     {
-      "id": "8-bidauletov-aset-kameevich",
       "sourceId": 8,
       "name": "Бидаулетов Асет Камеевич",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (701) 765-11-98",
+          "href": "+77017651198"
+        }
+      ],
+      "id": "8-bidauletov-aset-kameevich",
+      "ggup2026": true,
+      "ggupSourceId": 15
     },
     {
-      "id": "9-darhambaev-damir-rahimzhanovich",
       "sourceId": 9,
       "name": "Дархамбаев Дамир Рахимжанович",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (747) 685-92-74",
+          "href": "+77476859274"
+        }
+      ],
+      "id": "9-darhambaev-damir-rahimzhanovich",
+      "ggup2026": false
     },
     {
-      "id": "10-doserbekov-baglan-sansyzbaevich",
       "sourceId": 10,
       "name": "Досербеков Баглан Сансызбаевич",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (707) 777-70-75",
+          "href": "+77077777075"
+        }
+      ],
+      "id": "10-doserbekov-baglan-sansyzbaevich",
+      "ggup2026": false
     },
     {
-      "id": "11-ermenbekov-nurlyhan-zhaskairatovich",
       "sourceId": 11,
       "name": "Ерменбеков Нурлыхан Жаскайратович",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (701) 757-75-48",
+          "href": "+77017577548"
+        }
+      ],
+      "id": "11-ermenbekov-nurlyhan-zhaskairatovich",
+      "ggup2026": true,
+      "ggupSourceId": 22
     },
     {
-      "id": "12-eseibekov-ruslan-nurgalymovich",
       "sourceId": 12,
       "name": "Есейбеков Руслан Нургалымович",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (701) 799-54-15",
+          "href": "+77017995415"
+        }
+      ],
+      "id": "12-eseibekov-ruslan-nurgalymovich",
+      "ggup2026": false
     },
     {
-      "id": "13-zharylkasynov-sarkytbek-smagulovich",
       "sourceId": 13,
       "name": "Жарылкасынов Саркытбек Смагулович",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (702) 835-05-54",
+          "href": "+77028350554"
+        }
+      ],
+      "id": "13-zharylkasynov-sarkytbek-smagulovich",
+      "ggup2026": true,
+      "ggupSourceId": 24
     },
     {
-      "id": "14-isimbekova-perizat-muhambekovna",
       "sourceId": 14,
       "name": "Исимбекова Перизат Мухамбековна",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (701) 150-02-92",
+          "href": "+77011500292"
+        }
+      ],
+      "id": "14-isimbekova-perizat-muhambekovna",
+      "ggup2026": true,
+      "ggupSourceId": 25
     },
     {
-      "id": "15-imangaliev-rymbek-umirgalievich",
       "sourceId": 15,
       "name": "Имангалиев Рымбек Умиргалиевич",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (771) 857-58-51",
+          "href": "+77718575851"
+        }
+      ],
+      "id": "15-imangaliev-rymbek-umirgalievich",
+      "ggup2026": false
     },
     {
-      "id": "16-kalbergenov-samat-maulenbaevich",
       "sourceId": 16,
       "name": "Калбергенов Самат Мауленбаевич",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (775) 069-28-66",
+          "href": "+77750692866"
+        },
+        {
+          "display": "+7 (707) 540-64-80",
+          "href": "+77075406480"
+        }
+      ],
+      "id": "16-kalbergenov-samat-maulenbaevich",
+      "ggup2026": false
     },
     {
-      "id": "17-kairbek-aidyn-kairbekuly",
       "sourceId": 17,
       "name": "Кайрбек Айдын Кайрбекулы",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (778) 408-75-36",
+          "href": "+77784087536"
+        },
+        {
+          "display": "+7 (771) 407-52-39",
+          "href": "+77714075239"
+        }
+      ],
+      "id": "17-kairbek-aidyn-kairbekuly",
+      "ggup2026": false
     },
     {
-      "id": "18-kaliev-baurzhan-myrzakulovich",
       "sourceId": 18,
       "name": "Калиев Бауржан Мырзакулович",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (776) 889-94-11",
+          "href": "+77768899411"
+        },
+        {
+          "display": "+7 (707) 889-94-11",
+          "href": "+77078899411"
+        }
+      ],
+      "id": "18-kaliev-baurzhan-myrzakulovich",
+      "ggup2026": true,
+      "ggupSourceId": 27
     },
     {
-      "id": "19-kalieva-saule-myrzakulovna",
       "sourceId": 19,
       "name": "Калиева Сауле Мырзакуловна",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (777) 520-26-15",
+          "href": "+77775202615"
+        }
+      ],
+      "id": "19-kalieva-saule-myrzakulovna",
+      "ggup2026": false
     },
     {
-      "id": "20-kundakbaev-rauan-aldabergenovich",
       "sourceId": 20,
       "name": "Кундакбаев Рауан Алдабергенович",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (707) 551-07-41",
+          "href": "+77075510741"
+        }
+      ],
+      "id": "20-kundakbaev-rauan-aldabergenovich",
+      "ggup2026": false
     },
     {
-      "id": "21-kasenov-kuat-adilhanovich",
       "sourceId": 21,
       "name": "Касенов Куат Адилханович",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (707) 246-56-57",
+          "href": "+77072465657"
+        }
+      ],
+      "id": "21-kasenov-kuat-adilhanovich",
+      "ggup2026": false
     },
     {
-      "id": "22-kukin-vyacheslav-arturovich",
       "sourceId": 22,
       "name": "Кукин Вячеслав Артурович",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (701) 943-83-97",
+          "href": "+77019438397"
+        }
+      ],
+      "id": "22-kukin-vyacheslav-arturovich",
+      "ggup2026": true,
+      "ggupSourceId": 29
     },
     {
-      "id": "23-qaisarov-sailaubek-qaisaruly",
       "sourceId": 23,
       "name": "Қайсаров Сайлаубек Қайсарұлы",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (701) 616-00-07",
+          "href": "+77016160007"
+        }
+      ],
+      "id": "23-qaisarov-sailaubek-qaisaruly",
+      "ggup2026": true,
+      "ggupSourceId": 30
     },
     {
-      "id": "24-lim-evgenii-pavlovich",
       "sourceId": 24,
       "name": "Лим Евгений Павлович",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (701) 742-97-23",
+          "href": "+77017429723"
+        }
+      ],
+      "id": "24-lim-evgenii-pavlovich",
+      "ggup2026": false
     },
     {
-      "id": "25-mukasheva-uruhiya-naimanhanovna",
       "sourceId": 25,
       "name": "Мукашева Урухия Найманхановна",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (701) 760-13-57",
+          "href": "+77017601357"
+        }
+      ],
+      "id": "25-mukasheva-uruhiya-naimanhanovna",
+      "ggup2026": true,
+      "ggupSourceId": 31
     },
     {
-      "id": "26-museke-tilek-talgatuly",
       "sourceId": 26,
       "name": "Мусеке Тілек Талғатұлы",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (775) 937-47-27",
+          "href": "+77759374727"
+        }
+      ],
+      "id": "26-museke-tilek-talgatuly",
+      "ggup2026": false
     },
     {
-      "id": "27-mulazakirova-alfiya-abdykadyrovna",
       "sourceId": 27,
       "name": "Мулазакирова Альфия Абдыкадыровна",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (771) 473-07-28",
+          "href": "+77714730728"
+        }
+      ],
+      "id": "27-mulazakirova-alfiya-abdykadyrovna",
+      "ggup2026": true,
+      "ggupSourceId": 32
     },
     {
-      "id": "28-mun-dmitrii-viktorovich",
       "sourceId": 28,
       "name": "Мун Дмитрий Викторович",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (702) 649-80-80",
+          "href": "+77026498080"
+        }
+      ],
+      "id": "28-mun-dmitrii-viktorovich",
+      "ggup2026": true,
+      "ggupSourceId": 33
     },
     {
-      "id": "29-musapirov-aidos-nurhanovich",
       "sourceId": 29,
       "name": "Мусапиров Айдос Нурханович",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (705) 736-07-00",
+          "href": "+77057360700"
+        },
+        {
+          "display": "+7 (700) 993-10-67",
+          "href": "+77009931067"
+        },
+        {
+          "display": "+7 (701) 757-15-77",
+          "href": "+77017571577"
+        }
+      ],
+      "id": "29-musapirov-aidos-nurhanovich",
+      "ggup2026": true,
+      "ggupSourceId": 35
     },
     {
-      "id": "30-muqatai-dinislam-qairatuly",
       "sourceId": 30,
       "name": "Мұқатай Дінислам Қайратұлы",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (700) 102-11-96",
+          "href": "+77001021196"
+        }
+      ],
+      "id": "30-muqatai-dinislam-qairatuly",
+      "ggup2026": false
     },
     {
-      "id": "31-muhametsadykov-askar-kamelchievich",
       "sourceId": 31,
       "name": "Мухаметсадыков Аскар Камелчиевич",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (777) 200-07-50",
+          "href": "+77772000750"
+        }
+      ],
+      "id": "31-muhametsadykov-askar-kamelchievich",
+      "ggup2026": false
     },
     {
-      "id": "32-onalbaeva-asel-dyusembaevna",
       "sourceId": 32,
       "name": "Оналбаева Асель Дюсембаевна",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (707) 520-30-94",
+          "href": "+77075203094"
+        }
+      ],
+      "id": "32-onalbaeva-asel-dyusembaevna",
+      "ggup2026": true,
+      "ggupSourceId": 40
     },
     {
-      "id": "33-ongarbaev-erkin-nurmoldaevich",
       "sourceId": 33,
       "name": "Онгарбаев Еркин Нурмолдаевич",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (708) 517-15-47",
+          "href": "+77085171547"
+        }
+      ],
+      "id": "33-ongarbaev-erkin-nurmoldaevich",
+      "ggup2026": true,
+      "ggupSourceId": 41
     },
     {
-      "id": "34-saduakasov-nurmurat-maratovich",
       "sourceId": 34,
       "name": "Садуакасов Нурмурат Маратович",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (777) 371-13-59",
+          "href": "+77773711359"
+        },
+        {
+          "display": "+7 (775) 113-87-53",
+          "href": "+77751138753"
+        }
+      ],
+      "id": "34-saduakasov-nurmurat-maratovich",
+      "ggup2026": true,
+      "ggupSourceId": 42
     },
     {
-      "id": "35-smagulov-altai-eltaevich",
       "sourceId": 35,
       "name": "Смагулов Алтай Елтаевич",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (707) 287-00-77",
+          "href": "+77072870077"
+        }
+      ],
+      "id": "35-smagulov-altai-eltaevich",
+      "ggup2026": false
     },
     {
-      "id": "36-tarybaev-eren-bakbergenovich",
       "sourceId": 36,
       "name": "Тарыбаев Ерен Бакбергенович",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (701) 759-47-75",
+          "href": "+77017594775"
+        }
+      ],
+      "id": "36-tarybaev-eren-bakbergenovich",
+      "ggup2026": false
     },
     {
-      "id": "37-temirbekov-zhenis-nurlanovich",
       "sourceId": 37,
       "name": "Темирбеков Женис Нурланович",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (775) 499-55-77",
+          "href": "+77754995577"
+        }
+      ],
+      "id": "37-temirbekov-zhenis-nurlanovich",
+      "ggup2026": false
     },
     {
-      "id": "38-husainova-galiya-abdulkasymovna",
       "sourceId": 38,
       "name": "Хусаинова Галия Абдулкасымовна",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (777) 363-37-65",
+          "href": "+77773633765"
+        }
+      ],
+      "id": "38-husainova-galiya-abdulkasymovna",
+      "ggup2026": false
     },
     {
-      "id": "39-husainova-malika-madzhitovna",
       "sourceId": 39,
       "name": "Хусаинова Малика Маджитовна",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (702) 236-65-75",
+          "href": "+77022366575"
+        }
+      ],
+      "id": "39-husainova-malika-madzhitovna",
+      "ggup2026": true,
+      "ggupSourceId": 48
     },
     {
-      "id": "40-tsoi-mihail-yurevich",
       "sourceId": 40,
       "name": "Цой Михаил Юрьевич",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (701) 442-74-28",
+          "href": "+77014427428"
+        }
+      ],
+      "id": "40-tsoi-mihail-yurevich",
+      "ggup2026": false
     },
     {
-      "id": "41-chinyaeva-olesya-viktorovna",
       "sourceId": 41,
       "name": "Чиняева Олеся Викторовна",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (771) 505-23-25",
+          "href": "+77715052325"
+        },
+        {
+          "display": "+7 (747) 505-23-25",
+          "href": "+77475052325"
+        }
+      ],
+      "id": "41-chinyaeva-olesya-viktorovna",
+      "ggup2026": false
     },
     {
-      "id": "42-chuprynova-nadezhda-aleksandrovna",
       "sourceId": 42,
       "name": "Чупрынова Надежда Александровна",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (702) 214-65-18",
+          "href": "+77022146518"
+        }
+      ],
+      "id": "42-chuprynova-nadezhda-aleksandrovna",
+      "ggup2026": false
     },
     {
-      "id": "43-shingisbaev-bakyt-mynzhasarovich",
       "sourceId": 43,
       "name": "Шингисбаев Бакыт Мынжасарович",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (777) 818-40-07",
+          "href": "+77778184007"
+        },
+        {
+          "display": "+7 (701) 760-31-09",
+          "href": "+77017603109"
+        }
+      ],
+      "id": "43-shingisbaev-bakyt-mynzhasarovich",
+      "ggup2026": false
     },
     {
-      "id": "44-estiyarov-serik-ondasynovich",
       "sourceId": 44,
       "name": "Эстияров Серик Ондасынович",
       "region": "область Жетісу",
-      "consultation": "ЮК г. Талдыкорган"
+      "consultation": "ЮК г. Талдыкорган",
+      "contacts": [
+        {
+          "display": "+7 (701) 558-46-83",
+          "href": "+77015584683"
+        }
+      ],
+      "id": "44-estiyarov-serik-ondasynovich",
+      "ggup2026": false
     },
     {
-      "id": "45-abdrahimova-bibigul-amangeldinovna",
       "sourceId": 45,
       "name": "Абдрахимова Бибигуль Амангельдиновна",
       "region": "область Жетісу",
-      "consultation": "Ювенальная консультация"
+      "consultation": "Ювенальная консультация",
+      "contacts": [
+        {
+          "display": "+7 (777) 292-94-73",
+          "href": "+77772929473"
+        }
+      ],
+      "id": "45-abdrahimova-bibigul-amangeldinovna",
+      "ggup2026": false
     },
     {
-      "id": "46-amersanov-kadyrles-kadyrzhanovich",
       "sourceId": 46,
       "name": "Амерсанов Кадырлес Кадыржанович",
       "region": "область Жетісу",
-      "consultation": "Ювенальная консультация"
+      "consultation": "Ювенальная консультация",
+      "contacts": [
+        {
+          "display": "+7 (707) 750-65-17",
+          "href": "+77077506517"
+        },
+        {
+          "display": "+7 (771) 756-92-03",
+          "href": "+77717569203"
+        }
+      ],
+      "id": "46-amersanov-kadyrles-kadyrzhanovich",
+      "ggup2026": false
     },
     {
-      "id": "47-asilov-rustam-bakytovich",
       "sourceId": 47,
       "name": "Асилов Рустам Бакытович",
       "region": "область Жетісу",
-      "consultation": "Ювенальная консультация"
+      "consultation": "Ювенальная консультация",
+      "contacts": [
+        {
+          "display": "+7 (778) 300-33-78",
+          "href": "+77783003378"
+        }
+      ],
+      "id": "47-asilov-rustam-bakytovich",
+      "ggup2026": true,
+      "ggupSourceId": 3
     },
     {
-      "id": "48-andreev-viktor-aleksandrovich",
       "sourceId": 48,
       "name": "Андреев Виктор Александрович",
       "region": "область Жетісу",
-      "consultation": "Ювенальная консультация"
+      "consultation": "Ювенальная консультация",
+      "contacts": [
+        {
+          "display": "+7 (777) 232-45-36",
+          "href": "+77772324536"
+        }
+      ],
+      "id": "48-andreev-viktor-aleksandrovich",
+      "ggup2026": true,
+      "ggupSourceId": 6
     },
     {
-      "id": "49-aralbaev-batyrbek-kadyrovich",
       "sourceId": 49,
       "name": "Аралбаев Батырбек Кадырович",
       "region": "область Жетісу",
-      "consultation": "Ювенальная консультация"
+      "consultation": "Ювенальная консультация",
+      "contacts": [
+        {
+          "display": "+7 (701) 772-64-09",
+          "href": "+77017726409"
+        },
+        {
+          "display": "8707",
+          "needsReview": true
+        }
+      ],
+      "id": "49-aralbaev-batyrbek-kadyrovich",
+      "ggup2026": false
     },
     {
-      "id": "50-bektasova-shynar-sainovna",
       "sourceId": 50,
       "name": "Бектасова Шынар Саиновна",
       "region": "область Жетісу",
-      "consultation": "Ювенальная консультация"
+      "consultation": "Ювенальная консультация",
+      "contacts": [
+        {
+          "display": "+7 (700) 119-72-82",
+          "href": "+77001197282"
+        }
+      ],
+      "id": "50-bektasova-shynar-sainovna",
+      "ggup2026": false
     },
     {
-      "id": "51-galuza-tatyana-evgenevna",
       "sourceId": 51,
       "name": "Галуза Татьяна Евгеньевна",
       "region": "область Жетісу",
-      "consultation": "Ювенальная консультация"
+      "consultation": "Ювенальная консультация",
+      "contacts": [
+        {
+          "display": "+7 (771) 993-90-29",
+          "href": "+77719939029"
+        }
+      ],
+      "id": "51-galuza-tatyana-evgenevna",
+      "ggup2026": false
     },
     {
-      "id": "52-batyrbaev-serik-zholdasshaikovich",
       "sourceId": 52,
       "name": "Батырбаев Серик Жолдасшаикович",
       "region": "область Жетісу",
-      "consultation": "Ювенальная консультация"
+      "consultation": "Ювенальная консультация",
+      "contacts": [
+        {
+          "display": "+7 (701) 111-62-58",
+          "href": "+77011116258"
+        }
+      ],
+      "id": "52-batyrbaev-serik-zholdasshaikovich",
+      "ggup2026": false
     },
     {
-      "id": "53-dzhaksybekov-erik-asylhanovich",
       "sourceId": 53,
       "name": "Джаксыбеков Ерик Асылханович",
       "region": "область Жетісу",
-      "consultation": "Ювенальная консультация"
+      "consultation": "Ювенальная консультация",
+      "contacts": [
+        {
+          "display": "+7 (707) 828-01-52",
+          "href": "+77078280152"
+        }
+      ],
+      "id": "53-dzhaksybekov-erik-asylhanovich",
+      "ggup2026": false
     },
     {
-      "id": "54-dosanova-mira-dosanovna",
       "sourceId": 54,
       "name": "Досанова Мира Досановна",
       "region": "область Жетісу",
-      "consultation": "Ювенальная консультация"
+      "consultation": "Ювенальная консультация",
+      "contacts": [
+        {
+          "display": "+7 (771) 673-25-26",
+          "href": "+77716732526"
+        }
+      ],
+      "id": "54-dosanova-mira-dosanovna",
+      "ggup2026": true,
+      "ggupSourceId": 18
     },
     {
-      "id": "55-dosumov-manat-sergazievich",
       "sourceId": 55,
       "name": "Досумов Манат Сергазиевич",
       "region": "область Жетісу",
-      "consultation": "Ювенальная консультация"
+      "consultation": "Ювенальная консультация",
+      "contacts": [
+        {
+          "display": "+7 (775) 600-00-07",
+          "href": "+77756000007"
+        }
+      ],
+      "id": "55-dosumov-manat-sergazievich",
+      "ggup2026": false
     },
     {
-      "id": "56-dyusebaeva-karlygash-bagdatovna",
       "sourceId": 56,
       "name": "Дюсебаева Карлыгаш Багдатовна",
       "region": "область Жетісу",
-      "consultation": "Ювенальная консультация"
+      "consultation": "Ювенальная консультация",
+      "contacts": [
+        {
+          "display": "+7 (708) 427-18-31",
+          "href": "+77084271831"
+        }
+      ],
+      "id": "56-dyusebaeva-karlygash-bagdatovna",
+      "ggup2026": true,
+      "ggupSourceId": 19
     },
     {
-      "id": "57-dzhakupbekova-aiymbala-abdoldaevna",
       "sourceId": 57,
       "name": "Джакупбекова Айымбала Абдолдаевна",
       "region": "область Жетісу",
-      "consultation": "Ювенальная консультация"
+      "consultation": "Ювенальная консультация",
+      "contacts": [
+        {
+          "display": "+7 (777) 702-75-44",
+          "href": "+77777027544"
+        }
+      ],
+      "id": "57-dzhakupbekova-aiymbala-abdoldaevna",
+      "ggup2026": false
     },
     {
-      "id": "58-zhambulbaev-esimhan-korpebaevich",
       "sourceId": 58,
       "name": "Жамбулбаев Есимхан Корпебаевич",
       "region": "область Жетісу",
-      "consultation": "Ювенальная консультация"
+      "consultation": "Ювенальная консультация",
+      "contacts": [
+        {
+          "display": "+7 (705) 218-55-55",
+          "href": "+77052185555"
+        },
+        {
+          "display": "+7 (702) 267-26-67",
+          "href": "+77022672667"
+        }
+      ],
+      "id": "58-zhambulbaev-esimhan-korpebaevich",
+      "ggup2026": true,
+      "ggupSourceId": 23
     },
     {
-      "id": "59-kakimov-almas-kakimovich",
       "sourceId": 59,
       "name": "Какимов Алмас Какимович",
       "region": "область Жетісу",
-      "consultation": "Ювенальная консультация"
+      "consultation": "Ювенальная консультация",
+      "contacts": [
+        {
+          "display": "+7 (702) 150-09-32",
+          "href": "+77021500932"
+        }
+      ],
+      "id": "59-kakimov-almas-kakimovich",
+      "ggup2026": false
     },
     {
-      "id": "60-kametov-nurdaulet-temirgalievich",
       "sourceId": 60,
       "name": "Каметов Нурдаулет Темиргалиевич",
       "region": "область Жетісу",
-      "consultation": "Ювенальная консультация"
+      "consultation": "Ювенальная консультация",
+      "contacts": [
+        {
+          "display": "+7 (702) 289-88-34",
+          "href": "+77022898834"
+        }
+      ],
+      "id": "60-kametov-nurdaulet-temirgalievich",
+      "ggup2026": false
     },
     {
-      "id": "61-meirmanov-erkinbai-baktiyarovich",
       "sourceId": 61,
       "name": "Меирманов Еркинбай Бактиярович",
       "region": "область Жетісу",
-      "consultation": "Ювенальная консультация"
+      "consultation": "Ювенальная консультация",
+      "contacts": [
+        {
+          "display": "+7 (700) 404-67-24",
+          "href": "+77004046724"
+        }
+      ],
+      "id": "61-meirmanov-erkinbai-baktiyarovich",
+      "ggup2026": false
     },
     {
-      "id": "62-saparov-azamat-tolegenovich",
       "sourceId": 62,
       "name": "Сапаров Азамат Толегенович",
       "region": "область Жетісу",
-      "consultation": "Ювенальная консультация"
+      "consultation": "Ювенальная консультация",
+      "contacts": [
+        {
+          "display": "+7 (701) 055-45-55",
+          "href": "+77010554555"
+        }
+      ],
+      "id": "62-saparov-azamat-tolegenovich",
+      "ggup2026": false
     },
     {
-      "id": "63-sadykov-marat-manatbekovich",
       "sourceId": 63,
       "name": "Садыков Марат Манатбекович",
       "region": "область Жетісу",
-      "consultation": "Ювенальная консультация"
+      "consultation": "Ювенальная консультация",
+      "contacts": [
+        {
+          "display": "+7 (705) 132-60-14",
+          "href": "+77051326014"
+        }
+      ],
+      "id": "63-sadykov-marat-manatbekovich",
+      "ggup2026": true,
+      "ggupSourceId": 43
     },
     {
-      "id": "64-sarkytov-zhanat-tulepbergenovich",
       "sourceId": 64,
       "name": "Саркытов Жанат Тулепбергенович",
       "region": "область Жетісу",
-      "consultation": "Ювенальная консультация"
+      "consultation": "Ювенальная консультация",
+      "contacts": [
+        {
+          "display": "+7 (705) 220-59-64",
+          "href": "+77052205964"
+        }
+      ],
+      "id": "64-sarkytov-zhanat-tulepbergenovich",
+      "ggup2026": false
     },
     {
-      "id": "65-sydykov-kasym-bakytzhanovich",
       "sourceId": 65,
       "name": "Сыдыков Касым Бакытжанович",
       "region": "область Жетісу",
-      "consultation": "Ювенальная консультация"
+      "consultation": "Ювенальная консультация",
+      "contacts": [
+        {
+          "display": "+7 (702) 215-08-03",
+          "href": "+77022150803"
+        }
+      ],
+      "id": "65-sydykov-kasym-bakytzhanovich",
+      "ggup2026": false
     },
     {
-      "id": "66-bekishev-serik-aldangarovich",
       "sourceId": 66,
       "name": "Бекишев Серик Алдангарович",
       "region": "область Жетісу",
-      "consultation": "г. Текели"
+      "consultation": "г. Текели",
+      "contacts": [
+        {
+          "display": "+7 (705) 219-73-77",
+          "href": "+77052197377"
+        }
+      ],
+      "id": "66-bekishev-serik-aldangarovich",
+      "ggup2026": false
     },
     {
-      "id": "67-zhanbulatov-talgat-tursynovich",
       "sourceId": 67,
       "name": "Жанбулатов Талгат Турсынович",
       "region": "область Жетісу",
-      "consultation": "г. Текели"
+      "consultation": "г. Текели",
+      "contacts": [
+        {
+          "display": "+7 (777) 289-92-69",
+          "href": "+77772899269"
+        },
+        {
+          "display": "+7 (778) 444-35-14",
+          "href": "+77784443514"
+        }
+      ],
+      "id": "67-zhanbulatov-talgat-tursynovich",
+      "ggup2026": false
     },
     {
-      "id": "68-kereibaeva-roza-nurgalievna",
       "sourceId": 68,
       "name": "Керейбаева Роза Нургалиевна",
       "region": "область Жетісу",
-      "consultation": "г. Текели"
+      "consultation": "г. Текели",
+      "contacts": [
+        {
+          "display": "+7 (747) 131-95-26",
+          "href": "+77471319526"
+        }
+      ],
+      "id": "68-kereibaeva-roza-nurgalievna",
+      "ggup2026": true,
+      "ggupSourceId": 28
     },
     {
-      "id": "69-muratbekov-sayan-tursynbaevich",
       "sourceId": 69,
       "name": "Муратбеков Саян Турсынбаевич",
       "region": "область Жетісу",
-      "consultation": "г. Текели"
+      "consultation": "г. Текели",
+      "contacts": [
+        {
+          "display": "+7 (705) 193-25-96",
+          "href": "+77051932596"
+        }
+      ],
+      "id": "69-muratbekov-sayan-tursynbaevich",
+      "ggup2026": false
     },
     {
-      "id": "70-fedorov-vladimir-semenovich",
       "sourceId": 70,
       "name": "Федоров Владимир Семенович",
       "region": "область Жетісу",
-      "consultation": "г. Текели"
+      "consultation": "г. Текели",
+      "contacts": [
+        {
+          "display": "+7 (777) 364-71-61",
+          "href": "+77773647161"
+        }
+      ],
+      "id": "70-fedorov-vladimir-semenovich",
+      "ggup2026": false
     },
     {
-      "id": "71-andasbaev-adil-beisenbekovich",
       "sourceId": 71,
       "name": "Андасбаев Адиль Бейсенбекович",
       "region": "область Жетісу",
-      "consultation": "ЮК Коксуского района"
+      "consultation": "ЮК Коксуского района",
+      "contacts": [
+        {
+          "display": "+7 (747) 777-83-95",
+          "href": "+77477778395"
+        }
+      ],
+      "id": "71-andasbaev-adil-beisenbekovich",
+      "ggup2026": true,
+      "ggupSourceId": 5
     },
     {
-      "id": "72-beisenov-dias-malikovich",
       "sourceId": 72,
       "name": "Бейсенов Диас Маликович",
       "region": "область Жетісу",
-      "consultation": "ЮК Коксуского района"
+      "consultation": "ЮК Коксуского района",
+      "contacts": [
+        {
+          "display": "+7 (775) 992-99-59",
+          "href": "+77759929959"
+        }
+      ],
+      "id": "72-beisenov-dias-malikovich",
+      "ggup2026": true,
+      "ggupSourceId": 10
     },
     {
-      "id": "73-beisenova-diana-zhanatbekovna",
       "sourceId": 73,
       "name": "Бейсенова Диана Жанатбековна",
       "region": "область Жетісу",
-      "consultation": "ЮК Коксуского района"
+      "consultation": "ЮК Коксуского района",
+      "contacts": [
+        {
+          "display": "+7 (778) 526-07-00",
+          "href": "+77785260700"
+        }
+      ],
+      "id": "73-beisenova-diana-zhanatbekovna",
+      "ggup2026": true,
+      "ggupSourceId": 11
     },
     {
-      "id": "74-baiseitov-bakytbek-bathanovich",
       "sourceId": 74,
       "name": "Байсеитов Бакытбек Батханович",
       "region": "область Жетісу",
-      "consultation": "ЮК Каратальского района"
+      "consultation": "ЮК Каратальского района",
+      "contacts": [
+        {
+          "display": "+7 (701) 302-96-98",
+          "href": "+77013029698"
+        }
+      ],
+      "id": "74-baiseitov-bakytbek-bathanovich",
+      "ggup2026": true,
+      "ggupSourceId": 8
     },
     {
-      "id": "75-dyusembekov-bolatzhan-kyzyltaevich",
       "sourceId": 75,
       "name": "Дюсембеков Болатжан Кызылтаевич",
       "region": "область Жетісу",
-      "consultation": "ЮК Каратальского района"
+      "consultation": "ЮК Каратальского района",
+      "contacts": [
+        {
+          "display": "+7 (701) 360-53-53",
+          "href": "+77013605353"
+        }
+      ],
+      "id": "75-dyusembekov-bolatzhan-kyzyltaevich",
+      "ggup2026": true,
+      "ggupSourceId": 20
     },
     {
-      "id": "76-burkitbaev-aibek-kalkabekovich",
       "sourceId": 76,
       "name": "Буркитбаев Айбек Калкабекович",
       "region": "область Жетісу",
-      "consultation": "ЮК Кербулакского района"
+      "consultation": "ЮК Кербулакского района",
+      "contacts": [
+        {
+          "display": "+7 (701) 222-46-45",
+          "href": "+77012224645"
+        }
+      ],
+      "id": "76-burkitbaev-aibek-kalkabekovich",
+      "ggup2026": true,
+      "ggupSourceId": 17
     },
     {
-      "id": "77-abdikarimova-dinara-amantaevna",
       "sourceId": 77,
       "name": "Абдикаримова Динара Амантаевна",
       "region": "область Жетісу",
-      "consultation": "ЮК Ескельдинского района"
+      "consultation": "ЮК Ескельдинского района",
+      "contacts": [
+        {
+          "display": "+7 (701) 125-57-17",
+          "href": "+77011255717"
+        }
+      ],
+      "id": "77-abdikarimova-dinara-amantaevna",
+      "ggup2026": true,
+      "ggupSourceId": 1
     },
     {
-      "id": "78-beisenbaeva-margarita-serikovna",
       "sourceId": 78,
       "name": "Бейсенбаева Маргарита Сериковна",
       "region": "область Жетісу",
-      "consultation": "ЮК Ескельдинского района"
+      "consultation": "ЮК Ескельдинского района",
+      "contacts": [
+        {
+          "display": "+7 (771) 410-37-63",
+          "href": "+77714103763"
+        },
+        {
+          "display": "+7 (702) 396-10-64",
+          "href": "+77023961064"
+        }
+      ],
+      "id": "78-beisenbaeva-margarita-serikovna",
+      "ggup2026": true,
+      "ggupSourceId": 9
     },
     {
-      "id": "79-daurenbekov-kozhabergen-meirbaevich",
       "sourceId": 79,
       "name": "Дауренбеков Кожаберген Меирбаевич",
       "region": "область Жетісу",
-      "consultation": "ЮК Ескельдинского района"
+      "consultation": "ЮК Ескельдинского района",
+      "contacts": [
+        {
+          "display": "+7 (777) 394-08-84",
+          "href": "+77773940884"
+        }
+      ],
+      "id": "79-daurenbekov-kozhabergen-meirbaevich",
+      "ggup2026": false
     },
     {
-      "id": "80-imanbekov-daulet-talgatovich",
       "sourceId": 80,
       "name": "Иманбеков Даулет Талгатович",
       "region": "область Жетісу",
-      "consultation": "ЮК Ескельдинского района"
+      "consultation": "ЮК Ескельдинского района",
+      "contacts": [
+        {
+          "display": "+7 (776) 259-72-72",
+          "href": "+77762597272"
+        }
+      ],
+      "id": "80-imanbekov-daulet-talgatovich",
+      "ggup2026": true,
+      "ggupSourceId": 26
     },
     {
-      "id": "81-nusipov-murat-orazhanovich",
       "sourceId": 81,
       "name": "Нусипов Мурат Оразханович",
       "region": "область Жетісу",
-      "consultation": "ЮК Аксуского района"
+      "consultation": "ЮК Аксуского района",
+      "contacts": [
+        {
+          "display": "+7 (705) 372-80-18",
+          "href": "+77053728018"
+        }
+      ],
+      "id": "81-nusipov-murat-orazhanovich",
+      "ggup2026": true,
+      "ggupSourceId": 38
     },
     {
-      "id": "82-tazabekov-doszhan-aldabergenovich",
       "sourceId": 82,
       "name": "Тазабеков Досжан Алдабергенович",
       "region": "область Жетісу",
-      "consultation": "ЮК Сарканского района"
+      "consultation": "ЮК Сарканского района",
+      "contacts": [
+        {
+          "display": "+7 (777) 175-88-06",
+          "href": "+77771758806"
+        }
+      ],
+      "id": "82-tazabekov-doszhan-aldabergenovich",
+      "ggup2026": true,
+      "ggupSourceId": 46
     },
     {
-      "id": "83-bekishev-zhomart-toleubaevich",
       "sourceId": 83,
       "name": "Бекишев Жомарт Толеубаевич",
       "region": "область Жетісу",
-      "consultation": "ЮК Алакольского района №1"
+      "consultation": "ЮК Алакольского района №1",
+      "contacts": [
+        {
+          "display": "+7 (702) 883-33-94",
+          "href": "+77028833394"
+        }
+      ],
+      "id": "83-bekishev-zhomart-toleubaevich",
+      "ggup2026": true,
+      "ggupSourceId": 13
     },
     {
-      "id": "84-shaltaev-aidyn-orazhanovich",
       "sourceId": 84,
       "name": "Шалтаев Айдын Оразханович",
       "region": "область Жетісу",
-      "consultation": "ЮК Алакольского района №1"
+      "consultation": "ЮК Алакольского района №1",
+      "contacts": [
+        {
+          "display": "+7 (702) 237-32-16",
+          "href": "+77022373216"
+        }
+      ],
+      "id": "84-shaltaev-aidyn-orazhanovich",
+      "ggup2026": true,
+      "ggupSourceId": 49
     },
     {
-      "id": "85-brikeev-bahyt-zheksembaevich",
       "sourceId": 85,
       "name": "Брикеев Бахыт Жексембаевич",
       "region": "область Жетісу",
-      "consultation": "ЮК Алакольского района №2"
+      "consultation": "ЮК Алакольского района №2",
+      "contacts": [
+        {
+          "display": "+7 (776) 528-41-50",
+          "href": "+77765284150"
+        }
+      ],
+      "id": "85-brikeev-bahyt-zheksembaevich",
+      "ggup2026": true,
+      "ggupSourceId": 16
     },
     {
-      "id": "86-muratbekov-erbolat-nurgalievich",
       "sourceId": 86,
       "name": "Муратбеков Ерболат Нургалиевич",
       "region": "область Жетісу",
-      "consultation": "ЮК Алакольского района №2"
+      "consultation": "ЮК Алакольского района №2",
+      "contacts": [
+        {
+          "display": "+7 (702) 283-07-67",
+          "href": "+77022830767"
+        }
+      ],
+      "id": "86-muratbekov-erbolat-nurgalievich",
+      "ggup2026": true,
+      "ggupSourceId": 34
     },
     {
-      "id": "87-ausadykov-erlan-nurkalykovich",
       "sourceId": 87,
       "name": "Аусадыков Ерлан Нуркалыкович",
       "region": "область Жетісу",
-      "consultation": "ЮК Панфиловского района"
+      "consultation": "ЮК Панфиловского района",
+      "contacts": [
+        {
+          "display": "+7 (775) 987-40-84",
+          "href": "+77759874084"
+        }
+      ],
+      "id": "87-ausadykov-erlan-nurkalykovich",
+      "ggup2026": false
     },
     {
-      "id": "88-begadilov-erbol-muratovich",
       "sourceId": 88,
       "name": "Бегадилов Ербол Муратович",
       "region": "область Жетісу",
-      "consultation": "ЮК Панфиловского района"
+      "consultation": "ЮК Панфиловского района",
+      "contacts": [
+        {
+          "display": "+7 (707) 788-81-87",
+          "href": "+77077888187"
+        }
+      ],
+      "id": "88-begadilov-erbol-muratovich",
+      "ggup2026": true,
+      "ggupSourceId": 14
     },
     {
-      "id": "89-ismail-zhagda-manapuly",
       "sourceId": 89,
       "name": "Исмаил Жағда Манапұлы",
       "region": "область Жетісу",
-      "consultation": "ЮК Панфиловского района"
+      "consultation": "ЮК Панфиловского района",
+      "contacts": [
+        {
+          "display": "+7 (777) 647-73-35",
+          "href": "+77776477335"
+        }
+      ],
+      "id": "89-ismail-zhagda-manapuly",
+      "ggup2026": false
     },
     {
-      "id": "90-kobdaliev-saken-mukashovich",
       "sourceId": 90,
       "name": "Кобдалиев Сакен Мукашович",
       "region": "область Жетісу",
-      "consultation": "ЮК Панфиловского района"
+      "consultation": "ЮК Панфиловского района",
+      "contacts": [
+        {
+          "display": "+7 (701) 725-45-54",
+          "href": "+77017254554"
+        },
+        {
+          "display": "+7 (747) 799-19-70",
+          "href": "+77477991970"
+        }
+      ],
+      "id": "90-kobdaliev-saken-mukashovich",
+      "ggup2026": false
     },
     {
-      "id": "91-nugmanov-nurlan-sherniyazovich",
       "sourceId": 91,
       "name": "Нугманов Нурлан Шерниязович",
       "region": "область Жетісу",
-      "consultation": "ЮК Панфиловского района"
+      "consultation": "ЮК Панфиловского района",
+      "contacts": [
+        {
+          "display": "+7 (708) 604-09-31",
+          "href": "+77086040931"
+        }
+      ],
+      "id": "91-nugmanov-nurlan-sherniyazovich",
+      "ggup2026": true,
+      "ggupSourceId": 37
     },
     {
-      "id": "92-niyazhadzhieva-zumrad-ganievna",
       "sourceId": 92,
       "name": "Ниязхаджиева Зумрад Ганиевна",
       "region": "область Жетісу",
-      "consultation": "ЮК Панфиловского района"
+      "consultation": "ЮК Панфиловского района",
+      "contacts": [
+        {
+          "display": "+7 (701) 376-28-87",
+          "href": "+77013762887"
+        }
+      ],
+      "id": "92-niyazhadzhieva-zumrad-ganievna",
+      "ggup2026": true,
+      "ggupSourceId": 36
     },
     {
-      "id": "93-resnyanskii-aleksandr-pavlovich",
       "sourceId": 93,
       "name": "Реснянский Александр Павлович",
       "region": "область Жетісу",
-      "consultation": "ЮК Панфиловского района"
+      "consultation": "ЮК Панфиловского района",
+      "contacts": [
+        {
+          "display": "+7 (701) 384-53-66",
+          "href": "+77013845366"
+        }
+      ],
+      "id": "93-resnyanskii-aleksandr-pavlovich",
+      "ggup2026": false
     },
     {
-      "id": "94-sarsebekova-lyazat-kasymgazievna",
       "sourceId": 94,
       "name": "Сарсебекова Лязат Касымгазиевна",
       "region": "область Жетісу",
-      "consultation": "ЮК Панфиловского района"
+      "consultation": "ЮК Панфиловского района",
+      "contacts": [
+        {
+          "display": "+7 (701) 455-39-47",
+          "href": "+77014553947"
+        },
+        {
+          "display": "+7 (705) 449-39-04",
+          "href": "+77054493904"
+        }
+      ],
+      "id": "94-sarsebekova-lyazat-kasymgazievna",
+      "ggup2026": true,
+      "ggupSourceId": 45
     },
     {
-      "id": "95-raqymzhan-olzhas-nurbolatuly",
       "sourceId": 95,
       "name": "Рақымжан Олжас Нурболатұлы",
       "region": "область Жетісу",
-      "consultation": "ЮК Панфиловского района"
+      "consultation": "ЮК Панфиловского района",
+      "contacts": [
+        {
+          "display": "+7 (707) 288-95-59",
+          "href": "+77072889559"
+        }
+      ],
+      "id": "95-raqymzhan-olzhas-nurbolatuly",
+      "ggup2026": true,
+      "ggupSourceId": 39
     },
     {
-      "id": "96-adilbekova-danipa-medetovna",
       "sourceId": 96,
       "name": "Адильбекова Данипа Медетовна",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (701) 712-16-08",
+          "href": "+77017121608"
+        }
+      ],
+      "id": "96-adilbekova-danipa-medetovna",
+      "ggup2026": false
     },
     {
-      "id": "97-alibaev-ergali-kairgalievich",
       "sourceId": 97,
       "name": "Алибаев Ергали Кайргалиевич",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (777) 737-81-50",
+          "href": "+77777378150"
+        }
+      ],
+      "id": "97-alibaev-ergali-kairgalievich",
+      "ggup2026": false
     },
     {
-      "id": "98-abdraimov-sagynysh-karipzhanovich",
       "sourceId": 98,
+      "name": "Амантай Турлубек Жанзакұлы",
+      "region": "область Жетісу",
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (702) 330-12-49",
+          "href": "+77023301249"
+        }
+      ],
+      "id": "98-amantai-turlubek-zhanzakuly",
+      "ggup2026": false
+    },
+    {
+      "sourceId": 99,
       "name": "Абдраимов Сагыныш Карипжанович",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (701) 994-07-70",
+          "href": "+77019940770"
+        }
+      ],
+      "id": "98-abdraimov-sagynysh-karipzhanovich",
+      "ggup2026": false
     },
     {
-      "id": "99-abikenova-tolganai-nurlanbekovna",
-      "sourceId": 99,
+      "sourceId": 100,
       "name": "Абикенова Толганай Нурланбековна",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (778) 684-39-77",
+          "href": "+77786843977"
+        }
+      ],
+      "id": "99-abikenova-tolganai-nurlanbekovna",
+      "ggup2026": true,
+      "ggupSourceId": 2
     },
     {
-      "id": "100-aimhanova-nurgul-muhametkalymovna",
-      "sourceId": 100,
+      "sourceId": 101,
       "name": "Аймханова Нургул Мухаметкалымовна",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (778) 494-00-44",
+          "href": "+77784940044"
+        }
+      ],
+      "id": "100-aimhanova-nurgul-muhametkalymovna",
+      "ggup2026": false
     },
     {
-      "id": "101-askanov-dosan-damiruly",
-      "sourceId": 101,
+      "sourceId": 102,
       "name": "Асканов Досан Дамирұлы",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (701) 727-35-45",
+          "href": "+77017273545"
+        }
+      ],
+      "id": "101-askanov-dosan-damiruly",
+      "ggup2026": false
     },
     {
-      "id": "102-aripov-kunbolat-serikovich",
-      "sourceId": 102,
+      "sourceId": 103,
       "name": "Арипов Кунболат Серикович",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (701) 777-98-59",
+          "href": "+77017779859"
+        }
+      ],
+      "id": "102-aripov-kunbolat-serikovich",
+      "ggup2026": false
     },
     {
-      "id": "103-aukenov-madi-muhtarovich",
-      "sourceId": 103,
+      "sourceId": 104,
       "name": "Аукенов Мади Мухтарович",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (775) 367-89-29",
+          "href": "+77753678929"
+        }
+      ],
+      "id": "103-aukenov-madi-muhtarovich",
+      "ggup2026": false
     },
     {
-      "id": "104-baigazin-eldar-quanyshuly",
-      "sourceId": 104,
+      "sourceId": 105,
       "name": "Байгазин Елдар Қуанышұлы",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (700) 903-09-03",
+          "href": "+77009030903"
+        }
+      ],
+      "id": "104-baigazin-eldar-quanyshuly",
+      "ggup2026": false
     },
     {
-      "id": "105-baigarashev-dulat-kanatuly",
-      "sourceId": 105,
+      "sourceId": 106,
       "name": "Байгарашев Дулат Канатулы",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (707) 333-30-07",
+          "href": "+77073333007"
+        }
+      ],
+      "id": "105-baigarashev-dulat-kanatuly",
+      "ggup2026": false
     },
     {
-      "id": "106-baiduakasov-kaiyrzhan-malikovich",
-      "sourceId": 106,
+      "sourceId": 107,
       "name": "Байдуакасов Кайыржан Маликович",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (776) 111-31-76",
+          "href": "+77761113176"
+        }
+      ],
+      "id": "106-baiduakasov-kaiyrzhan-malikovich",
+      "ggup2026": false
     },
     {
-      "id": "107-baizhunusov-berikzhan-abenovich",
-      "sourceId": 107,
+      "sourceId": 108,
       "name": "Байжунусов Берикжан Абенович",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (747) 788-78-50",
+          "href": "+77477887850"
+        }
+      ],
+      "id": "107-baizhunusov-berikzhan-abenovich",
+      "ggup2026": false
     },
     {
-      "id": "108-valimova-gulnara-mametzhanovna",
-      "sourceId": 108,
+      "sourceId": 109,
       "name": "Валимова Гульнара Маметжановна",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (775) 951-99-79",
+          "href": "+77759519979"
+        }
+      ],
+      "id": "108-valimova-gulnara-mametzhanovna",
+      "ggup2026": false
     },
     {
-      "id": "109-demesinov-almas-amanbolovich",
-      "sourceId": 109,
+      "sourceId": 110,
       "name": "Демесинов Алмас Аманболович",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (775) 123-42-42",
+          "href": "+77751234242"
+        }
+      ],
+      "id": "109-demesinov-almas-amanbolovich",
+      "ggup2026": false
     },
     {
-      "id": "110-dosanov-talgat-dzhanahmetovich",
-      "sourceId": 110,
+      "sourceId": 111,
       "name": "Досанов Талгат Джанахметович",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (705) 220-18-49",
+          "href": "+77052201849"
+        }
+      ],
+      "id": "110-dosanov-talgat-dzhanahmetovich",
+      "ggup2026": false
     },
     {
-      "id": "111-dosanova-alfiya-ashatovna",
-      "sourceId": 111,
+      "sourceId": 112,
       "name": "Досанова Альфия Асхатовна",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (775) 859-99-98",
+          "href": "+77758599998"
+        }
+      ],
+      "id": "111-dosanova-alfiya-ashatovna",
+      "ggup2026": false
     },
     {
-      "id": "112-qaisarov-arnur-sailaubekuly",
-      "sourceId": 112,
+      "sourceId": 113,
       "name": "Қайсаров Арнұр Сайлаубекұлы",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "8777384444",
+          "needsReview": true
+        }
+      ],
+      "id": "112-qaisarov-arnur-sailaubekuly",
+      "ggup2026": false
     },
     {
-      "id": "113-zhagaparov-erzhan-murzabekovich",
-      "sourceId": 113,
+      "sourceId": 114,
       "name": "Жагапаров Ержан Мурзабекович",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (705) 507-01-41",
+          "href": "+77055070141"
+        },
+        {
+          "display": "+7 (702) 194-15-41",
+          "href": "+77021941541"
+        }
+      ],
+      "id": "113-zhagaparov-erzhan-murzabekovich",
+      "ggup2026": false
     },
     {
-      "id": "114-qorganbaev-medet-maulenuly",
-      "sourceId": 114,
+      "sourceId": 115,
       "name": "Қорғанбаев Медет Мауленұлы",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (747) 732-65-74",
+          "href": "+77477326574"
+        }
+      ],
+      "id": "114-qorganbaev-medet-maulenuly",
+      "ggup2026": false
     },
     {
-      "id": "116-erzhanov-maulen-erzhanovich",
       "sourceId": 116,
       "name": "Ержанов Маулен Ержанович",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (777) 745-75-77",
+          "href": "+77777457577"
+        }
+      ],
+      "id": "116-erzhanov-maulen-erzhanovich",
+      "ggup2026": true,
+      "ggupSourceId": 21
     },
     {
-      "id": "117-kalibekov-arman-seitkulovich",
       "sourceId": 117,
       "name": "Калибеков Арман Сейткулович",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (701) 701-24-95",
+          "href": "+77017012495"
+        }
+      ],
+      "id": "117-kalibekov-arman-seitkulovich",
+      "ggup2026": false
     },
     {
-      "id": "118-ermekov-rinat-kairatovich",
       "sourceId": 118,
       "name": "Ермеков Ринат Кайратович",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (701) 570-35-80",
+          "href": "+77015703580"
+        }
+      ],
+      "id": "118-ermekov-rinat-kairatovich",
+      "ggup2026": false
     },
     {
-      "id": "119-kerimbek-erbol-baqytzhanuly",
       "sourceId": 119,
       "name": "Керімбек Ербол Бақытжанұлы",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (702) 000-11-71",
+          "href": "+77020001171"
+        }
+      ],
+      "id": "119-kerimbek-erbol-baqytzhanuly",
+      "ggup2026": false
     },
     {
-      "id": "120-kozhabekov-talgat-elubekovich",
       "sourceId": 120,
       "name": "Кожабеков Талгат Елубекович",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (777) 822-37-67",
+          "href": "+77778223767"
+        }
+      ],
+      "id": "120-kozhabekov-talgat-elubekovich",
+      "ggup2026": false
     },
     {
-      "id": "121-kuatkanov-nursultan-almatovich",
       "sourceId": 121,
       "name": "Куатканов Нурсултан Алматович",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (702) 678-91-09",
+          "href": "+77026789109"
+        }
+      ],
+      "id": "121-kuatkanov-nursultan-almatovich",
+      "ggup2026": false
     },
     {
-      "id": "122-kanatov-askar-dzhenisovich",
       "sourceId": 122,
       "name": "Канатов Аскар Дженисович",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (707) 744-46-48",
+          "href": "+77077444648"
+        }
+      ],
+      "id": "122-kanatov-askar-dzhenisovich",
+      "ggup2026": false
     },
     {
-      "id": "123-qamali-qairat-qabiuly",
       "sourceId": 123,
       "name": "Қамали Қайрат Қабиұлы",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (701) 228-11-16",
+          "href": "+77012281116"
+        }
+      ],
+      "id": "123-qamali-qairat-qabiuly",
+      "ggup2026": false
     },
     {
-      "id": "124-mamyrkanov-esimbol-askabylovich",
       "sourceId": 124,
       "name": "Мамырканов Есимбол Аскабылович",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (707) 243-11-90",
+          "href": "+77072431190"
+        },
+        {
+          "display": "+7 (777) 129-11-14",
+          "href": "+77771291114"
+        }
+      ],
+      "id": "124-mamyrkanov-esimbol-askabylovich",
+      "ggup2026": false
     },
     {
-      "id": "125-mamytov-marat-umbetuly",
       "sourceId": 125,
       "name": "Мамытов Марат Умбетулы",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (701) 410-11-54",
+          "href": "+77014101154"
+        }
+      ],
+      "id": "125-mamytov-marat-umbetuly",
+      "ggup2026": false
     },
     {
-      "id": "126-muhmetov-serikbol-davletbekovich",
       "sourceId": 126,
       "name": "Мухметов Серикбол Давлетбекович",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (701) 550-00-31",
+          "href": "+77015500031"
+        }
+      ],
+      "id": "126-muhmetov-serikbol-davletbekovich",
+      "ggup2026": false
     },
     {
-      "id": "127-nazyrova-gulnara-talgatovna",
       "sourceId": 127,
       "name": "Назырова Гульнара Талгатовна",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (701) 932-97-49",
+          "href": "+77019329749"
+        }
+      ],
+      "id": "127-nazyrova-gulnara-talgatovna",
+      "ggup2026": false
     },
     {
-      "id": "128-nisanbekov-rashit-suniyatovich",
       "sourceId": 128,
       "name": "Нисанбеков Рашит Суниятович",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (705) 419-64-78",
+          "href": "+77054196478"
+        },
+        {
+          "display": "р.т. 24-40-09"
+        }
+      ],
+      "id": "128-nisanbekov-rashit-suniyatovich",
+      "ggup2026": false
     },
     {
-      "id": "129-nurkasymova-saru-nurkasymovna",
       "sourceId": 129,
       "name": "Нуркасымова Сару Нуркасымовна",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (701) 746-33-90",
+          "href": "+77017463390"
+        },
+        {
+          "display": "+7 (778) 520-86-90",
+          "href": "+77785208690"
+        },
+        {
+          "display": "+7 (777) 746-33-90",
+          "href": "+77777463390"
+        }
+      ],
+      "id": "129-nurkasymova-saru-nurkasymovna",
+      "ggup2026": false
     },
     {
-      "id": "130-ongarova-gulnar-amanovna",
       "sourceId": 130,
       "name": "Онгарова Гульнар Амановна",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (701) 676-82-32",
+          "href": "+77016768232"
+        },
+        {
+          "display": "+7 (705) 905-58-27",
+          "href": "+77059055827"
+        }
+      ],
+      "id": "130-ongarova-gulnar-amanovna",
+      "ggup2026": false
     },
     {
-      "id": "131-sagindykova-gulnar-izbasarovna",
       "sourceId": 131,
       "name": "Сагиндыкова Гульнар Избасаровна",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (701) 377-96-25",
+          "href": "+77013779625"
+        }
+      ],
+      "id": "131-sagindykova-gulnar-izbasarovna",
+      "ggup2026": false
     },
     {
-      "id": "132-seitkozhanova-karina-renatovna",
       "sourceId": 132,
       "name": "Сейткожанова Карина Ренатовна",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (702) 940-88-86",
+          "href": "+77029408886"
+        },
+        {
+          "display": "+7 (775) 935-91-55",
+          "href": "+77759359155"
+        }
+      ],
+      "id": "132-seitkozhanova-karina-renatovna",
+      "ggup2026": false
     },
     {
-      "id": "133-serikzhanqyzy-aigerim",
       "sourceId": 133,
       "name": "Серікжанқызы Айгерім",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (771) 130-59-30",
+          "href": "+77711305930"
+        }
+      ],
+      "id": "133-serikzhanqyzy-aigerim",
+      "ggup2026": false
     },
     {
-      "id": "134-serikqyzy-moldir",
       "sourceId": 134,
       "name": "Серікқызы Мөлдір",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (700) 660-66-04",
+          "href": "+77006606604"
+        }
+      ],
+      "id": "134-serikqyzy-moldir",
+      "ggup2026": true,
+      "ggupSourceId": 44
     },
     {
-      "id": "135-sihimbaev-nurlan-dzholdasbekovich",
       "sourceId": 135,
       "name": "Сихимбаев Нурлан Джолдасбекович",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (702) 624-44-44",
+          "href": "+77026244444"
+        }
+      ],
+      "id": "135-sihimbaev-nurlan-dzholdasbekovich",
+      "ggup2026": false
     },
     {
-      "id": "136-torehanova-gulnaz-kanatovna",
       "sourceId": 136,
       "name": "Тореханова Гульназ Канатовна",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (775) 478-25-81",
+          "href": "+77754782581"
+        }
+      ],
+      "id": "136-torehanova-gulnaz-kanatovna",
+      "ggup2026": true,
+      "ggupSourceId": 47
     },
     {
-      "id": "137-tyan-vera-germanovna",
       "sourceId": 137,
       "name": "Тян Вера Германовна",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (707) 162-98-05",
+          "href": "+77071629805"
+        },
+        {
+          "display": "р.т.24-15-87"
+        }
+      ],
+      "id": "137-tyan-vera-germanovna",
+      "ggup2026": false
     },
     {
-      "id": "138-sherneev-erlan-nurlanovich",
       "sourceId": 138,
       "name": "Шернеев Ерлан Нурланович",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (701) 760-30-85",
+          "href": "+77017603085"
+        },
+        {
+          "display": "+7 (771) 450-81-60",
+          "href": "+77714508160"
+        }
+      ],
+      "id": "138-sherneev-erlan-nurlanovich",
+      "ggup2026": false
     },
     {
-      "id": "139-shugaibaeva-aigul-turlyhanovna",
       "sourceId": 139,
       "name": "Шугайбаева Айгуль Турлыхановна",
       "region": "область Жетісу",
-      "consultation": "Индивидуалы"
+      "consultation": "Индивидуалы",
+      "contacts": [
+        {
+          "display": "+7 (701) 400-99-44",
+          "href": "+77014009944"
+        }
+      ],
+      "id": "139-shugaibaeva-aigul-turlyhanovna",
+      "ggup2026": true,
+      "ggupSourceId": 50
     }
   ]
 }

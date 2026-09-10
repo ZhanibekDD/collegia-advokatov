@@ -189,7 +189,7 @@ export function CivicMotionStage({
 
       <div className="stage-float stage-float-members">
         <span><Scale /></span>
-        <div><strong><AnimatedNumber value={total} fallback="138" /></strong><small>{locale === "ru" ? "адвокатов" : "адвокат"}</small></div>
+        <div><strong><AnimatedNumber value={total} fallback="139" /></strong><small>{locale === "ru" ? "адвокатов" : "адвокат"}</small></div>
       </div>
       <div className="stage-float stage-float-groups">
         <span><Building2 /></span>

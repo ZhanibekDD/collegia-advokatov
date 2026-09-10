@@ -67,9 +67,9 @@ const text = {
     ],
     membersEyebrow: "Состав коллегии",
     membersTitle: "Адвокаты без рекламных анкет",
-    membersLead: "В карточках только сведения из переданного коллегией списка: ФИО и подразделение. Без выдуманных рейтингов, специализаций и фотографий.",
+    membersLead: "В карточках — ФИО, подразделение, контакты из общего списка и отметка об участии в ГГЮП 2026. Без выдуманных рейтингов, специализаций и фотографий.",
     openProfile: "Открыть запись",
-    viewAll: "Смотреть всех 138",
+    viewAll: "Смотреть всех 139",
     groupsEyebrow: "География помощи",
     groupsTitle: "Юридические консультации региона",
     groupsLead: "От Талдыкоргана до районных подразделений — выберите удобную консультацию и посмотрите её состав.",
@@ -120,9 +120,9 @@ const text = {
     ],
     membersEyebrow: "Алқа құрамы",
     membersTitle: "Жарнамалық анкетасыз адвокаттар",
-    membersLead: "Карточкаларда тек алқа ұсынған тізімдегі мәліметтер бар: аты-жөні және бөлімшесі. Ойдан шығарылған рейтинг, мамандану немесе фотосурет жоқ.",
+    membersLead: "Карточкаларда аты-жөні, бөлімше, жалпы тізімдегі байланыстар және 2026 жылғы МКБЗК қатысу белгісі бар. Ойдан шығарылған рейтинг, мамандану немесе фотосурет жоқ.",
     openProfile: "Жазбаны ашу",
-    viewAll: "Барлық 138 адвокат",
+    viewAll: "Барлық 139 адвокат",
     groupsEyebrow: "Көмек географиясы",
     groupsTitle: "Өңірдің заң консультациялары",
     groupsLead: "Талдықорғаннан аудандық бөлімшелерге дейін — ыңғайлы консультацияны таңдап, оның құрамын қараңыз.",
@@ -225,7 +225,7 @@ export default function HomePage() {
 
       <section className="registry-stats registry-stats-v2" aria-label={locale === "ru" ? "Статистика списка" : "Тізім статистикасы"}>
         <div className="shell stats-grid stats-grid-v2">
-          <div><UsersRound /><strong><AnimatedNumber value={directory?.meta.total} fallback="138" /></strong><span>{t.members}</span></div>
+          <div><UsersRound /><strong><AnimatedNumber value={directory?.meta.total} fallback="139" /></strong><span>{t.members}</span></div>
           <div><Landmark /><strong><AnimatedNumber value={directory?.meta.consultationCount} fallback="13" /></strong><span>{t.groups}</span></div>
           <div><CalendarCheck2 /><strong>01.09.2026</strong><span>{t.updated}</span></div>
           <div><ShieldCheck /><strong>2</strong><span>{t.languages}</span></div>
@@ -262,7 +262,7 @@ export default function HomePage() {
             <div className="region-story-actions">
               <Link className="button region-story-button" href="/konsultacii">{t.regionCta}<ArrowRight /></Link>
               <div className="region-story-facts" aria-label={locale === "ru" ? "Охват коллегии" : "Алқаның қамтуы"}>
-                <span><strong>{directory?.meta.total ?? 138}</strong>{t.regionMembers}</span>
+                <span><strong>{directory?.meta.total ?? 139}</strong>{t.regionMembers}</span>
                 <span><strong>{directory?.meta.consultationCount ?? 13}</strong>{t.regionGroups}</span>
               </div>
             </div>
@@ -273,7 +273,7 @@ export default function HomePage() {
       <section className="section members-section-v2" id="advocates">
         <div className="shell">
           <div className="section-heading split-heading" data-reveal><div><div className="eyebrow"><span />{t.membersEyebrow}</div><h2>{t.membersTitle}</h2><p>{t.membersLead}</p></div><Link className="arrow-link" href="/advokaty">{t.viewAll}<ArrowRight /></Link></div>
-          <div data-reveal><DataSourceNotice locale={locale} total={directory?.meta.total} /></div>
+          <div data-reveal><DataSourceNotice locale={locale} total={directory?.meta.total} ggupTotal={directory?.meta.ggup.total} /></div>
           <div className="member-preview-grid member-preview-v2" data-reveal>
             {featured.map((advocate) => <Link className="member-row" href={`/advokaty/${advocate.id}`} key={advocate.id}><span className="member-index">{String(advocate.sourceId).padStart(3, "0")}</span><span><strong>{advocate.name}</strong><small>{consultationName(advocate.consultation, locale)}</small></span><span className="round-arrow" aria-label={t.openProfile}><ArrowRight /></span></Link>)}
           </div>

@@ -111,21 +111,22 @@ export function PortalHeader({
   );
 }
 
-export function DataSourceNotice({ locale, total }: { locale: Locale; total?: number }) {
+export function DataSourceNotice({ locale, total, ggupTotal }: { locale: Locale; total?: number; ggupTotal?: number }) {
   const count = typeof total === "number" ? total.toLocaleString("ru-RU") : "—";
+  const ggupCount = typeof ggupTotal === "number" ? ggupTotal.toLocaleString("ru-RU") : "—";
   return (
     <aside className="source-notice" aria-label={locale === "ru" ? "Источник списка" : "Тізім дереккөзі"}>
       <span className="source-icon"><Database /></span>
       <div>
         <strong>
           {locale === "ru"
-            ? `${count} адвокатов · список КАОЖ на ${formatDirectoryDate(locale)}`
-            : `${count} адвокат · КАОЖ тізімі, ${formatDirectoryDate(locale)}`}
+            ? `${count} адвокатов · ${ggupCount} участников ГГЮП 2026`
+            : `${count} адвокат · 2026 жылғы МКБЗК-ға ${ggupCount} қатысушы`}
         </strong>
         <p>
           {locale === "ru"
-            ? "На сайте публикуется состав из переданного коллегией сентябрьского реестра. Лицензию рекомендуется дополнительно проверить в официальных источниках."
-            : "Сайтта алқа ұсынған қыркүйек тізілімінің құрамы жарияланады. Лицензияны ресми дереккөздерден қосымша тексеру ұсынылады."}
+            ? `ФИО и контакты — из общего списка КАОЖ на ${formatDirectoryDate(locale)}; отметка ГГЮП — из списка за январь 2026 года. Лицензию рекомендуется дополнительно проверить в официальных источниках.`
+            : `Аты-жөні мен байланыстар — ${formatDirectoryDate(locale)} күнгі КАОЖ жалпы тізімінен; МКБЗК белгісі — 2026 жылғы қаңтар тізімінен. Лицензияны ресми дереккөздерден қосымша тексеру ұсынылады.`}
         </p>
       </div>
       <a href={RKA_TERRITORIAL_ASSOCIATIONS_URL} target="_blank" rel="noreferrer">

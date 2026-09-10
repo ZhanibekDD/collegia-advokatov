@@ -82,7 +82,7 @@ export default function AboutPage() {
 
       <section className="section">
         <div className="shell">
-          <div data-reveal><DataSourceNotice locale={locale} total={directory?.meta.total} /></div>
+          <div data-reveal><DataSourceNotice locale={locale} total={directory?.meta.total} ggupTotal={directory?.meta.ggup.total} /></div>
           <div className="mission-grid" data-reveal>
             <div className="mission-copy">
               <div className="eyebrow"><span />{t.missionEyebrow}</div>

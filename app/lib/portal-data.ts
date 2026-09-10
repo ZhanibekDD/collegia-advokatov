@@ -1,11 +1,20 @@
 export type Locale = "ru" | "kk";
 
+export type AdvocateContact = {
+  display: string;
+  href?: string;
+  needsReview?: boolean;
+};
+
 export type OfficialAdvocate = {
   id: string;
   sourceId: number;
   name: string;
   region: string;
   consultation: string;
+  contacts: AdvocateContact[];
+  ggup2026: boolean;
+  ggupSourceId?: number;
 };
 
 export type LegalConsultation = {
@@ -23,6 +32,13 @@ export type AdvocateDirectory = {
     sourceFile: string;
     total: number;
     consultationCount: number;
+    contactReviewCount: number;
+    ggup: {
+      asOf: string;
+      sourceLabel: string;
+      sourceFile: string;
+      total: number;
+    };
   };
   consultations: LegalConsultation[];
   advocates: OfficialAdvocate[];

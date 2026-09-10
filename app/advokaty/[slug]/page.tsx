@@ -22,5 +22,5 @@ export default async function AdvocateProfilePage({ params }: { params: Promise<
   const { slug } = await params;
   const advocate = directory.advocates.find((item) => item.id === slug);
   if (!advocate) notFound();
-  return <ProfileClient advocate={advocate} total={directory.meta.total} />;
+  return <ProfileClient advocate={advocate} total={directory.meta.total} ggupTotal={directory.meta.ggup.total} />;
 }

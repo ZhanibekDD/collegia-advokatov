@@ -30,6 +30,10 @@ const text = {
     ],
     directory: "Открыть список адвокатов",
     consultations: "Юридические консультации",
+    ggupEyebrow: "Государственная гарантия",
+    ggupTitle: "Гарантированная государством юридическая помощь",
+    ggupText: "В январском списке 2026 года отмечены 50 адвокатов коллегии, участвующих в оказании ГГЮП.",
+    ggupAction: "Открыть участников ГГЮП",
   },
   kk: {
     eyebrow: "Құқықтық көмек",
@@ -54,6 +58,10 @@ const text = {
     ],
     directory: "Адвокаттар тізімін ашу",
     consultations: "Заң консультациялары",
+    ggupEyebrow: "Мемлекеттік кепілдік",
+    ggupTitle: "Мемлекет кепілдік берген заң көмегі",
+    ggupText: "2026 жылғы қаңтар тізімінде МКБЗК көрсетуге қатысатын 50 алқа адвокаты белгіленген.",
+    ggupAction: "МКБЗК қатысушыларын ашу",
   },
 };
 
@@ -80,6 +88,15 @@ export default function HelpPage() {
       <section className="section">
         <div className="shell">
           <div className="guidance-note" data-reveal><ShieldAlert /><p>{t.note}</p></div>
+          <article className="ggup-feature" data-reveal>
+            <span className="ggup-feature-icon"><Scale /></span>
+            <div>
+              <small>{t.ggupEyebrow}</small>
+              <h2>{t.ggupTitle}</h2>
+              <p>{t.ggupText}</p>
+            </div>
+            <Link className="button button-accent" href="/advokaty?ggup=1">{t.ggupAction}<ArrowRight /></Link>
+          </article>
           <div className="section-heading centered" data-reveal>
             <div className="eyebrow"><span />{t.topicsEyebrow}<span /></div>
             <h2>{t.topicsTitle}</h2>
