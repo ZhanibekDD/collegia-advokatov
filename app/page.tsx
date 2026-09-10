@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { type FormEvent, useMemo, useState } from "react";
+import { type FormEvent, useEffect, useMemo, useState } from "react";
 import {
   ArrowDown,
   ArrowRight,
   BadgeCheck,
   Building2,
+  CalendarDays,
   CalendarCheck2,
   ExternalLink,
   FileSearch,
@@ -14,6 +15,7 @@ import {
   Landmark,
   Mail,
   MapPin,
+  Newspaper,
   Phone,
   Scale,
   Search,
@@ -25,10 +27,12 @@ import { AnimatedNumber, CivicMotionStage } from "./components/motion-stage";
 import { DataSourceNotice, PortalFooter, PortalHeader } from "./components/portal-shell";
 import {
   ASSOCIATION,
+  NEWS_DATA_URL,
   RKA_TERRITORIAL_ASSOCIATIONS_URL,
   advocateWord,
   consultationName,
   formatDirectoryDate,
+  type NewsPost,
 } from "./lib/portal-data";
 import { useDirectory } from "./lib/use-directory";
 import { usePersistentLocale } from "./lib/use-persistent-locale";
@@ -46,6 +50,7 @@ const text = {
     noMatches: "Точных совпадений пока нет — посмотреть полный поиск",
     quick: ["По фамилии", "По району", "Юрконсультации"],
     sourceTitle: "Реестр обновлён коллегией",
+    registryState: "Состояние официального реестра",
     members: "адвокатов в реестре",
     groups: "подразделений и форм практики",
     updated: "актуальность списка",
@@ -59,6 +64,15 @@ const text = {
     regionCta: "Открыть консультации",
     regionMembers: "адвокатов",
     regionGroups: "подразделений",
+    newsEyebrow: "Официальная лента",
+    newsTitle: "Новости и мероприятия коллегии",
+    newsLead: "Решения, встречи и важные объявления — в единой официальной ленте.",
+    newsAll: "Все публикации",
+    newsRead: "Открыть публикацию",
+    newsEmptyTitle: "Первая публикация готовится",
+    newsEmptyText: "Новости и сведения о мероприятиях появятся здесь после публикации коллегией.",
+    newsLabel: "Новость",
+    eventLabel: "Мероприятие",
     routes: [
       ["Найти адвоката", "Поиск по ФИО и подразделению в полном составе коллегии."],
       ["Выбрать консультацию", "Городские, районные и ювенальная юридические консультации."],
@@ -99,6 +113,7 @@ const text = {
     noMatches: "Дәл сәйкестік жоқ — толық іздеуді ашу",
     quick: ["Тегі бойынша", "Аудан бойынша", "Заң консультациялары"],
     sourceTitle: "Тізілімді алқа жаңартты",
+    registryState: "Ресми тізілімнің жағдайы",
     members: "тізілімдегі адвокат",
     groups: "бөлімше және практика нысаны",
     updated: "тізімнің өзектілігі",
@@ -112,6 +127,15 @@ const text = {
     regionCta: "Консультацияларды ашу",
     regionMembers: "адвокат",
     regionGroups: "бөлімше",
+    newsEyebrow: "Ресми лента",
+    newsTitle: "Алқа жаңалықтары мен іс-шаралары",
+    newsLead: "Шешімдер, кездесулер және маңызды хабарландырулар — бірыңғай ресми лентада.",
+    newsAll: "Барлық жарияланымдар",
+    newsRead: "Жарияланымды ашу",
+    newsEmptyTitle: "Алғашқы жарияланым дайындалуда",
+    newsEmptyText: "Алқа жариялағаннан кейін жаңалықтар мен іс-шаралар туралы ақпарат осында шығады.",
+    newsLabel: "Жаңалық",
+    eventLabel: "Іс-шара",
     routes: [
       ["Адвокат табу", "Алқаның толық құрамынан аты-жөні және бөлімшесі бойынша іздеу."],
       ["Консультация таңдау", "Қалалық, аудандық және ювеналдық заң консультациялары."],
@@ -145,9 +169,20 @@ const text = {
 const routeIcons = [UserRoundSearch, Building2, Gavel, FileSearch];
 const routeHrefs = ["/advokaty", "/konsultacii", "/pomosh", RKA_TERRITORIAL_ASSOCIATIONS_URL];
 
+function formatNewsDate(value: string | null, locale: "ru" | "kk") {
+  if (!value) return "—";
+  return new Intl.DateTimeFormat(locale === "ru" ? "ru-RU" : "kk-KZ", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(value));
+}
+
 export default function HomePage() {
   const [locale, setLocale] = usePersistentLocale();
   const [query, setQuery] = useState("");
+  const [news, setNews] = useState<NewsPost[]>([]);
+  const [newsState, setNewsState] = useState<"loading" | "ready">("loading");
   const { directory } = useDirectory();
   const t = text[locale];
 
@@ -163,6 +198,17 @@ export default function HomePage() {
       .filter((advocate) => `${advocate.name} ${advocate.consultation}`.toLocaleLowerCase(locale === "kk" ? "kk-KZ" : "ru-RU").includes(needle))
       .slice(0, 5);
   }, [directory, locale, query]);
+  const latestNews = useMemo(() => news.slice(0, 3), [news]);
+
+  useEffect(() => {
+    let active = true;
+    fetch(NEWS_DATA_URL)
+      .then((response) => response.ok ? response.json() as Promise<{ posts: NewsPost[] }> : Promise.reject())
+      .then((result) => { if (active) setNews(result.posts); })
+      .catch(() => { if (active) setNews([]); })
+      .finally(() => { if (active) setNewsState("ready"); });
+    return () => { active = false; };
+  }, []);
 
   function submitSearch(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -224,11 +270,14 @@ export default function HomePage() {
       </section>
 
       <section className="registry-stats registry-stats-v2" aria-label={locale === "ru" ? "Статистика списка" : "Тізім статистикасы"}>
-        <div className="shell stats-grid stats-grid-v2">
-          <div><UsersRound /><strong><AnimatedNumber value={directory?.meta.total} fallback="139" /></strong><span>{t.members}</span></div>
-          <div><Landmark /><strong><AnimatedNumber value={directory?.meta.consultationCount} fallback="13" /></strong><span>{t.groups}</span></div>
-          <div><CalendarCheck2 /><strong>01.09.2026</strong><span>{t.updated}</span></div>
-          <div><ShieldCheck /><strong>2</strong><span>{t.languages}</span></div>
+        <div className="shell stats-dock-v3">
+          <div className="stats-dock-label"><span>{t.registryState}</span><div aria-hidden="true">{Array.from({ length: 7 }, (_, index) => <i style={{ "--dock-stream": index } as React.CSSProperties} key={index} />)}</div></div>
+          <div className="stats-grid stats-grid-v2">
+            <div><UsersRound /><strong><AnimatedNumber value={directory?.meta.total} fallback="139" /></strong><span>{t.members}</span></div>
+            <div><Landmark /><strong><AnimatedNumber value={directory?.meta.consultationCount} fallback="13" /></strong><span>{t.groups}</span></div>
+            <div><CalendarCheck2 /><strong>01.09.2026</strong><span>{t.updated}</span></div>
+            <div><ShieldCheck /><strong>2</strong><span>{t.languages}</span></div>
+          </div>
         </div>
       </section>
 
@@ -267,6 +316,50 @@ export default function HomePage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="section home-news-v3" id="home-news">
+        <div className="home-news-streams" aria-hidden="true">{Array.from({ length: 7 }, (_, index) => <i style={{ "--news-stream": index } as React.CSSProperties} key={index} />)}</div>
+        <div className="shell">
+          <div className="section-heading split-heading home-news-heading" data-reveal>
+            <div><div className="eyebrow"><span />{t.newsEyebrow}</div><h2>{t.newsTitle}</h2><p>{t.newsLead}</p></div>
+            <Link className="arrow-link" href="/novosti">{t.newsAll}<ArrowRight /></Link>
+          </div>
+
+          {newsState === "loading" && (
+            <div className="home-news-grid" aria-label={locale === "ru" ? "Загрузка новостей" : "Жаңалықтар жүктелуде"}>
+              {Array.from({ length: 3 }, (_, index) => <div className="home-news-card home-news-skeleton" key={index}><span /><strong /><p /></div>)}
+            </div>
+          )}
+
+          {newsState === "ready" && latestNews.length === 0 && (
+            <div className="home-news-empty" data-reveal>
+              <span className="home-news-empty-icon"><Newspaper /></span>
+              <div><small>KAOJ.KZ / NEWSROOM</small><h3>{t.newsEmptyTitle}</h3><p>{t.newsEmptyText}</p></div>
+              <Link href="/novosti">{t.newsAll}<ArrowRight /></Link>
+            </div>
+          )}
+
+          {latestNews.length > 0 && (
+            <div className="home-news-grid">
+              {latestNews.map((post, index) => {
+                const title = locale === "kk" && post.titleKk ? post.titleKk : post.titleRu;
+                const excerpt = locale === "kk" && post.excerptKk ? post.excerptKk : post.excerptRu;
+                const date = post.eventDate ?? post.publishedAt;
+                return (
+                  <Link className="home-news-card" href={`/novosti/${post.slug}`} data-reveal data-tilt style={{ "--reveal-delay": `${index * 80}ms` } as React.CSSProperties} key={post.id}>
+                    <span className="surface-glow" aria-hidden="true" />
+                    <div className="home-news-meta"><span>{post.kind === "event" ? <CalendarDays /> : <Newspaper />}{post.kind === "event" ? t.eventLabel : t.newsLabel}</span><time dateTime={date ?? undefined}>{formatNewsDate(date, locale)}</time></div>
+                    <strong className="home-news-index">0{index + 1}</strong>
+                    <h3>{title}</h3>
+                    {excerpt && <p>{excerpt}</p>}
+                    <span className="home-news-action">{t.newsRead}<ArrowRight /></span>
+                  </Link>
+                );
+              })}
+            </div>
+          )}
         </div>
       </section>
 
