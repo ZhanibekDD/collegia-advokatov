@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { ArrowRight, ArrowUp, Building2, Gavel, Landmark, Search, Sparkles, UserRoundSearch, X } from "lucide-react";
+import { ArrowRight, ArrowUp, Building2, Gavel, Landmark, Newspaper, Search, Sparkles, UserRoundSearch, X } from "lucide-react";
 import { consultationName, type Locale } from "../lib/portal-data";
 import { useDirectory } from "../lib/use-directory";
 
@@ -12,12 +12,14 @@ const portalRoutes = {
   ru: [
     ["Найти адвоката", "Поиск по официальному списку коллегии", "/advokaty", UserRoundSearch],
     ["Юридические консультации", "Городские и районные подразделения", "/konsultacii", Building2],
+    ["Новости и мероприятия", "Официальные публикации коллегии", "/novosti", Newspaper],
     ["Правовая помощь", "Как подготовиться к обращению", "/pomosh", Gavel],
     ["О коллегии", "Контакты, руководство и реквизиты", "/regions", Landmark],
   ],
   kk: [
     ["Адвокат табу", "Алқаның ресми тізімі бойынша іздеу", "/advokaty", UserRoundSearch],
     ["Заң консультациялары", "Қалалық және аудандық бөлімшелер", "/konsultacii", Building2],
+    ["Жаңалықтар мен іс-шаралар", "Алқаның ресми жарияланымдары", "/novosti", Newspaper],
     ["Құқықтық көмек", "Өтінішке қалай дайындалуға болады", "/pomosh", Gavel],
     ["Алқа туралы", "Байланыс, басшылық және деректемелер", "/regions", Landmark],
   ],

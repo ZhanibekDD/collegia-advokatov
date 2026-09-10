@@ -19,6 +19,7 @@ const nav = {
     ["Главная", "/"],
     ["Адвокаты", "/advokaty"],
     ["Юр. консультации", "/konsultacii"],
+    ["Новости", "/novosti"],
     ["Правовая помощь", "/pomosh"],
     ["О коллегии", "/regions"],
   ],
@@ -26,6 +27,7 @@ const nav = {
     ["Басты бет", "/"],
     ["Адвокаттар", "/advokaty"],
     ["Заң консультациялары", "/konsultacii"],
+    ["Жаңалықтар", "/novosti"],
     ["Құқықтық көмек", "/pomosh"],
     ["Алқа туралы", "/regions"],
   ],
@@ -148,6 +150,7 @@ export function PortalFooter({ locale }: { locale: Locale }) {
           <strong>{locale === "ru" ? "Разделы" : "Бөлімдер"}</strong>
           <Link href="/advokaty">{locale === "ru" ? "Список адвокатов" : "Адвокаттар тізімі"}</Link>
           <Link href="/konsultacii">{locale === "ru" ? "Юридические консультации" : "Заң консультациялары"}</Link>
+          <Link href="/novosti">{locale === "ru" ? "Новости и мероприятия" : "Жаңалықтар мен іс-шаралар"}</Link>
           <Link href="/regions">{locale === "ru" ? "О коллегии" : "Алқа туралы"}</Link>
         </div>
         <div className="footer-column footer-contacts">

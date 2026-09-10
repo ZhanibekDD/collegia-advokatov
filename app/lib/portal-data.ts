@@ -44,7 +44,25 @@ export type AdvocateDirectory = {
   advocates: OfficialAdvocate[];
 };
 
-export const ADVOCATE_DATA_URL = "/data/advocates-september-2026.json";
+export type NewsPost = {
+  id: string;
+  slug: string;
+  kind: "news" | "event";
+  status: "draft" | "published" | "archived";
+  titleRu: string;
+  titleKk: string;
+  excerptRu: string;
+  excerptKk: string;
+  contentRu: string;
+  contentKk: string;
+  eventDate: string | null;
+  publishedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export const ADVOCATE_DATA_URL = "/api/directory";
+export const NEWS_DATA_URL = "/api/news";
 
 export const RKA_TERRITORIAL_ASSOCIATIONS_URL =
   "https://advokatura.kz/ru/territorial-nye-kollegii-advokatov";
