@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, BadgeCheck, Building2, Landmark, Mail, MapPin, Phone, Scale, ShieldCheck, UsersRound } from "lucide-react";
+import { ArrowRight, BadgeCheck, Building2, ChevronDown, FileCheck2, Gavel, Landmark, Mail, MapPin, Phone, Scale, ShieldCheck, UserRoundCheck, UsersRound, Vote } from "lucide-react";
 import { DataSourceNotice, PortalFooter, PortalHeader } from "../components/portal-shell";
 import { JetisuSignature } from "../components/portal-experience";
+import { GOVERNANCE_GROUPS, REGIONAL_CONFERENCE_DELEGATES, REPUBLICAN_CONFERENCE_DELEGATES, REPUBLICAN_PRESIDIUM } from "../lib/association-structure";
 import { ASSOCIATION } from "../lib/portal-data";
 import { useDirectory } from "../lib/use-directory";
 import { usePersistentLocale } from "../lib/use-persistent-locale";
@@ -23,6 +24,18 @@ const text = {
     ],
     legalEyebrow: "Руководство и реквизиты",
     legalTitle: "Официальные сведения",
+    structureEyebrow: "Структура коллегии",
+    structureTitle: "Органы управления и комиссии",
+    structureLead: "Состав президиума, комиссий и делегатов опубликован по списку, переданному Коллегией адвокатов области Жетісу.",
+    structureSource: "Переданный состав КАОЖ · дата утверждения в документе не указана",
+    chairRole: "Председатель",
+    membersLabel: "человек",
+    representationEyebrow: "Представительство",
+    representationTitle: "Республиканская и региональная конференции",
+    republicanPresidium: "Президиум Республиканской коллегии адвокатов",
+    republicanDelegates: "Делегаты конференции Республиканской коллегии адвокатов",
+    regionalDelegates: "Делегаты конференции Коллегии адвокатов области Жетісу",
+    showDelegates: "Открыть полный список из 28 делегатов",
     chair: "Председатель президиума",
     address: "Юридический адрес",
     bin: "БИН",
@@ -46,6 +59,18 @@ const text = {
     ],
     legalEyebrow: "Басшылық және деректемелер",
     legalTitle: "Ресми мәліметтер",
+    structureEyebrow: "Алқа құрылымы",
+    structureTitle: "Басқару органдары мен комиссиялар",
+    structureLead: "Төралқа, комиссиялар мен делегаттар құрамы Жетісу облыстық адвокаттар алқасы берген тізім бойынша жарияланды.",
+    structureSource: "ЖОАА берген құрам · құжатта бекітілген күні көрсетілмеген",
+    chairRole: "Төраға",
+    membersLabel: "адам",
+    representationEyebrow: "Өкілдік",
+    representationTitle: "Республикалық және өңірлік конференциялар",
+    republicanPresidium: "Республикалық адвокаттар алқасының төралқасы",
+    republicanDelegates: "Республикалық адвокаттар алқасы конференциясының делегаттары",
+    regionalDelegates: "Жетісу облыстық адвокаттар алқасы конференциясының делегаттары",
+    showDelegates: "28 делегаттың толық тізімін ашу",
     chair: "Төралқа төрағасы",
     address: "Заңды мекенжай",
     bin: "БСН",
@@ -58,6 +83,13 @@ const text = {
 };
 
 const principleIcons = [BadgeCheck, ShieldCheck, UsersRound];
+const governanceIcons = {
+  presidium: Landmark,
+  disciplinary: Gavel,
+  ethics: ShieldCheck,
+  audit: FileCheck2,
+  attestation: UserRoundCheck,
+};
 
 export default function AboutPage() {
   const [locale, setLocale] = usePersistentLocale();
@@ -96,6 +128,88 @@ export default function AboutPage() {
               })}
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="section governance-section" id="organy">
+        <div className="governance-streams" aria-hidden="true">
+          {Array.from({ length: 7 }, (_, index) => <i key={index} style={{ "--governance-stream": index } as React.CSSProperties} />)}
+        </div>
+        <div className="shell">
+          <div className="section-heading split-heading governance-heading" data-reveal>
+            <div>
+              <div className="eyebrow"><span />{t.structureEyebrow}</div>
+              <h2>{t.structureTitle}</h2>
+              <p>{t.structureLead}</p>
+            </div>
+            <div className="governance-summary" aria-label={t.structureTitle}>
+              <span><strong>07</strong>{locale === "ru" ? "членов президиума" : "төралқа мүшесі"}</span>
+              <span><strong>04</strong>{locale === "ru" ? "комиссии" : "комиссия"}</span>
+              <span><strong>28</strong>{locale === "ru" ? "делегатов конференции" : "конференция делегаты"}</span>
+            </div>
+          </div>
+
+          <div className="governance-source" data-reveal><BadgeCheck /><span>{t.structureSource}</span></div>
+
+          <div className="governance-grid">
+            {GOVERNANCE_GROUPS.map((group, groupIndex) => {
+              const Icon = governanceIcons[group.key];
+              return (
+                <article className={`governance-card ${group.key === "presidium" ? "featured" : ""} ${group.key === "disciplinary" ? "with-related" : ""}`} key={group.key} data-reveal style={{ "--reveal-delay": `${Math.min(groupIndex, 3) * 70}ms` } as React.CSSProperties}>
+                  <header>
+                    <span className="governance-card-icon"><Icon /></span>
+                    <div><small>{String(groupIndex + 1).padStart(2, "0")}</small><h3>{group.title[locale]}</h3></div>
+                    <em>{group.members.length} {t.membersLabel}</em>
+                  </header>
+                  <ol className="governance-members">
+                    {group.members.map((member, index) => (
+                      <li key={member.name}>
+                        <span>{String(index + 1).padStart(2, "0")}</span>
+                        <strong>{member.name}</strong>
+                        {member.chair ? <small>{t.chairRole}</small> : null}
+                      </li>
+                    ))}
+                  </ol>
+                  {group.related ? (
+                    <div className="governance-related">
+                      {group.related.map((related) => (
+                        <section key={related.title.ru}>
+                          <h4>{related.title[locale]}</h4>
+                          <ul>{related.members.map((member) => <li key={member.name}>{member.name}</li>)}</ul>
+                        </section>
+                      ))}
+                    </div>
+                  ) : null}
+                </article>
+              );
+            })}
+          </div>
+
+          <section className="representation-panel" data-reveal>
+            <header className="representation-heading">
+              <span><Vote /></span>
+              <div><small>{t.representationEyebrow}</small><h2>{t.representationTitle}</h2></div>
+            </header>
+            <div className="representation-grid">
+              <article className="representation-card">
+                <small>01</small>
+                <h3>{t.republicanPresidium}</h3>
+                <ol>{REPUBLICAN_PRESIDIUM.map((member) => <li key={member.name}>{member.name}</li>)}</ol>
+              </article>
+              <article className="representation-card">
+                <small>02</small>
+                <h3>{t.republicanDelegates}</h3>
+                <ol>{REPUBLICAN_CONFERENCE_DELEGATES.map((member) => <li key={member.name}>{member.name}</li>)}</ol>
+              </article>
+            </div>
+            <details className="delegate-drawer">
+              <summary><span><strong>03</strong>{t.showDelegates}</span><ChevronDown /></summary>
+              <div>
+                <h3>{t.regionalDelegates}</h3>
+                <ol>{REGIONAL_CONFERENCE_DELEGATES.map((member) => <li key={member.name}>{member.name}</li>)}</ol>
+              </div>
+            </details>
+          </section>
         </div>
       </section>
 
