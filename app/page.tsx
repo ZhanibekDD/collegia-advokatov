@@ -243,7 +243,7 @@ export default function HomePage() {
                   <div className="suggestions-title">{t.suggestions}<span>{suggestions.length}</span></div>
                   {suggestions.map((advocate) => (
                     <Link href={`/advokaty/${advocate.id}`} role="option" aria-selected="false" key={advocate.id}>
-                      <span>№ {advocate.sourceId}</span>
+                      <span>{advocate.sourceId}</span>
                       <div><strong>{advocate.name}</strong><small>{consultationName(advocate.consultation, locale)}</small></div>
                       <ArrowRight />
                     </Link>

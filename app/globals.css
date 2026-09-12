@@ -901,10 +901,9 @@ a:hover > .round-arrow, .member-row:hover .round-arrow, .directory-row:hover .ro
 .hero-search-control button svg { width: 17px; height: 17px; transition: transform 180ms ease; }
 .hero-search-control button:hover svg { transform: translateX(4px); }
 .hero-search-suggestions {
-  position: absolute;
-  top: calc(100% + 9px);
-  right: 0;
-  left: 0;
+  position: relative;
+  width: 100%;
+  margin-top: 9px;
   overflow: hidden;
   border: 1px solid rgba(16,58,65,.12);
   border-radius: 17px;
