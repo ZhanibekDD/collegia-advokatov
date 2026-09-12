@@ -1,128 +1,87 @@
 "use client";
-/* eslint-disable @next/next/no-html-link-for-pages */
 
+import Link from "next/link";
 import { useState } from "react";
-import {
-  AlertTriangle,
-  ArrowLeft,
-  ArrowUpRight,
-  BadgeCheck,
-  CalendarDays,
-  Check,
-  Copy,
-  Database,
-  ExternalLink,
-  IdCard,
-  MapPin,
-  MessageCircle,
-  Phone,
-  PhoneCall,
-} from "lucide-react";
+import { ArrowLeft, ArrowRight, BadgeCheck, Building2, Check, Copy, Database, MapPin, Phone, Printer, Scale, ShieldCheck, UserRound } from "lucide-react";
 import { DataSourceNotice, PortalFooter, PortalHeader } from "../../components/portal-shell";
-import type { Locale, OfficialAdvocate } from "../../lib/portal-data";
+import { consultationName, type OfficialAdvocate } from "../../lib/portal-data";
+import { usePersistentLocale } from "../../lib/use-persistent-locale";
 
-function readableDate(value: string, fallback: string) {
-  if (!value) return fallback;
-  if (/^\d{4}-\d{2}-\d{2}$/.test(value)) {
-    const [year, month, day] = value.split("-");
-    return `${day}.${month}.${year}`;
-  }
-  return value;
-}
-
-function extractPhone(value: string) {
-  const match = value.match(/(?:\+?7|8)[\s()\-]*\d{3}[\s()\-]*\d{3}[\s()\-]*\d{2}[\s()\-]*\d{2}/);
-  if (!match) return null;
-  let digits = match[0].replace(/\D/g, "");
-  if (digits.startsWith("8")) digits = `7${digits.slice(1)}`;
-  return digits.length === 11 && digits.startsWith("7") ? digits : null;
-}
-
-export default function ProfileClient({ advocate, total }: { advocate: OfficialAdvocate; total: number }) {
-  const [locale, setLocale] = useState<Locale>("ru");
+export default function ProfileClient({ advocate, total, ggupTotal }: { advocate: OfficialAdvocate; total: number; ggupTotal: number }) {
+  const [locale, setLocale] = usePersistentLocale();
   const [copied, setCopied] = useState(false);
   const kk = locale === "kk";
-  const noValue = kk ? "Дереккөзде көрсетілмеген" : "Не указано в источнике";
-  const phone = extractPhone(advocate.contacts);
 
   async function copyProfileLink() {
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-    } catch {
-      const temporary = document.createElement("textarea");
-      temporary.value = window.location.href;
-      temporary.style.position = "fixed";
-      temporary.style.opacity = "0";
-      document.body.appendChild(temporary);
-      temporary.select();
-      document.execCommand("copy");
-      temporary.remove();
-    }
+    await navigator.clipboard.writeText(window.location.href);
     setCopied(true);
-    window.setTimeout(() => setCopied(false), 1800);
+    window.setTimeout(() => setCopied(false), 1600);
   }
 
   return (
-    <main className="portal-page profile-page">
+    <main id="main-content">
       <PortalHeader locale={locale} onLocaleChange={setLocale} />
-      <div className="profile-breadcrumb shell">
-        <a href="/advokaty"><ArrowLeft /> {kk ? "Каталогқа оралу" : "Вернуться в каталог"}</a>
-      </div>
-      <section className="profile-hero official-profile-hero">
-        <div className="shell profile-hero-grid">
-          <div className="profile-portrait official-portrait">
-            <span>{advocate.initials || "KZ"}</span>
-            <small>OPEN DATA · #{advocate.id}</small>
-          </div>
-          <div className="profile-main">
-            <div className="verified-line"><span><BadgeCheck /></span>{kk ? "Ашық деректердегі жазба" : "Запись из открытых данных"}</div>
-            <h1>{advocate.name}</h1>
-            <p className="profile-practice"><MapPin />{advocate.region}</p>
-            <div className="profile-facts">
-              <div><small>{kk ? "Лицензия" : "Лицензия"}</small><strong>№ {advocate.licenseNumber || noValue}</strong></div>
-              <div><small>{kk ? "Берілген күні" : "Дата выдачи"}</small><strong>{readableDate(advocate.licenseIssuedAt, noValue)}</strong></div>
-              <div><small>{kk ? "Алқаға кіру" : "Вступление в коллегию"}</small><strong>{readableDate(advocate.joinedAt, noValue)}</strong></div>
+      <section className="profile-hero">
+        <div className="shell">
+          <Link className="breadcrumb" href="/advokaty"><ArrowLeft />{kk ? "Тізімге оралу" : "Вернуться к списку"}</Link>
+          <div className="profile-hero-grid">
+            <div className="profile-number"><small>{locale === "ru" ? "Номер в официальном списке" : "Ресми тізімдегі нөмір"}</small><strong>№ {advocate.sourceId}</strong></div>
+            <div className="profile-title">
+              <div className="verified-label"><BadgeCheck />{kk ? "Алқаның өзекті тізіміндегі жазба" : "Запись в актуальном списке коллегии"}</div>
+              <h1>{advocate.name}</h1>
+              <p><MapPin />{kk ? "Жетісу облысы" : "Область Жетісу"}</p>
+            </div>
+            <div className="profile-actions">
+              <button className="copy-button" type="button" aria-live="polite" onClick={copyProfileLink}>{copied ? <Check /> : <Copy />}{copied ? (kk ? "Көшірілді" : "Скопировано") : (kk ? "Сілтемені көшіру" : "Копировать ссылку")}</button>
+              <button className="copy-button" type="button" onClick={() => window.print()}><Printer />{kk ? "Басып шығару" : "Распечатать"}</button>
             </div>
           </div>
-          <aside className="profile-action-card official-action-card">
-            <small>{kk ? "Ресми тексеру" : "Официальная проверка"}</small>
-            <h2>{kk ? "Келісімге дейін мәліметтерді салыстырыңыз" : "Сверьте сведения до заключения соглашения"}</h2>
-            <p>{kk ? "Ашық жиын ағымдағы лицензия мәртебесін көрсетпейді. Лицензияны және аумақтық алқаға мүшелікті қосымша тексеріңіз." : "Открытый набор не содержит текущий статус лицензии. Дополнительно проверьте лицензию и членство в территориальной коллегии."}</p>
-            <a className="button button-primary" href="https://data.egov.kz/datasets/view?index=advokattar_tizimi14" target="_blank" rel="noreferrer">
-              {kk ? "Дереккөзді ашу" : "Открыть источник"}<ExternalLink />
-            </a>
-            <div className="profile-contact-actions">
-              {phone && <a href={`tel:+${phone}`}><PhoneCall />{kk ? "Қоңырау шалу" : "Позвонить"}</a>}
-              {phone && <a href={`https://wa.me/${phone}`} target="_blank" rel="noreferrer"><MessageCircle />WhatsApp</a>}
-              <button type="button" onClick={copyProfileLink}>{copied ? <Check /> : <Copy />}{copied ? (kk ? "Көшірілді" : "Скопировано") : (kk ? "Сілтемені көшіру" : "Копировать ссылку")}</button>
-            </div>
-          </aside>
         </div>
       </section>
+
       <section className="profile-content">
         <div className="shell">
-          <DataSourceNotice locale={locale} total={total} />
-          <div className="profile-warning"><AlertTriangle /><p>{kk ? "Бұл карточка мамандану, тәжірибе, рейтинг немесе лицензияның ағымдағы мәртебесі туралы қорытынды жасамайды." : "Эта карточка не делает выводов о специализации, опыте, рейтинге или текущем статусе лицензии."}</p></div>
-          <div className="profile-content-grid official-profile-grid">
-            <article>
-              <div className="eyebrow"><span />{kk ? "Дереккөздегі мәліметтер" : "Сведения источника"}</div>
-              <h2>{kk ? "Кәсіби жазба" : "Профессиональная запись"}</h2>
-              <ul className="official-detail-list">
-                <li><span><IdCard /></span><div><small>{kk ? "Лицензия нөмірі" : "Номер лицензии"}</small><strong>{advocate.licenseNumber || noValue}</strong></div></li>
-                <li><span><CalendarDays /></span><div><small>{kk ? "Лицензия берілген күн" : "Дата выдачи лицензии"}</small><strong>{readableDate(advocate.licenseIssuedAt, noValue)}</strong></div></li>
-                <li><span><Database /></span><div><small>{kk ? "Алқаға кіру күні" : "Дата вступления в коллегию"}</small><strong>{readableDate(advocate.joinedAt, noValue)}</strong></div></li>
-              </ul>
+          <DataSourceNotice locale={locale} total={total} ggupTotal={ggupTotal} />
+          <div className="profile-content-grid">
+            <article className="profile-card">
+              <div className="eyebrow"><span />{kk ? "Алқа құрамы" : "Состав коллегии"}</div>
+              <h2>{kk ? "Тізімдегі мәліметтер" : "Сведения из списка"}</h2>
+              <dl className="detail-list">
+                <div><dt><UserRound />{kk ? "Адвокат" : "Адвокат"}</dt><dd>{advocate.name}</dd></div>
+                <div><dt><Building2 />{kk ? "Бөлімше / практика" : "Подразделение / форма практики"}</dt><dd>{consultationName(advocate.consultation, locale)}</dd></div>
+                <div>
+                  <dt><Phone />{kk ? "Тізімдегі байланыстар" : "Контакты из списка"}</dt>
+                  <dd className="contact-values">
+                    {advocate.contacts.map((contact, index) => contact.href ? (
+                      <a href={`tel:${contact.href}`} key={`${contact.display}-${index}`}>{contact.display}</a>
+                    ) : (
+                      <span key={`${contact.display}-${index}`}>
+                        {contact.display}
+                        {contact.needsReview && <small className="contact-review">{kk ? "нақтылау қажет" : "требует уточнения"}</small>}
+                      </span>
+                    ))}
+                  </dd>
+                </div>
+                <div>
+                  <dt><Scale />{kk ? "МКБЗК 2026" : "ГГЮП 2026"}</dt>
+                  <dd className={advocate.ggup2026 ? "ggup-status included" : "ggup-status"}>
+                    {advocate.ggup2026
+                      ? (kk ? `2026 жылғы қаңтар тізіміне енгізілген · № ${advocate.ggupSourceId}` : `Включён в январский список · № ${advocate.ggupSourceId}`)
+                      : (kk ? "2026 жылғы қаңтар тізімінде көрсетілмеген" : "Не указан в январском списке")}
+                  </dd>
+                </div>
+                <div><dt><Database />{kk ? "Тізімдегі нөмір" : "Номер в списке"}</dt><dd>№ {advocate.sourceId}</dd></div>
+                <div><dt><ShieldCheck />{kk ? "Тізімнің күні" : "Дата списка"}</dt><dd>{formatDirectoryDate(locale)}</dd></div>
+              </dl>
             </article>
-            <article>
-              <div className="eyebrow"><span />{kk ? "Байланыс" : "Контактные данные"}</div>
-              <h2>{kk ? "Мекенжай және байланыс" : "Адрес и контакты"}</h2>
-              <ul className="official-detail-list">
-                <li><span><MapPin /></span><div><small>{kk ? "Өңір" : "Регион"}</small><strong>{advocate.region}</strong></div></li>
-                <li><span><MapPin /></span><div><small>{kk ? "Мекенжай" : "Адрес"}</small><strong>{advocate.address || noValue}</strong></div></li>
-                <li><span><Phone /></span><div><small>{kk ? "Байланыс" : "Контакты"}</small><strong>{advocate.contacts || noValue}</strong></div></li>
-              </ul>
-              <a className="profile-help-link" href="/pomosh">{kk ? "Өтінішті дайындау" : "Подготовить обращение"}<ArrowUpRight /></a>
-            </article>
+
+            <aside className="profile-note">
+              <span><ShieldCheck /></span>
+              <h2>{kk ? "Ресми тізімдегі деректер" : "Данные из официальных списков"}</h2>
+              <p>{kk ? "Байланыстар КАОЖ жалпы тізімінде қалай берілсе, солай жарияланды. Фотосуреттер, лицензия нөмірлері мен мамандану тізімде жоқ, сондықтан сайт оларды ойдан қоспайды. Нөмірдің өзектілігін алқа қабылдауынан нақтылауға болады." : "Контакты опубликованы так, как они указаны в общем списке КАОЖ. Фотографий, номеров лицензий и специализаций в реестре нет, поэтому сайт их не додумывает. Актуальность номера можно уточнить через приёмную коллегии."}</p>
+              <Link className="button button-accent" href={`/advokaty?consultation=${encodeURIComponent(advocate.consultation)}`}>{kk ? "Осы бөлімшенің адвокаттары" : "Адвокаты этого подразделения"}<ArrowRight /></Link>
+              <Link className="plain-link" href="/regions">{kk ? "Алқаның байланыстары" : "Контакты коллегии"}<ArrowRight /></Link>
+            </aside>
           </div>
         </div>
       </section>

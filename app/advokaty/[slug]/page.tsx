@@ -1,14 +1,19 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import directoryData from "../../../public/data/advocates.json";
-import { ZHETISU_REGION, type AdvocateDirectory } from "../../lib/portal-data";
+import { getPublicDirectory } from "../../lib/content-service";
 import ProfileClient from "./profile-client";
 
-const directory = directoryData as AdvocateDirectory;
-const zhetysuAdvocates = directory.advocates.filter((item) => item.region === ZHETISU_REGION);
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Карточка адвоката",
+  description: "Сведения из актуального реестра Коллегии адвокатов области Жетісу.",
+};
 
 export default async function AdvocateProfilePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const advocate = zhetysuAdvocates.find((item) => item.id === slug);
+  const directory = await getPublicDirectory();
+  const advocate = directory.advocates.find((item) => item.id === slug);
   if (!advocate) notFound();
-  return <ProfileClient advocate={advocate} total={zhetysuAdvocates.length} />;
+  return <ProfileClient advocate={advocate} total={directory.meta.total} ggupTotal={directory.meta.ggup.total} />;
 }
