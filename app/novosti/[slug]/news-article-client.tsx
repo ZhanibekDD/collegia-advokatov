@@ -1,25 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { ArrowLeft, CalendarDays, ExternalLink, Newspaper } from "lucide-react";
 import { PortalFooter, PortalHeader } from "../../components/portal-shell";
-import { NEWS_DATA_URL, type NewsPost } from "../../lib/portal-data";
+import type { NewsPost } from "../../lib/portal-data";
 import { usePersistentLocale } from "../../lib/use-persistent-locale";
 
-export default function NewsArticleClient({ slug }: { slug: string }) {
+export default function NewsArticleClient({ initialPost: post }: { initialPost: NewsPost | null }) {
   const [locale, setLocale] = usePersistentLocale();
-  const [post, setPost] = useState<NewsPost | null>(null);
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    let active = true;
-    fetch(`${NEWS_DATA_URL}?slug=${encodeURIComponent(slug)}`)
-      .then((response) => response.json() as Promise<{ posts: NewsPost[] }>)
-      .then((result) => { if (active) { setPost(result.posts[0] ?? null); setReady(true); } })
-      .catch(() => { if (active) setReady(true); });
-    return () => { active = false; };
-  }, [slug]);
 
   const kk = locale === "kk";
   const title = post ? (kk && post.titleKk ? post.titleKk : post.titleRu) : "";
@@ -32,8 +20,7 @@ export default function NewsArticleClient({ slug }: { slug: string }) {
       <section className="article-section">
         <div className="shell article-shell">
           <Link className="article-back" href="/novosti"><ArrowLeft />{kk ? "Жаңалықтарға оралу" : "Вернуться к новостям"}</Link>
-          {!ready && <div className="status-panel"><span className="spinner" />{kk ? "Жарияланым жүктелуде…" : "Загружаем публикацию…"}</div>}
-          {ready && !post && <div className="news-empty"><span><Newspaper /></span><h1>{kk ? "Жарияланым табылмады" : "Публикация не найдена"}</h1></div>}
+          {!post && <div className="news-empty"><span><Newspaper /></span><h1>{kk ? "Жарияланым табылмады" : "Публикация не найдена"}</h1></div>}
           {post && (
             <article className="news-article">
               {post.imageUrl && <img className="news-article-image" src={post.imageUrl} alt={title} width="1200" height="675" />}
