@@ -35,13 +35,13 @@ const helpText = `Управление KAOJ.KZ
 Поля обновления: name, region, consultation, contacts, ggup, ggupsource, active.
 
 Новости и мероприятия:
-/news_publish Заголовок RU | Анонс RU | Текст RU | YYYY-MM-DD | news/event | Заголовок KZ | Анонс KZ | Текст KZ
+/news_publish Заголовок RU | Анонс RU | Текст RU | YYYY-MM-DD | news/event | Заголовок KZ | Анонс KZ | Текст KZ | Картинка URL | Источник URL | Название источника
 /news_draft — тот же формат, но без публикации
 /news_update ID | поле | значение
 /news_delete ID — отправить в архив
 /news_list — последние публикации
 
-Поля публикации: title, titlekk, excerpt, excerptkk, content, contentkk, date, kind, status.`;
+Поля публикации: title, titlekk, excerpt, excerptkk, content, contentkk, date, kind, image, sourceurl, sourcelabel, status.`;
 
 function splitParts(value: string): string[] {
   return value.split("|").map((part) => part.trim());
@@ -132,7 +132,7 @@ async function processCommand(text: string, actorId: string): Promise<string> {
   }
 
   if (command === "/news_publish" || command === "/news_draft") {
-    const [titleRu, excerptRu, contentRu, eventDate, kind, titleKk, excerptKk, contentKk] = splitParts(argument);
+    const [titleRu, excerptRu, contentRu, eventDate, kind, titleKk, excerptKk, contentKk, imageUrl, sourceUrl, sourceLabel] = splitParts(argument);
     if (!titleRu) return `Формат: ${command} Заголовок RU | Анонс RU | Текст RU | YYYY-MM-DD | news/event | Заголовок KZ | Анонс KZ | Текст KZ`;
     const post = await createNews({
       titleRu,
@@ -141,6 +141,9 @@ async function processCommand(text: string, actorId: string): Promise<string> {
       excerptKk,
       contentRu,
       contentKk,
+      imageUrl,
+      sourceUrl,
+      sourceLabel,
       eventDate: eventDate || null,
       kind: kind === "event" ? "event" : "news",
       status: command === "/news_publish" ? "published" : "draft",
@@ -159,10 +162,13 @@ async function processCommand(text: string, actorId: string): Promise<string> {
     else if (normalizedField === "excerptkk") input.excerptKk = value ?? "";
     else if (normalizedField === "content") input.contentRu = value ?? "";
     else if (normalizedField === "contentkk") input.contentKk = value ?? "";
+    else if (normalizedField === "image") input.imageUrl = value ?? "";
+    else if (normalizedField === "sourceurl") input.sourceUrl = value ?? "";
+    else if (normalizedField === "sourcelabel") input.sourceLabel = value ?? "";
     else if (normalizedField === "date") input.eventDate = value || null;
     else if (normalizedField === "kind") input.kind = value === "event" ? "event" : "news";
     else if (normalizedField === "status") input.status = value === "published" ? "published" : value === "archived" ? "archived" : "draft";
-    else return "Неизвестное поле. Доступно: title, titlekk, excerpt, excerptkk, content, contentkk, date, kind, status.";
+    else return "Неизвестное поле. Доступно: title, titlekk, excerpt, excerptkk, content, contentkk, image, sourceurl, sourcelabel, date, kind, status.";
     const post = await updateNews(id, input, actor);
     return `Публикация обновлена: ${post.titleRu}`;
   }

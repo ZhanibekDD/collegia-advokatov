@@ -45,6 +45,9 @@ const emptyNews = {
   excerptKk: "",
   contentRu: "",
   contentKk: "",
+  imageUrl: "",
+  sourceUrl: "",
+  sourceLabel: "",
   eventDate: "",
   kind: "news" as "news" | "event",
   status: "draft" as "draft" | "published",
@@ -175,6 +178,9 @@ export default function AdminDashboard({ userName, signOutPath }: { userName: st
       excerptKk: post.excerptKk,
       contentRu: post.contentRu,
       contentKk: post.contentKk,
+      imageUrl: post.imageUrl,
+      sourceUrl: post.sourceUrl,
+      sourceLabel: post.sourceLabel,
       eventDate: post.eventDate ?? "",
       kind: post.kind,
       status: post.status === "published" ? "published" : "draft",
@@ -295,6 +301,8 @@ export default function AdminDashboard({ userName, signOutPath }: { userName: st
                   <label><span>Қазақша тақырып</span><input value={newsForm.titleKk} onChange={(event) => setNewsForm({ ...newsForm, titleKk: event.target.value })} /></label>
                   <label><span>Краткий анонс</span><textarea rows={2} value={newsForm.excerptRu} onChange={(event) => setNewsForm({ ...newsForm, excerptRu: event.target.value })} /></label>
                   <label><span>Полный текст</span><textarea rows={7} value={newsForm.contentRu} onChange={(event) => setNewsForm({ ...newsForm, contentRu: event.target.value })} /></label>
+                  <label><span>Картинка (HTTPS-ссылка или путь /images/...)</span><input value={newsForm.imageUrl} onChange={(event) => setNewsForm({ ...newsForm, imageUrl: event.target.value })} placeholder="/images/news/photo.webp" /></label>
+                  <div className="admin-form-row"><label><span>Ссылка на источник</span><input type="url" value={newsForm.sourceUrl} onChange={(event) => setNewsForm({ ...newsForm, sourceUrl: event.target.value })} placeholder="https://www.gov.kz/..." /></label><label><span>Название источника</span><input value={newsForm.sourceLabel} onChange={(event) => setNewsForm({ ...newsForm, sourceLabel: event.target.value })} placeholder="GOV.KZ" /></label></div>
                   <label><span>Қазақша қысқаша мәтін</span><textarea rows={2} value={newsForm.excerptKk} onChange={(event) => setNewsForm({ ...newsForm, excerptKk: event.target.value })} /></label>
                   <label><span>Қазақша толық мәтін</span><textarea rows={5} value={newsForm.contentKk} onChange={(event) => setNewsForm({ ...newsForm, contentKk: event.target.value })} /></label>
                   <label><span>После сохранения</span><select value={newsForm.status} onChange={(event) => setNewsForm({ ...newsForm, status: event.target.value === "published" ? "published" : "draft" })}><option value="draft">Сохранить черновик</option><option value="published">Опубликовать на сайте</option></select></label>

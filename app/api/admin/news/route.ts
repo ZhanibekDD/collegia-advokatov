@@ -20,6 +20,9 @@ function parseInput(value: unknown): NewsInput {
     excerptKk: typeof data.excerptKk === "string" ? data.excerptKk : "",
     contentRu: typeof data.contentRu === "string" ? data.contentRu : "",
     contentKk: typeof data.contentKk === "string" ? data.contentKk : "",
+    imageUrl: typeof data.imageUrl === "string" ? data.imageUrl : "",
+    sourceUrl: typeof data.sourceUrl === "string" ? data.sourceUrl : "",
+    sourceLabel: typeof data.sourceLabel === "string" ? data.sourceLabel : "",
     eventDate: typeof data.eventDate === "string" ? data.eventDate : null,
   };
 }

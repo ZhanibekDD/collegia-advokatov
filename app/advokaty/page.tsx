@@ -156,7 +156,7 @@ function DirectoryContent() {
             <div className="directory-list">
               {visible.map((advocate) => (
                 <Link className="directory-row" href={`/advokaty/${advocate.id}`} key={advocate.id}>
-                  <span className="directory-id">{String(advocate.sourceId).padStart(3, "0")}</span>
+                  <span className="directory-id"><small>{locale === "ru" ? "№ в списке" : "Тізім №"}</small><strong>{advocate.sourceId}</strong></span>
                   <span className="directory-person">
                     <strong>{advocate.name}</strong>
                     <small>{locale === "ru" ? "Член Коллегии адвокатов области Жетісу" : "Жетісу облыстық адвокаттар алқасының мүшесі"}</small>

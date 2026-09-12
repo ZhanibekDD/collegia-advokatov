@@ -8,12 +8,17 @@ import { ShanyrakMark } from "./shanyrak-mark";
 export function MotionController() {
   useEffect(() => {
     const root = document.documentElement;
-    root.classList.add("motion-enabled");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
     let interactionFrame = 0;
     let activeTilt: HTMLElement | null = null;
     let activeMagnetic: HTMLElement | null = null;
+
+    const revealAll = () => document.querySelectorAll<HTMLElement>("[data-reveal]").forEach((item) => item.classList.add("is-visible"));
+    if (reducedMotion || !("IntersectionObserver" in window)) {
+      revealAll();
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -29,12 +34,16 @@ export function MotionController() {
     const observeItems = () => {
       document.querySelectorAll<HTMLElement>("[data-reveal]:not([data-motion-observed])").forEach((item) => {
         item.dataset.motionObserved = "true";
+        const bounds = item.getBoundingClientRect();
+        if (bounds.top < window.innerHeight * 0.94 && bounds.bottom > 0) item.classList.add("is-visible");
         observer.observe(item);
       });
     };
     observeItems();
+    root.classList.add("motion-enabled");
     const mutations = new MutationObserver(observeItems);
     mutations.observe(document.body, { childList: true, subtree: true });
+    const revealFallback = window.setTimeout(revealAll, 1400);
 
     const resetTilt = (target: HTMLElement | null) => {
       if (!target) return;
@@ -105,6 +114,7 @@ export function MotionController() {
       document.removeEventListener("pointerout", handlePointerOut);
       mutations.disconnect();
       observer.disconnect();
+      window.clearTimeout(revealFallback);
       root.classList.remove("motion-enabled");
     };
   }, []);
@@ -200,7 +210,6 @@ export function CivicMotionStage({
         <span>{locale === "ru" ? "Список проверен" : "Тізім тексерілді"}</span>
       </div>
       <div className="stage-status"><ShieldCheck /><span>{locale === "ru" ? "Официальные сведения" : "Ресми мәліметтер"}</span></div>
-      <div className="stage-seven-mark"><strong>07</strong><span>{locale === "ru" ? "потоков Жетісу" : "Жетісу ағыны"}</span></div>
     </div>
   );
 }

@@ -55,6 +55,9 @@ export type NewsPost = {
   excerptKk: string;
   contentRu: string;
   contentKk: string;
+  imageUrl: string;
+  sourceUrl: string;
+  sourceLabel: string;
   eventDate: string | null;
   publishedAt: string | null;
   createdAt: string;

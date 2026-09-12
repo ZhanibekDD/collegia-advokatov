@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { ArrowLeft, ArrowRight, BadgeCheck, Building2, Check, Copy, Database, MapPin, Phone, Printer, Scale, ShieldCheck, UserRound } from "lucide-react";
 import { DataSourceNotice, PortalFooter, PortalHeader } from "../../components/portal-shell";
-import { consultationName, formatDirectoryDate, type OfficialAdvocate } from "../../lib/portal-data";
+import { consultationName, type OfficialAdvocate } from "../../lib/portal-data";
 import { usePersistentLocale } from "../../lib/use-persistent-locale";
 
 export default function ProfileClient({ advocate, total, ggupTotal }: { advocate: OfficialAdvocate; total: number; ggupTotal: number }) {
@@ -25,7 +25,7 @@ export default function ProfileClient({ advocate, total, ggupTotal }: { advocate
         <div className="shell">
           <Link className="breadcrumb" href="/advokaty"><ArrowLeft />{kk ? "Тізімге оралу" : "Вернуться к списку"}</Link>
           <div className="profile-hero-grid">
-            <div className="profile-number"><small>KAOJ · {formatDirectoryDate(locale)}</small><strong>{String(advocate.sourceId).padStart(3, "0")}</strong></div>
+            <div className="profile-number"><small>{locale === "ru" ? "Номер в официальном списке" : "Ресми тізімдегі нөмір"}</small><strong>№ {advocate.sourceId}</strong></div>
             <div className="profile-title">
               <div className="verified-label"><BadgeCheck />{kk ? "Алқаның өзекті тізіміндегі жазба" : "Запись в актуальном списке коллегии"}</div>
               <h1>{advocate.name}</h1>

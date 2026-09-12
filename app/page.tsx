@@ -39,12 +39,12 @@ import { usePersistentLocale } from "./lib/use-persistent-locale";
 
 const text = {
   ru: {
-    eyebrow: "Официальный портал адвокатуры области Жетісу",
-    title: "Найдите адвоката.",
-    titleAccent: "Быстро и по официальному списку.",
-    lead: "Актуальный состав коллегии, юридические консультации региона и проверенные контактные сведения — в одном месте.",
-    searchLabel: "Поиск по реестру",
-    placeholder: "Введите фамилию или район…",
+    eyebrow: "Официальный список адвокатов области Жетісу",
+    title: "Нужна юридическая помощь?",
+    titleAccent: "Найдите адвоката рядом с вами.",
+    lead: "Введите фамилию или район. Сайт покажет адвокатов, их подразделения и контакты из официального списка.",
+    searchLabel: "Поиск по официальному списку",
+    placeholder: "Например: Иванов или Коксу…",
     search: "Найти",
     suggestions: "Подходящие адвокаты",
     noMatches: "Точных совпадений пока нет — посмотреть полный поиск",
@@ -53,11 +53,11 @@ const text = {
     registryState: "Состояние официального реестра",
     members: "адвокатов в реестре",
     groups: "подразделений и форм практики",
-    updated: "актуальность списка",
-    languages: "языка интерфейса",
-    routesEyebrow: "Быстрый маршрут",
-    routesTitle: "Нужный раздел — в один шаг",
-    routesLead: "Мы убрали лишние экраны: сразу переходите к поиску, подразделениям или памятке по правовой помощи.",
+    updated: "список обновлён",
+    languages: "языка на сайте",
+    routesEyebrow: "Выберите действие",
+    routesTitle: "Что вам нужно?",
+    routesLead: "Нажмите на подходящий вариант — всё важное открывается сразу, без сложных меню.",
     regionEyebrow: "Регион присутствия",
     regionTitle: "Правовая помощь — рядом с жителями Жетісу",
     regionText: "Коллегия объединяет адвокатов Талдыкоргана и районов области. Выберите ближайшую юридическую консультацию или найдите специалиста по фамилии.",
@@ -80,8 +80,8 @@ const text = {
       ["Проверить сведения", "Переход к официальному ресурсу Республиканской коллегии адвокатов."],
     ],
     membersEyebrow: "Состав коллегии",
-    membersTitle: "Адвокаты без рекламных анкет",
-    membersLead: "В карточках — ФИО, подразделение, контакты из общего списка и отметка об участии в ГГЮП 2026. Без выдуманных рейтингов, специализаций и фотографий.",
+    membersTitle: "Адвокаты из официального списка",
+    membersLead: "В каждой записи указаны ФИО, подразделение и доступные контакты. Номер рядом с именем — это номер строки в исходном списке коллегии.",
     openProfile: "Открыть запись",
     viewAll: "Смотреть всех 139",
     groupsEyebrow: "География помощи",
@@ -118,9 +118,9 @@ const text = {
     groups: "бөлімше және практика нысаны",
     updated: "тізімнің өзектілігі",
     languages: "интерфейс тілі",
-    routesEyebrow: "Жылдам бағыт",
-    routesTitle: "Қажетті бөлім — бір қадамда",
-    routesLead: "Артық экрандарды алып тастадық: іздеуге, бөлімшелерге немесе құқықтық көмек нұсқаулығына бірден өтіңіз.",
+    routesEyebrow: "Әрекетті таңдаңыз",
+    routesTitle: "Сізге не қажет?",
+    routesLead: "Сәйкес нұсқаны басыңыз — маңызды ақпарат күрделі мәзірсіз бірден ашылады.",
     regionEyebrow: "Қызмет көрсету өңірі",
     regionTitle: "Құқықтық көмек — Жетісу тұрғындарына жақын",
     regionText: "Алқа Талдықорған қаласы мен облыс аудандарындағы адвокаттарды біріктіреді. Жақын заң консультациясын таңдаңыз немесе адвокатты тегі бойынша табыңыз.",
@@ -243,7 +243,7 @@ export default function HomePage() {
                   <div className="suggestions-title">{t.suggestions}<span>{suggestions.length}</span></div>
                   {suggestions.map((advocate) => (
                     <Link href={`/advokaty/${advocate.id}`} role="option" aria-selected="false" key={advocate.id}>
-                      <span>{String(advocate.sourceId).padStart(3, "0")}</span>
+                      <span>№ {advocate.sourceId}</span>
                       <div><strong>{advocate.name}</strong><small>{consultationName(advocate.consultation, locale)}</small></div>
                       <ArrowRight />
                     </Link>
@@ -273,10 +273,10 @@ export default function HomePage() {
         <div className="shell stats-dock-v3">
           <div className="stats-dock-label"><span>{t.registryState}</span><div aria-hidden="true">{Array.from({ length: 7 }, (_, index) => <i style={{ "--dock-stream": index } as React.CSSProperties} key={index} />)}</div></div>
           <div className="stats-grid stats-grid-v2">
-            <div><UsersRound /><strong><AnimatedNumber value={directory?.meta.total} fallback="139" /></strong><span>{t.members}</span></div>
-            <div><Landmark /><strong><AnimatedNumber value={directory?.meta.consultationCount} fallback="13" /></strong><span>{t.groups}</span></div>
-            <div><CalendarCheck2 /><strong>01.09.2026</strong><span>{t.updated}</span></div>
-            <div><ShieldCheck /><strong>2</strong><span>{t.languages}</span></div>
+            <div><div className="stat-value"><UsersRound /><strong><AnimatedNumber value={directory?.meta.total} fallback="139" /></strong></div><span>{t.members}</span></div>
+            <div><div className="stat-value"><Landmark /><strong><AnimatedNumber value={directory?.meta.consultationCount} fallback="13" /></strong></div><span>{t.groups}</span></div>
+            <div><div className="stat-value"><CalendarCheck2 /><strong>01.09.2026</strong></div><span>{t.updated}</span></div>
+            <div><div className="stat-value"><ShieldCheck /><strong>2</strong></div><span>{t.languages}</span></div>
           </div>
         </div>
       </section>
@@ -289,7 +289,7 @@ export default function HomePage() {
               const Icon = routeIcons[index];
               // The source asset is already an optimized, responsive-safe WebP; Vinext's image endpoint is not available in this static Worker build.
               // eslint-disable-next-line @next/next/no-img-element
-              const content = <>{index === 0 && <img className="route-card-image" src="/images/legal-architecture-v1.webp" alt="" loading="lazy" aria-hidden="true" />}<span className="surface-glow" aria-hidden="true" /><div className="route-card-top"><span className="route-number">0{index + 1}</span><span className="route-icon"><Icon /></span></div><h3>{title}</h3><p>{description}</p><span className="route-card-action">{locale === "ru" ? "Перейти" : "Ашу"}<ArrowRight />{index === 3 && <ExternalLink />}</span></>;
+              const content = <>{index === 0 && <img className="route-card-image" src="/images/legal-architecture-v1.webp" alt="" loading="lazy" aria-hidden="true" />}<span className="surface-glow" aria-hidden="true" /><div className="route-card-top"><span className="route-icon"><Icon /></span></div><h3>{title}</h3><p>{description}</p><span className="route-card-action">{locale === "ru" ? "Открыть" : "Ашу"}<ArrowRight />{index === 3 && <ExternalLink />}</span></>;
               const className = `route-card-v2 route-card-${index + 1}`;
               const style = { "--reveal-delay": `${index * 80}ms` } as React.CSSProperties;
               return index === 3 ? <a className={className} style={style} data-reveal data-tilt href={routeHrefs[index]} target="_blank" rel="noreferrer" key={title}>{content}</a> : <Link className={className} style={style} data-reveal data-tilt href={routeHrefs[index]} key={title}>{content}</Link>;
@@ -350,8 +350,8 @@ export default function HomePage() {
                 return (
                   <Link className="home-news-card" href={`/novosti/${post.slug}`} data-reveal data-tilt style={{ "--reveal-delay": `${index * 80}ms` } as React.CSSProperties} key={post.id}>
                     <span className="surface-glow" aria-hidden="true" />
+                    {post.imageUrl && <img className="home-news-image" src={post.imageUrl} alt="" width="1200" height="675" loading={index === 0 ? "eager" : "lazy"} aria-hidden="true" />}
                     <div className="home-news-meta"><span>{post.kind === "event" ? <CalendarDays /> : <Newspaper />}{post.kind === "event" ? t.eventLabel : t.newsLabel}</span><time dateTime={date ?? undefined}>{formatNewsDate(date, locale)}</time></div>
-                    <strong className="home-news-index">0{index + 1}</strong>
                     <h3>{title}</h3>
                     {excerpt && <p>{excerpt}</p>}
                     <span className="home-news-action">{t.newsRead}<ArrowRight /></span>
@@ -368,7 +368,7 @@ export default function HomePage() {
           <div className="section-heading split-heading" data-reveal><div><div className="eyebrow"><span />{t.membersEyebrow}</div><h2>{t.membersTitle}</h2><p>{t.membersLead}</p></div><Link className="arrow-link" href="/advokaty">{t.viewAll}<ArrowRight /></Link></div>
           <div data-reveal><DataSourceNotice locale={locale} total={directory?.meta.total} ggupTotal={directory?.meta.ggup.total} /></div>
           <div className="member-preview-grid member-preview-v2" data-reveal>
-            {featured.map((advocate) => <Link className="member-row" href={`/advokaty/${advocate.id}`} key={advocate.id}><span className="member-index">{String(advocate.sourceId).padStart(3, "0")}</span><span><strong>{advocate.name}</strong><small>{consultationName(advocate.consultation, locale)}</small></span><span className="round-arrow" aria-label={t.openProfile}><ArrowRight /></span></Link>)}
+            {featured.map((advocate) => <Link className="member-row" href={`/advokaty/${advocate.id}`} key={advocate.id}><span className="member-index"><small>{locale === "ru" ? "№ в списке" : "Тізім №"}</small><strong>{advocate.sourceId}</strong></span><span><strong>{advocate.name}</strong><small>{consultationName(advocate.consultation, locale)}</small></span><span className="round-arrow" aria-label={t.openProfile}><ArrowRight /></span></Link>)}
           </div>
         </div>
       </section>
@@ -378,7 +378,7 @@ export default function HomePage() {
         <div className="shell">
           <div className="section-heading split-heading light-heading" data-reveal><div><div className="eyebrow light"><span />{t.groupsEyebrow}</div><h2>{t.groupsTitle}</h2><p>{t.groupsLead}</p></div><Link className="arrow-link light-link" href="/konsultacii">{t.viewGroups}<ArrowRight /></Link></div>
           <div className="consultation-preview-grid consultation-preview-v2">
-            {featuredConsultations.map((consultation, index) => <Link className="consultation-card" data-reveal data-tilt style={{ "--reveal-delay": `${index * 70}ms` } as React.CSSProperties} href={`/konsultacii#${consultation.id}`} key={consultation.id}><span className="surface-glow" aria-hidden="true" /><span className="consultation-number">{String(index + 1).padStart(2, "0")}</span><Building2 /><h3>{consultationName(consultation.name, locale)}</h3><p>{consultation.count} {advocateWord(consultation.count, locale)}</p><ArrowRight className="consultation-arrow" /></Link>)}
+            {featuredConsultations.map((consultation, index) => <Link className="consultation-card" data-reveal data-tilt style={{ "--reveal-delay": `${index * 70}ms` } as React.CSSProperties} href={`/konsultacii#${consultation.id}`} key={consultation.id}><span className="surface-glow" aria-hidden="true" /><Building2 /><h3>{consultationName(consultation.name, locale)}</h3><p>{consultation.count} {advocateWord(consultation.count, locale)}</p><ArrowRight className="consultation-arrow" /></Link>)}
           </div>
         </div>
       </section>

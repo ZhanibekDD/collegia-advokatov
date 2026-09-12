@@ -104,6 +104,8 @@ export default function NewsPage() {
                 const excerpt = locale === "kk" && post.excerptKk ? post.excerptKk : post.excerptRu;
                 return (
                   <article className="news-card" data-reveal key={post.id}>
+                    {post.imageUrl && <img className="news-card-image" src={post.imageUrl} alt={title} width="1200" height="675" loading="lazy" />}
+                    <div className="news-card-content">
                     <div className="news-card-meta">
                       <span>{post.kind === "event" ? <CalendarDays /> : <Newspaper />}{post.kind === "event" ? t.eventLabel : t.newsLabel}</span>
                       <time dateTime={post.eventDate ?? post.publishedAt ?? undefined}>{formatDate(post.eventDate ?? post.publishedAt, locale)}</time>
@@ -111,6 +113,7 @@ export default function NewsPage() {
                     <h2>{title}</h2>
                     {excerpt && <p>{excerpt}</p>}
                     <Link href={`/novosti/${post.slug}`}>{t.read}<ArrowRight /></Link>
+                    </div>
                   </article>
                 );
               })}

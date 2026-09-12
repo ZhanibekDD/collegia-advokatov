@@ -76,7 +76,7 @@ export default function ConsultationsPage() {
                       <h3>{t.members}</h3>
                       <ol>
                         {members.map((advocate) => (
-                          <li key={advocate.id}><span>{String(advocate.sourceId).padStart(3, "0")}</span><Link href={`/advokaty/${advocate.id}`}>{advocate.name}<ArrowRight /></Link></li>
+                          <li key={advocate.id}><span>№ {advocate.sourceId}</span><Link href={`/advokaty/${advocate.id}`}>{advocate.name}<ArrowRight /></Link></li>
                         ))}
                       </ol>
                       <Link className="plain-link" href={`/advokaty?consultation=${encodeURIComponent(consultation.name)}`}>{t.directory}<ArrowRight /></Link>

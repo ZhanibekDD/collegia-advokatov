@@ -25,78 +25,20 @@ const portalRoutes = {
   ],
 } as const;
 
-const homeSections = {
-  ru: [
-    ["Начало", "home-top"],
-    ["Маршруты", "quick-routes"],
-    ["Жетісу", "region-story"],
-    ["Новости", "home-news"],
-    ["Адвокаты", "advocates"],
-    ["Консультации", "consultations"],
-  ],
-  kk: [
-    ["Басты", "home-top"],
-    ["Бағыттар", "quick-routes"],
-    ["Жетісу", "region-story"],
-    ["Жаңалықтар", "home-news"],
-    ["Адвокаттар", "advocates"],
-    ["Консультациялар", "consultations"],
-  ],
-} as const;
-
 export function RouteTransition() {
   const pathname = usePathname();
   return (
     <div className="route-transition" key={pathname} aria-hidden="true">
-      {Array.from({ length: 7 }, (_, index) => <span style={{ "--curtain": index } as React.CSSProperties} key={index} />)}
+      <span />
     </div>
-  );
-}
-
-export function SectionNavigator({ locale }: { locale: Locale }) {
-  const sections = homeSections[locale];
-  const [active, setActive] = useState(sections[0][1]);
-
-  useEffect(() => {
-    let frame = 0;
-    const update = () => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
-        const anchor = window.innerHeight * 0.42;
-        const nearest = sections
-          .map(([, id]) => ({ id, distance: Math.abs((document.getElementById(id)?.getBoundingClientRect().top ?? Infinity) - anchor) }))
-          .sort((a, b) => a.distance - b.distance)[0];
-        if (nearest && Number.isFinite(nearest.distance)) setActive(nearest.id);
-      });
-    };
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update, { passive: true });
-    return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
-    };
-  }, [sections]);
-
-  const activeIndex = Math.max(0, sections.findIndex(([, id]) => id === active));
-  return (
-    <aside className="section-navigator">
-      <span className="section-nav-count"><strong>{String(activeIndex + 1).padStart(2, "0")}</strong><i />{String(sections.length).padStart(2, "0")}</span>
-      <nav aria-label={locale === "ru" ? "Навигация по главной странице" : "Басты бет навигациясы"}>
-        {sections.map(([label, id], index) => (
-          <a className={active === id ? "active" : ""} href={`#${id}`} aria-current={active === id ? "location" : undefined} key={id}>
-            <span>{label}</span><i /><em>{String(index + 1).padStart(2, "0")}</em>
-          </a>
-        ))}
-      </nav>
-    </aside>
   );
 }
 
 export function PortalAtmosphere() {
   useEffect(() => {
     const root = document.documentElement;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
     let frame = 0;
 
     const updateScroll = () => {
@@ -118,11 +60,11 @@ export function PortalAtmosphere() {
 
     updateScroll();
     window.addEventListener("scroll", updateScroll, { passive: true });
-    window.addEventListener("pointermove", updatePointer, { passive: true });
+    if (!reducedMotion && !coarsePointer) window.addEventListener("pointermove", updatePointer, { passive: true });
     return () => {
       cancelAnimationFrame(frame);
       window.removeEventListener("scroll", updateScroll);
-      window.removeEventListener("pointermove", updatePointer);
+      if (!reducedMotion && !coarsePointer) window.removeEventListener("pointermove", updatePointer);
     };
   }, []);
 
@@ -278,7 +220,7 @@ export function PortalCommand({ locale }: { locale: Locale }) {
                   <p>{locale === "ru" ? "Адвокаты" : "Адвокаттар"}<span>{advocateMatches.length}</span></p>
                   {advocateMatches.map((advocate) => (
                     <Link href={`/advokaty/${advocate.id}`} onClick={close} key={advocate.id}>
-                      <em>{String(advocate.sourceId).padStart(3, "0")}</em>
+                      <em>№ {advocate.sourceId}</em>
                       <div><strong>{advocate.name}</strong><small>{consultationName(advocate.consultation, locale)}</small></div>
                       <ArrowRight />
                     </Link>
@@ -329,7 +271,6 @@ export function JetisuSignature({ locale }: { locale: Locale }) {
   return (
     <div className="jetisu-signature" aria-hidden="true">
       <div className="jetisu-signature-streams">{Array.from({ length: 7 }, (_, index) => <i key={index} />)}</div>
-      <strong>07</strong>
       <span>{locale === "ru" ? "СЕМЬ ПОТОКОВ · ЕДИНОЕ ПРАВОВОЕ ПРОСТРАНСТВО" : "ЖЕТІ АҒЫН · БІРТҰТАС ҚҰҚЫҚТЫҚ КЕҢІСТІК"}</span>
     </div>
   );
