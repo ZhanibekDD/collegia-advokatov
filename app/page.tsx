@@ -368,7 +368,7 @@ export default function HomePage() {
           <div className="section-heading split-heading" data-reveal><div><div className="eyebrow"><span />{t.membersEyebrow}</div><h2>{t.membersTitle}</h2><p>{t.membersLead}</p></div><Link className="arrow-link" href="/advokaty">{t.viewAll}<ArrowRight /></Link></div>
           <div data-reveal><DataSourceNotice locale={locale} total={directory?.meta.total} ggupTotal={directory?.meta.ggup.total} /></div>
           <div className="member-preview-grid member-preview-v2" data-reveal>
-            {featured.map((advocate) => <Link className="member-row" href={`/advokaty/${advocate.id}`} key={advocate.id}><span className="member-index"><small>{locale === "ru" ? "№ в списке" : "Тізім №"}</small><strong>{advocate.sourceId}</strong></span><span><strong>{advocate.name}</strong><small>{consultationName(advocate.consultation, locale)}</small></span><span className="round-arrow" aria-label={t.openProfile}><ArrowRight /></span></Link>)}
+            {featured.map((advocate, index) => <Link className="member-row" href={`/advokaty/${advocate.id}`} style={{ "--member-order": index } as React.CSSProperties} key={advocate.id}><span className="member-index" aria-label={locale === "ru" ? `Номер ${advocate.sourceId} в списке` : `Тізімдегі ${advocate.sourceId} нөмір`}><strong>{advocate.sourceId}</strong></span><span><strong>{advocate.name}</strong><small>{consultationName(advocate.consultation, locale)}</small></span><span className="round-arrow" aria-label={t.openProfile}><ArrowRight /></span></Link>)}
           </div>
         </div>
       </section>

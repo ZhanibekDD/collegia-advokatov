@@ -267,11 +267,11 @@ export function BackToTop({ locale }: { locale: Locale }) {
   );
 }
 
-export function JetisuSignature({ locale }: { locale: Locale }) {
+export function JetisuSignature({ locale: _locale }: { locale: Locale }) {
   return (
     <div className="jetisu-signature" aria-hidden="true">
       <div className="jetisu-signature-streams">{Array.from({ length: 7 }, (_, index) => <i key={index} />)}</div>
-      <span>{locale === "ru" ? "СЕМЬ ПОТОКОВ · ЕДИНОЕ ПРАВОВОЕ ПРОСТРАНСТВО" : "ЖЕТІ АҒЫН · БІРТҰТАС ҚҰҚЫҚТЫҚ КЕҢІСТІК"}</span>
+      <div className="jetisu-signature-nodes">{Array.from({ length: 7 }, (_, index) => <i key={index} />)}</div>
     </div>
   );
 }

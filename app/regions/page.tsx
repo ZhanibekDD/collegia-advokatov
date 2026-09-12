@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight, BadgeCheck, Building2, ChevronDown, FileCheck2, Gavel, Landmark, Mail, MapPin, Phone, Scale, ShieldCheck, UserRoundCheck, UsersRound, Vote } from "lucide-react";
 import { DataSourceNotice, PortalFooter, PortalHeader } from "../components/portal-shell";
 import { JetisuSignature } from "../components/portal-experience";
+import { ShanyrakMark } from "../components/shanyrak-mark";
 import { GOVERNANCE_GROUPS, REGIONAL_CONFERENCE_DELEGATES, REPUBLICAN_CONFERENCE_DELEGATES, REPUBLICAN_PRESIDIUM } from "../lib/association-structure";
 import { ASSOCIATION } from "../lib/portal-data";
 import { useDirectory } from "../lib/use-directory";
@@ -44,6 +45,7 @@ const text = {
     contactNote: "Отдельный номер для обращений и консультаций будет опубликован после согласования.",
     directory: "Перейти к списку адвокатов",
     groups: "Посмотреть юридические консультации",
+    motto: "Семь потоков. Единое правовое пространство.",
   },
   kk: {
     eyebrow: "Алқа туралы",
@@ -79,6 +81,7 @@ const text = {
     contactNote: "Өтініштер мен консультацияларға арналған жеке нөмір келісілгеннен кейін жарияланады.",
     directory: "Адвокаттар тізіміне өту",
     groups: "Заң консультацияларын көру",
+    motto: "Жеті ағын. Біртұтас құқықтық кеңістік.",
   },
 };
 
@@ -108,7 +111,16 @@ export default function AboutPage() {
             <h1>{t.title}</h1>
             <p>{t.lead}</p>
           </div>
-          <div className="association-seal"><Scale /><strong>{ASSOCIATION.domain}</strong><small>{locale === "ru" ? "область Жетісу" : "Жетісу облысы"}</small></div>
+          <div className="association-identity" data-tilt>
+            <div className="association-seal">
+              <span className="association-seal-emblem"><ShanyrakMark /></span>
+              <span className="association-seal-orbit" aria-hidden="true">{Array.from({ length: 7 }, (_, index) => <i key={index} />)}</span>
+              <Scale className="association-seal-scale" />
+              <strong>{ASSOCIATION.domain}</strong>
+              <small>{locale === "ru" ? "область Жетісу" : "Жетісу облысы"}</small>
+            </div>
+            <div className="association-motto"><span aria-hidden="true">{Array.from({ length: 7 }, (_, index) => <i key={index} />)}</span><p>{t.motto}</p></div>
+          </div>
         </div>
       </section>
 

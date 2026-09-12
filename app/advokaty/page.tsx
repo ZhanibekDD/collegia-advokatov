@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Suspense, useDeferredValue, useMemo, useState } from "react";
+import { Suspense, type CSSProperties, useDeferredValue, useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, Building2, ListFilter, Scale, Search, ShieldCheck, X } from "lucide-react";
 import { DataSourceNotice, PortalFooter, PortalHeader } from "../components/portal-shell";
 import { JetisuSignature } from "../components/portal-experience";
@@ -154,9 +154,9 @@ function DirectoryContent() {
 
           {directory && visible.length > 0 && (
             <div className="directory-list">
-              {visible.map((advocate) => (
-                <Link className="directory-row" href={`/advokaty/${advocate.id}`} key={advocate.id}>
-                  <span className="directory-id"><small>{locale === "ru" ? "№ в списке" : "Тізім №"}</small><strong>{advocate.sourceId}</strong></span>
+              {visible.map((advocate, index) => (
+                <Link className="directory-row" href={`/advokaty/${advocate.id}`} style={{ "--directory-order": index } as CSSProperties} key={advocate.id}>
+                  <span className="directory-id" aria-label={locale === "ru" ? `Номер ${advocate.sourceId} в списке` : `Тізімдегі ${advocate.sourceId} нөмір`}><strong>{advocate.sourceId}</strong></span>
                   <span className="directory-person">
                     <strong>{advocate.name}</strong>
                     <small>{locale === "ru" ? "Член Коллегии адвокатов области Жетісу" : "Жетісу облыстық адвокаттар алқасының мүшесі"}</small>
