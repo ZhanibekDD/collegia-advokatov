@@ -1,68 +1,174 @@
 "use client";
 
-import { useState } from "react";
-import type { Locale } from "../lib/portal-data";
-import { Database, ExternalLink, Menu, Scale, X } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Database, ExternalLink, Mail, MapPin, Menu, Phone, ShieldCheck, X } from "lucide-react";
+import {
+  ASSOCIATION,
+  RKA_TERRITORIAL_ASSOCIATIONS_URL,
+  formatDirectoryDate,
+  type Locale,
+} from "../lib/portal-data";
 import { ShanyrakMark } from "./shanyrak-mark";
+import { BackToTop, PortalAtmosphere, PortalCommand, RouteTransition } from "./portal-experience";
+import { MotionController } from "./motion-stage";
 
 const nav = {
   ru: [
     ["Главная", "/"],
-    ["О коллегии", "/regions"],
     ["Адвокаты", "/advokaty"],
+    ["Юр. консультации", "/konsultacii"],
+    ["Новости", "/novosti"],
     ["Правовая помощь", "/pomosh"],
+    ["О коллегии", "/regions"],
   ],
   kk: [
     ["Басты бет", "/"],
-    ["Алқа туралы", "/regions"],
     ["Адвокаттар", "/advokaty"],
+    ["Заң консультациялары", "/konsultacii"],
+    ["Жаңалықтар", "/novosti"],
     ["Құқықтық көмек", "/pomosh"],
+    ["Алқа туралы", "/regions"],
   ],
 };
 
-export function PortalHeader({ locale, onLocaleChange }: { locale: Locale; onLocaleChange: (locale: Locale) => void }) {
-  const [menuOpen, setMenuOpen] = useState(false);
+function AssociationBrand({ locale }: { locale: Locale }) {
   return (
-    <header className="jp-header jp-inner-header">
-      <div className="jp-shell jp-header-inner">
-        <a className="jp-brand" href="/">
-          <span className="jp-emblem"><ShanyrakMark /></span>
-          <span className="jp-brand-text"><strong>ЖЕТІСУ ОБЛЫСТЫҚ АДВОКАТТАР АЛҚАСЫ</strong><small>{locale === "ru" ? "Коллегия адвокатов области Жетісу" : "Жетісу облыстық адвокаттар алқасы"}</small></span>
-        </a>
-        <nav className={menuOpen ? "jp-nav is-open" : "jp-nav"} aria-label="Навигация">
-          {nav[locale].map(([label, href]) => <a href={href} key={href} onClick={() => setMenuOpen(false)}>{label}</a>)}
-        </nav>
-        <div className="jp-header-actions">
-          <div className="jp-language"><button className={locale === "kk" ? "active" : ""} onClick={() => onLocaleChange("kk")}>ҚАЗ</button><span>/</span><button className={locale === "ru" ? "active" : ""} onClick={() => onLocaleChange("ru")}>РУС</button></div>
-          <button className="jp-menu" type="button" aria-label={locale === "ru" ? "Открыть меню" : "Мәзірді ашу"} aria-expanded={menuOpen} onClick={() => setMenuOpen((value) => !value)}>{menuOpen ? <X /> : <Menu />}</button>
+    <span className="brand-lockup">
+      <span className="logo-slot" data-logo-slot="replace-with-approved-logo">
+        <ShanyrakMark />
+      </span>
+      <span className="brand-copy">
+        <strong>{ASSOCIATION.domain}</strong>
+        <small>{ASSOCIATION.name[locale]}</small>
+      </span>
+    </span>
+  );
+}
+
+export function PortalHeader({
+  locale,
+  onLocaleChange,
+}: {
+  locale: Locale;
+  onLocaleChange: (locale: Locale) => void;
+}) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [menuOpen]);
+
+  return (
+    <>
+      <a className="skip-link" href="#main-content">{locale === "ru" ? "Перейти к содержанию" : "Мазмұнға өту"}</a>
+      <MotionController />
+      <RouteTransition />
+      <PortalAtmosphere />
+      <BackToTop locale={locale} />
+      <div className="service-bar">
+        <div className="shell service-bar-inner">
+          <span><ShieldCheck />{locale === "ru" ? "Региональный портал адвокатуры" : "Өңірлік адвокатура порталы"}</span>
+          <span>{locale === "ru" ? "Область Жетісу" : "Жетісу облысы"}</span>
         </div>
       </div>
-    </header>
+      <header className="site-header">
+        <div className="shell header-inner">
+          <Link className="site-brand" href="/" aria-label={ASSOCIATION.name[locale]} onClick={() => setMenuOpen(false)}>
+            <AssociationBrand locale={locale} />
+          </Link>
+
+          <nav className={menuOpen ? "main-nav is-open" : "main-nav"} aria-label={locale === "ru" ? "Основная навигация" : "Негізгі навигация"}>
+            {nav[locale].map(([label, href]) => {
+              const active = href === "/" ? pathname === "/" : pathname.startsWith(href);
+              return (
+                <Link className={active ? "active" : ""} href={href} key={href} aria-current={active ? "page" : undefined} onClick={() => setMenuOpen(false)}>
+                  {label}
+                </Link>
+              );
+            })}
+          </nav>
+
+          <div className="header-actions">
+            <PortalCommand locale={locale} />
+            <div className="language-switch" aria-label={locale === "ru" ? "Выбор языка" : "Тілді таңдау"}>
+              <button type="button" className={locale === "kk" ? "active" : ""} aria-pressed={locale === "kk"} onClick={() => onLocaleChange("kk")}>ҚАЗ</button>
+              <button type="button" className={locale === "ru" ? "active" : ""} aria-pressed={locale === "ru"} onClick={() => onLocaleChange("ru")}>РУС</button>
+            </div>
+            <button className="menu-button" type="button" aria-label={menuOpen ? (locale === "ru" ? "Закрыть меню" : "Мәзірді жабу") : (locale === "ru" ? "Открыть меню" : "Мәзірді ашу")} aria-expanded={menuOpen} onClick={() => setMenuOpen((value) => !value)}>
+              {menuOpen ? <X /> : <Menu />}
+            </button>
+          </div>
+        </div>
+      </header>
+    </>
+  );
+}
+
+export function DataSourceNotice({ locale, total, ggupTotal }: { locale: Locale; total?: number; ggupTotal?: number }) {
+  const count = typeof total === "number" ? total.toLocaleString("ru-RU") : "—";
+  const ggupCount = typeof ggupTotal === "number" ? ggupTotal.toLocaleString("ru-RU") : "—";
+  return (
+    <aside className="source-notice" aria-label={locale === "ru" ? "Источник списка" : "Тізім дереккөзі"}>
+      <span className="source-icon"><Database /></span>
+      <div>
+        <strong>
+          {locale === "ru"
+            ? `${count} адвокатов · ${ggupCount} участников ГГЮП 2026`
+            : `${count} адвокат · 2026 жылғы МКБЗК-ға ${ggupCount} қатысушы`}
+        </strong>
+        <p>
+          {locale === "ru"
+            ? `ФИО и контакты — из общего списка КАОЖ на ${formatDirectoryDate(locale)}; отметка ГГЮП — из списка за январь 2026 года. Лицензию рекомендуется дополнительно проверить в официальных источниках.`
+            : `Аты-жөні мен байланыстар — ${formatDirectoryDate(locale)} күнгі КАОЖ жалпы тізімінен; МКБЗК белгісі — 2026 жылғы қаңтар тізімінен. Лицензияны ресми дереккөздерден қосымша тексеру ұсынылады.`}
+        </p>
+      </div>
+      <a href={RKA_TERRITORIAL_ASSOCIATIONS_URL} target="_blank" rel="noreferrer">
+        {locale === "ru" ? "Проверить в РКА" : "РАА-да тексеру"}<ExternalLink />
+      </a>
+    </aside>
   );
 }
 
 export function PortalFooter({ locale }: { locale: Locale }) {
   return (
-    <footer className="jp-footer jp-inner-footer">
-      <div className="jp-shell jp-footer-grid">
-        <div className="jp-footer-brand"><div className="jp-brand"><span className="jp-emblem"><ShanyrakMark /></span><span className="jp-brand-text"><strong>ЖЕТІСУ ОБЛЫСТЫҚ АДВОКАТТАР АЛҚАСЫ</strong><small>{locale === "ru" ? "Коллегия адвокатов области Жетісу" : "Жетісу облыстық адвокаттар алқасы"}</small></span></div><p>{locale === "ru" ? "Профессиональная правовая помощь в области Жетісу." : "Жетісу облысындағы кәсіби құқықтық көмек."}</p></div>
-        <div className="jp-footer-col"><strong>{locale === "ru" ? "Коллегия" : "Алқа"}</strong><a href="/regions">{locale === "ru" ? "О коллегии" : "Алқа туралы"}</a><a href="/advokaty">{locale === "ru" ? "Адвокаты" : "Адвокаттар"}</a><a href="/pomosh">{locale === "ru" ? "Правовая помощь" : "Құқықтық көмек"}</a></div>
-        <div className="jp-footer-col"><strong>{locale === "ru" ? "Контакты" : "Байланыс"}</strong><a href="tel:+77282244033">8 (7282) 24-40-33</a><a href="mailto:advokatura-tk@bk.ru">advokatura-tk@bk.ru</a><span>{locale === "ru" ? "Талдыкорган, Каблиса жырау, 69" : "Талдықорған, Қаблиса жырау, 69"}</span></div>
-        <div className="jp-footer-col"><strong>{locale === "ru" ? "Источник" : "Дереккөз"}</strong><a href="https://data.egov.kz/datasets/view?index=advokattar_tizimi14" target="_blank" rel="noreferrer">{locale === "ru" ? "Открытые данные Минюста РК" : "ҚР Әділет министрлігінің ашық деректері"}</a></div>
-        <div className="jp-footer-cta"><Scale /><strong>{locale === "ru" ? "Нужна юридическая помощь?" : "Құқықтық көмек қажет пе?"}</strong><a href="/pomosh">{locale === "ru" ? "Получить помощь" : "Көмек алу"}</a></div>
+    <footer className="site-footer">
+      <div className="shell footer-grid">
+        <div className="footer-brand">
+          <AssociationBrand locale={locale} />
+          <p>{locale === "ru" ? "Официальная информация, актуальный состав и подразделения коллегии." : "Алқаның ресми ақпараты, өзекті құрамы және бөлімшелері."}</p>
+        </div>
+        <div className="footer-column">
+          <strong>{locale === "ru" ? "Разделы" : "Бөлімдер"}</strong>
+          <Link href="/advokaty">{locale === "ru" ? "Список адвокатов" : "Адвокаттар тізімі"}</Link>
+          <Link href="/konsultacii">{locale === "ru" ? "Юридические консультации" : "Заң консультациялары"}</Link>
+          <Link href="/novosti">{locale === "ru" ? "Новости и мероприятия" : "Жаңалықтар мен іс-шаралар"}</Link>
+          <Link href="/regions">{locale === "ru" ? "О коллегии" : "Алқа туралы"}</Link>
+          <Link href="/regions#documents">{locale === "ru" ? "Устав и документы" : "Жарғы және құжаттар"}</Link>
+        </div>
+        <div className="footer-column footer-contacts">
+          <strong>{locale === "ru" ? "Приёмная коллегии" : "Алқа қабылдауы"}</strong>
+          <span><MapPin />{ASSOCIATION.address[locale]}</span>
+          <a href={`tel:${ASSOCIATION.phoneHref}`}><Phone />{ASSOCIATION.phone}</a>
+          <a href={`mailto:${ASSOCIATION.email}`}><Mail />{ASSOCIATION.email}</a>
+        </div>
+        <div className="footer-domain">
+          <small>{locale === "ru" ? "Будущий адрес сайта" : "Сайттың болашақ мекенжайы"}</small>
+          <strong>{ASSOCIATION.domain}</strong>
+          <p>{locale === "ru" ? "Отдельный номер для обращений будет добавлен после согласования." : "Өтініштерге арналған жеке нөмір келісілгеннен кейін қосылады."}</p>
+        </div>
       </div>
-      <div className="jp-shell jp-footer-bottom"><span>© 2026</span><span>{locale === "ru" ? "Коллегия адвокатов области Жетісу" : "Жетісу облыстық адвокаттар алқасы"}</span></div>
+      <div className="shell footer-bottom">
+        <span>© 2026 {ASSOCIATION.name[locale]}</span>
+        <span>{locale === "ru" ? `БИН ${ASSOCIATION.bin}` : `БСН ${ASSOCIATION.bin}`}</span>
+      </div>
     </footer>
-  );
-}
-
-export function DataSourceNotice({ locale, total }: { locale: Locale; total?: number }) {
-  const count = typeof total === "number" ? total.toLocaleString("ru-RU") : null;
-  return (
-    <div className="data-source-notice" role="note">
-      <span><Database /></span>
-      <div><strong>{locale === "ru" ? `${count ? `${count} · ` : ""}адвокаты области Жетісу в открытом наборе Минюста РК` : `${count ? `${count} · ` : ""}Жетісу облысының адвокаттары ҚР Әділет министрлігінің ашық деректерінде`}</strong><p>{locale === "ru" ? "На сайте показываются только записи, относящиеся к области Жетісу. Перед заключением соглашения дополнительно проверьте текущий статус лицензии и членство в коллегии." : "Сайтта тек Жетісу облысына қатысты жазбалар көрсетіледі. Келісім жасамас бұрын лицензия мәртебесі мен алқаға мүшелікті қосымша тексеріңіз."}</p></div>
-      <a href="https://data.egov.kz/datasets/view?index=advokattar_tizimi14" target="_blank" rel="noreferrer">{locale === "ru" ? "Открыть источник" : "Дереккөзді ашу"}<ExternalLink /></a>
-    </div>
   );
 }

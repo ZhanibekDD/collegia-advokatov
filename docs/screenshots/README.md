@@ -1,1 +1,0 @@
-Static screenshots for the GitHub project showcase.
