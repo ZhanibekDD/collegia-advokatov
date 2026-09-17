@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, BadgeCheck, Building2, ChevronDown, FileCheck2, Gavel, Landmark, Mail, MapPin, Phone, Scale, ShieldCheck, UserRoundCheck, UsersRound, Vote } from "lucide-react";
+import { ArrowRight, BadgeCheck, Building2, ChevronDown, Download, ExternalLink, FileCheck2, FileText, Gavel, Landmark, Mail, MapPin, Phone, Scale, ShieldCheck, UserRoundCheck, UsersRound, Vote } from "lucide-react";
 import { DataSourceNotice, PortalFooter, PortalHeader } from "../components/portal-shell";
 import { JetisuSignature } from "../components/portal-experience";
 import { ShanyrakMark } from "../components/shanyrak-mark";
@@ -46,6 +46,16 @@ const text = {
     directory: "Перейти к списку адвокатов",
     groups: "Посмотреть юридические консультации",
     motto: "Семь потоков. Единое правовое пространство.",
+    documentsEyebrow: "Учредительные документы",
+    documentsTitle: "Устав и изменения к нему",
+    documentsLead: "Оба документа доступны для просмотра и скачивания. Юридический адрес уточнён в изменениях 2024 года.",
+    documents: [
+      ["Устав коллегии · 2022", "Утверждён 5 июня 2022 года. Зарегистрированный устав на казахском и русском языках.", "PDF · 25 страниц · 1,6 МБ"],
+      ["Изменения и дополнения · 2024", "Утверждены 8 ноября 2024 года. Юридический адрес: г. Талдыкорган, ул. Майстрюка, 2А.", "PDF · 2 страницы · 55 КБ"],
+    ],
+    openDocument: "Открыть PDF",
+    downloadDocument: "Скачать",
+    documentNewTab: "откроется в новой вкладке",
   },
   kk: {
     eyebrow: "Алқа туралы",
@@ -82,10 +92,21 @@ const text = {
     directory: "Адвокаттар тізіміне өту",
     groups: "Заң консультацияларын көру",
     motto: "Жеті ағын. Біртұтас құқықтық кеңістік.",
+    documentsEyebrow: "Құрылтай құжаттары",
+    documentsTitle: "Жарғы және оған енгізілген өзгерістер",
+    documentsLead: "Екі құжатты да қарап, жүктеп алуға болады. Заңды мекенжай 2024 жылғы өзгерістерде нақтыланған.",
+    documents: [
+      ["Алқа жарғысы · 2022", "2022 жылғы 5 маусымда бекітілген. Қазақ және орыс тілдеріндегі тіркелген жарғы.", "PDF · 25 бет · 1,6 МБ"],
+      ["Өзгерістер мен толықтырулар · 2024", "2024 жылғы 8 қарашада бекітілген. Заңды мекенжай: Талдықорған қаласы, Майстрюк көшесі, 2А.", "PDF · 2 бет · 55 КБ"],
+    ],
+    openDocument: "PDF ашу",
+    downloadDocument: "Жүктеу",
+    documentNewTab: "жаңа қойындыда ашылады",
   },
 };
 
 const principleIcons = [BadgeCheck, ShieldCheck, UsersRound];
+const documentFiles = ["/documents/charter-2022.pdf", "/documents/charter-amendments-2024.pdf"];
 const governanceIcons = {
   presidium: Landmark,
   disciplinary: Gavel,
@@ -139,6 +160,29 @@ export default function AboutPage() {
                 return <article key={title}><span className="center-icon"><Icon /></span><h3>{title}</h3><p>{description}</p></article>;
               })}
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section association-documents-section" id="documents" aria-labelledby="association-documents-title">
+        <div className="shell">
+          <div className="section-heading" data-reveal>
+            <div className="eyebrow"><span />{t.documentsEyebrow}</div>
+            <h2 id="association-documents-title">{t.documentsTitle}</h2>
+            <p>{t.documentsLead}</p>
+          </div>
+          <div className="association-documents-grid">
+            {t.documents.map(([title, description, details], index) => (
+              <article className="association-document-card" key={documentFiles[index]} data-reveal>
+                <div className="association-document-top"><span className="association-document-icon"><FileText aria-hidden="true" /></span><span>{details}</span></div>
+                <h3>{title}</h3>
+                <p>{description}</p>
+                <div className="association-document-actions">
+                  <a className="button button-dark" href={documentFiles[index]} target="_blank" rel="noopener noreferrer" aria-label={`${t.openDocument}: ${title}, ${t.documentNewTab}`}>{t.openDocument}<ExternalLink aria-hidden="true" /></a>
+                  <a className="button button-outline-dark" href={documentFiles[index]} download aria-label={`${t.downloadDocument}: ${title}`}>{t.downloadDocument}<Download aria-hidden="true" /></a>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>

@@ -151,6 +151,7 @@ export function PortalFooter({ locale }: { locale: Locale }) {
           <Link href="/konsultacii">{locale === "ru" ? "Юридические консультации" : "Заң консультациялары"}</Link>
           <Link href="/novosti">{locale === "ru" ? "Новости и мероприятия" : "Жаңалықтар мен іс-шаралар"}</Link>
           <Link href="/regions">{locale === "ru" ? "О коллегии" : "Алқа туралы"}</Link>
+          <Link href="/regions#documents">{locale === "ru" ? "Устав и документы" : "Жарғы және құжаттар"}</Link>
         </div>
         <div className="footer-column footer-contacts">
           <strong>{locale === "ru" ? "Приёмная коллегии" : "Алқа қабылдауы"}</strong>
