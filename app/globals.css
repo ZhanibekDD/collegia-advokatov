@@ -1921,6 +1921,12 @@ a:hover > .round-arrow, .member-row:hover .round-arrow, .directory-row:hover .ro
 .admin-access-page h1 { margin: 22px 0 10px; font: 560 34px/1.15 Georgia, serif; }
 .admin-access-page p { color: rgba(255,255,255,.68); }
 .admin-access-page a { display: inline-flex; margin-top: 18px; padding-bottom: 4px; border-bottom: 1px solid rgba(140,231,214,.4); color: #91e7d7; font-weight: 800; }
+.admin-login-page form { display: grid; gap: 12px; margin-top: 25px; text-align: left; }
+.admin-login-page label { color: rgba(255,255,255,.72); font-size: 14px; font-weight: 800; }
+.admin-login-page input { width: 100%; min-height: 52px; padding: 0 16px; border: 1px solid rgba(255,255,255,.18); border-radius: 13px; background: rgba(255,255,255,.09); color: #fff; font: inherit; outline: none; }
+.admin-login-page input:focus { border-color: #8ae5d4; box-shadow: 0 0 0 4px rgba(138,229,212,.12); }
+.admin-login-page button { min-height: 52px; margin-top: 5px; border: 0; border-radius: 13px; background: #88dfcf; color: #062b31; font: inherit; font-size: 15px; font-weight: 850; cursor: pointer; }
+.admin-login-error { color: #ffd8d0; font-size: 14px; line-height: 1.5; }
 
 @media (max-width: 880px) {
   .profile-actions { grid-column: 2; width: max-content; flex-direction: row; flex-wrap: wrap; }

@@ -211,7 +211,7 @@ export default function AdminDashboard({ userName, signOutPath }: { userName: st
   async function setNewsStatus(post: NewsPost, status: "draft" | "published" | "archived") {
     setBusy(true);
     try {
-      await api("/api/admin/news", { method: "PATCH", body: JSON.stringify({ id: post.id, ...post, status }) });
+      await api("/api/admin/news", { method: "PATCH", body: JSON.stringify({ ...post, status }) });
       setNotice({ type: "ok", text: status === "published" ? "Публикация размещена" : status === "archived" ? "Публикация в архиве" : "Публикация возвращена в черновики" });
       await reload();
     } catch (error) {

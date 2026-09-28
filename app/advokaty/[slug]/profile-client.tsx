@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { ArrowLeft, ArrowRight, BadgeCheck, Building2, Check, Copy, Database, MapPin, Phone, Printer, Scale, ShieldCheck, UserRound } from "lucide-react";
 import { DataSourceNotice, PortalFooter, PortalHeader } from "../../components/portal-shell";
-import { consultationName, type OfficialAdvocate } from "../../lib/portal-data";
+import { consultationName, formatDirectoryDate, type OfficialAdvocate } from "../../lib/portal-data";
 import { usePersistentLocale } from "../../lib/use-persistent-locale";
 
 export default function ProfileClient({ advocate, total, ggupTotal }: { advocate: OfficialAdvocate; total: number; ggupTotal: number }) {

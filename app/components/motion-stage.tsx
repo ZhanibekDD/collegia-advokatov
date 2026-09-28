@@ -85,7 +85,8 @@ export function MotionController() {
           tilt.style.setProperty("--glow-y", `${y * 100}%`);
         }
 
-        const magnetic = event.target.closest(".button, .hero-search-control button, .command-trigger") as HTMLElement | null;
+        const target = event.target instanceof Element ? event.target : null;
+        const magnetic = target?.closest(".button, .hero-search-control button, .command-trigger") as HTMLElement | null;
         if (magnetic !== activeMagnetic) {
           resetMagnetic(activeMagnetic);
           activeMagnetic = magnetic;

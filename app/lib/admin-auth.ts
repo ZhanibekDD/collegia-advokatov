@@ -10,6 +10,7 @@ function values(name: string): Set<string> {
 }
 
 export function isAdminUser(user: ChatGPTUser): boolean {
+  if (user.userId === "local-admin" && Boolean(process.env.ADMIN_PASSWORD)) return true;
   const ids = values("ADMIN_ACCOUNT_USER_IDS");
   const emails = values("ADMIN_EMAILS");
   return ids.has(user.userId.toLocaleLowerCase("en-US")) || emails.has(user.email.toLocaleLowerCase("en-US"));
@@ -44,5 +45,9 @@ export async function secureEqual(provided: string, expected: string): Promise<b
     crypto.subtle.digest("SHA-256", encoder.encode(provided)),
     crypto.subtle.digest("SHA-256", encoder.encode(expected)),
   ]);
-  return crypto.subtle.timingSafeEqual(providedHash, expectedHash);
+  const left = new Uint8Array(providedHash);
+  const right = new Uint8Array(expectedHash);
+  let difference = left.length ^ right.length;
+  for (let index = 0; index < Math.max(left.length, right.length); index += 1) difference |= (left[index] ?? 0) ^ (right[index] ?? 0);
+  return difference === 0;
 }

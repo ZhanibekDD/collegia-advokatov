@@ -397,7 +397,7 @@ export async function createNews(input: NewsInput, actor: ChangeActor) {
   return toNewsPost(created);
 }
 
-export async function updateNews(id: string, input: Partial<NewsInput> & { status?: "draft" | "published" | "archived" }, actor: ChangeActor) {
+export async function updateNews(id: string, input: Omit<Partial<NewsInput>, "status"> & { status?: "draft" | "published" | "archived" }, actor: ChangeActor) {
   const db = getDb();
   const values: Partial<typeof newsPosts.$inferInsert> = { updatedAt: now() };
   if (input.kind !== undefined) values.kind = input.kind;
