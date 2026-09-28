@@ -37,6 +37,8 @@ yarn-error.log*
 next-env.d.ts
 *.tsbuildinfo
 /dist/
+!/deploy/
+!/deploy/plesk-bundle.tar.gz
 /.wrangler/
 /.sites-runtime/
 /outputs/
